@@ -1,5 +1,5 @@
 const {
-  client,
+  client, User
   // declare your model imports here
   // for example, User
 } = require('./');
@@ -63,6 +63,7 @@ try{
           }
         }
 
+
 async function populateInitialData() {
   console.log("Starting to create users...")
   try { 
@@ -76,10 +77,10 @@ async function populateInitialData() {
       {email:'georgie@cntrlplus.com', password: 'georgie1234'},
       {email:'productsgalore@cntrlplus.com', password: 'products1234', isAdmin: true},
     ]
-    // const users = await Promise.all(usersToCreate.map())
+   const users = await Promise.all(usersToCreate.map(User.createUser))
 
     console.log("Users Created!")
-    // console.log(users)
+    console.log(users)
     console.log("Fiinished Creating Users!")
   } catch (error) {
     console.log("Error Creating Users!")

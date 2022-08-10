@@ -1,5 +1,5 @@
 module.exports = {
-  // User: require('./user')
+  User: require('./user')
   
   // add each model to your exports object here
   // so that you can use them in your express server api routers
