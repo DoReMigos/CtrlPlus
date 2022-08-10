@@ -98,7 +98,10 @@ async function createInitialProducts() {
       { title: "Logitech G915", brand: "Logitech", description: "LIGHTSPEED Wireless RGB Mechanical Gaming Keyboard", price: 249.99, inventory: 20, category: "keyboard", image: "text" },
       { title: "SteelSeries Arctis 7+", brand: "SteelSeries", description: "Multi-Platform USB-C Gaming Headset", price: 169.99, inventory: 20, category: "headset", image: "text" },
     ];
+    console.log(productsToCreate)
+
     const products = await Promise.all(productsToCreate.map(Products.createProducts));
+    console.log(products, "THIS IS PRODUCTS")
 
     console.log("Products created:");
     console.log(products);

@@ -6,7 +6,7 @@ async function createProducts({ title, brand, description, price, inventory, cat
     // return the new activity
     try {
       const { 
-        rows
+        rows:[product]
       } = await client.query(
         `
           INSERT INTO products(title, brand, description, price, inventory, category, image) 
@@ -16,11 +16,12 @@ async function createProducts({ title, brand, description, price, inventory, cat
         `,
         [title, brand, description, price, inventory, category, image]
       );
-      return rows;
+      return product;
     } catch (error) {
       console.error(error);
     }
   }
+
   async function getAllProducts() {
     try {
       const { rows } = await client.query(`
@@ -34,8 +35,43 @@ async function createProducts({ title, brand, description, price, inventory, cat
     }
   }
   
+async function getProductById(){
+  try {
+
+
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function getProductByCategory(){
+  try {
+
+
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function updateProduct(){
+  try {
+
+
+  } catch (error) {
+    throw error;
+  }
+}
+
+async function deleteProduct(){
+  try {
+
+
+  } catch (error) {
+    throw error;
+  }
+}
+
   module.exports = {
   // add your database adapter fns here
-   getAllProducts, createProducts
-
+   getAllProducts, createProducts, getProductByCategory, getProductById, updateProduct, deleteProduct
 };
