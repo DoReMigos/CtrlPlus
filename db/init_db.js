@@ -71,11 +71,11 @@ async function populateInitialData() {
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
     const usersToCreate = [
-      {email:'albert@cntrlplus.com', password: 'bertie99'},
-      {email:'sandra@cntrlplus.com', password: 'sandra123'},
-      {email:'glamgal@cntrlplus.com', password: 'glamga123'},
-      {email:'georgie@cntrlplus.com', password: 'georgie1234'},
-      {email:'productsgalore@cntrlplus.com', password: 'products1234', isAdmin: true},
+      {email:'albert@ctrlplus.com', password: 'bertie99'},
+      {email:'sandra@ctrlplus.com', password: 'sandra123'},
+      {email:'glamgal@ctrlplus.com', password: 'glamga123'},
+      {email:'georgie@ctrlplus.com', password: 'georgie1234'},
+      {email:'productsgalore@ctrlplus.com', password: 'products1234', isAdmin: true},
     ]
    const users = await Promise.all(usersToCreate.map(User.createUser))
 
