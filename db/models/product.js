@@ -7,7 +7,7 @@ module.exports = {
 
 };
 //database function
-async function createProducts({ title, description, price, inventory, category, image }) {
+async function createProducts({ title, brand, description, price, inventory, category, image }) {
     // return the new activity
     try {
       const { rows:[product] } = await client.query(
@@ -17,7 +17,7 @@ async function createProducts({ title, description, price, inventory, category, 
           ON CONFLICT (title) DO NOTHING 
           RETURNING *;
         `,
-        [title, description, price, inventory, category, image]
+        [title, brand, description, price, inventory, category, image]
       );
       return product;
     } catch (error) {
