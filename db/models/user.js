@@ -2,11 +2,7 @@
 const client = require('../client');
 
 
-module.exports = {
-  // add your database adapter fns here
-   getAllUsers, createUser
 
-};
 async function createUser({ email, password, isAdmin=false }) {
   // const SALT_COUNT = 10;
   // const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
@@ -42,4 +38,8 @@ async function getAllUsers() {
   }
 }
 
+module.exports = {
+  // add your database adapter fns here
+   getAllUsers, createUser
 
+};

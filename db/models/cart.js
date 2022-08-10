@@ -1,4 +1,3 @@
-const { cart } = require('./cart')
 const { client } = require('../client')
 
 module.exports = {
@@ -8,5 +7,3 @@ module.exports = {
 
 
 
-
-export default cart

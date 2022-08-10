@@ -1,5 +1,5 @@
 const {
-  client, User
+  client, User, Products
   // declare your model imports here
   // for example, User
 } = require('./');
@@ -11,6 +11,7 @@ async function buildTables() {
 async function dropTables(){
       console.log("dropping Tables")    
       await client.query(`
+        DROP TABLE IF EXISTS reviews;
         DROP TABLE IF EXISTS cart_products;
         DROP TABLE IF EXISTS carts;
         DROP TABLE IF EXISTS products;
@@ -82,22 +83,28 @@ async function populateInitialData() {
 
     console.log("Users Created!")
     console.log(users)
-    console.log("Fiinished Creating Users!")
-  
-  console.log("Starting to create products...")
+    console.log("Finished Creating Users!")
+  } catch (error) {
+    console.error("Error creating Users!");
+    throw error;
+  }
+}
 
+async function createInitialProducts() {
+  console.log("Starting to create products...")
+  try { 
     const productsToCreate = [
       { title: "Razer Basilisk Ultimate with Charging Dock", brand:"Razer", description: "Wireless Gaming Mouse with 11 Programmable Buttons", price: "169.99", inventory: "20", category: "mouse", image: "" },
       { title: "Logitech G915", brand: "Logitech", description: "LIGHTSPEED Wireless RGB Mechanical Gaming Keyboard", price: "249.99", inventory: "20", category: "keyboard", image: "" },
       { title: "SteelSeries Arctis 7+", brand: "SteelSeries", description: "Multi-Platform USB-C Gaming Headset", price: "169.99", inventory: "20", category: "headset", image: "" },
     ];
-    const products = await Promise.all(ProductsToCreate.map(createProducts));
+    const products = await Promise.all(productsToCreate.map(Products.createProducts));
 
-    console.log("Users created:");
-    console.log(users);
-    console.log("Finished creating users!");
+    console.log("Products created:");
+    console.log(products);
+    console.log("Finished creating products!");
   } catch (error) {
-    console.error("Error creating users!");
+    console.error("Error creating products!");
     throw error;
   }
 }
@@ -106,5 +113,6 @@ buildTables()
   .then(dropTables)
   .then(createTables)
   .then(populateInitialData)
+  .then(createInitialProducts)
   .catch(console.error)
   .finally(() => client.end());

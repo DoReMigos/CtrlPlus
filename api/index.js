@@ -13,5 +13,11 @@ apiRouter.get('/health', (req, res, next) => {
 });
 
 // place your routers here
-
+apiRouter.use((error, req, res, next) => {
+  res.send({
+    name: error.name,
+    message: error.message,
+    error: error.message,
+  });
+});
 module.exports = apiRouter;
