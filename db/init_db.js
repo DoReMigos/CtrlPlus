@@ -30,12 +30,12 @@ try{
         );
     CREATE TABLE products (
           id SERIAL PRIMARY KEY,
-          title VARCHAR(255) NOT NULL,
-          brand TEXT,
+          title VARCHAR(255),
+          brand VARCHAR(255),
           description TEXT,
-          price NUMERIC NOT NULL,
-          inventory INTEGER NOT NULL,
-          category VARCHAR(255) NOT NULL,
+          price NUMERIC,
+          inventory INTEGER,
+          category VARCHAR(255),
           image TEXT
         );
         CREATE TABLE carts (
@@ -94,9 +94,9 @@ async function createInitialProducts() {
   console.log("Starting to create products...")
   try { 
     const productsToCreate = [
-      { title: "Razer Basilisk Ultimate with Charging Dock", brand:"Razer", description: "Wireless Gaming Mouse with 11 Programmable Buttons", price: "169.99", inventory: "20", category: "mouse", image: "" },
-      { title: "Logitech G915", brand: "Logitech", description: "LIGHTSPEED Wireless RGB Mechanical Gaming Keyboard", price: "249.99", inventory: "20", category: "keyboard", image: "" },
-      { title: "SteelSeries Arctis 7+", brand: "SteelSeries", description: "Multi-Platform USB-C Gaming Headset", price: "169.99", inventory: "20", category: "headset", image: "" },
+      { title: "Razer Basilisk Ultimate with Charging Dock", brand:"Razer", description: "Wireless Gaming Mouse with 11 Programmable Buttons", price: 169.99, inventory: 20, category: "mouse", image: "text" },
+      { title: "Logitech G915", brand: "Logitech", description: "LIGHTSPEED Wireless RGB Mechanical Gaming Keyboard", price: 249.99, inventory: 20, category: "keyboard", image: "text" },
+      { title: "SteelSeries Arctis 7+", brand: "SteelSeries", description: "Multi-Platform USB-C Gaming Headset", price: 169.99, inventory: 20, category: "headset", image: "text" },
     ];
     const products = await Promise.all(productsToCreate.map(Products.createProducts));
 
