@@ -3,7 +3,6 @@ const client = require('../client')
 
 //database function
 async function createProducts({ title, brand, description, price, inventory, category, image }) {
-  // return the new activity
   try {
     const { rows } = await client.query(
       `
