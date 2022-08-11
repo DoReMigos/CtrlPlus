@@ -56,7 +56,7 @@ router.post("/login", async (req, res, next) => {
       });
     } else {
       const token = jwt.sign(
-        { id: user.id, username: user.email },
+        { id: user.id, email: user.email },
         process.env.JWT_SECRET
       );
       res.send({ message: "you're logged in!", token, user });
@@ -78,11 +78,10 @@ router.get("/me", requireUser,  async (req, res, next) => {
 
 //cannot finsih this because we need carts and cart products.
 // GET /api/users/:email/carts
-router.get("/:email/carts", async (req, res, next) => {
- 
+router.get("/:user_id/carts", requireUser, async (req, res, next) => {
     try{
-      const {email} = req.params;
-      const user = await getUserByEmail(email);
+      const {user_id} = req.params;
+      const user = await getUserById(user_id);
       if (!user){
         next({
           name: "NO USER FOUND",
@@ -90,7 +89,7 @@ router.get("/:email/carts", async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const routines = await getAllRoutinesByUser({username: username});
+        const carts = await getAllCartsById({username: username});
         res.send(routines)
       }
       const routines = await getPublicRoutinesByUser({username: username});
