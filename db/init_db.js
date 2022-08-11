@@ -1,8 +1,9 @@
 const {
-  client, User, Products
+  client, User, Products, Cart,
   // declare your model imports here
   // for example, User
 } = require('./');
+const { createCart } = require('./models/cart');
 
 async function buildTables() {
 
@@ -111,11 +112,33 @@ async function createInitialProducts() {
     throw error;
   }
 }
+async function createInitialCarts() {
+  console.log("starting to create routines...")
+
+  const cartsToCreate = [
+    {
+      id: 1,
+      user_id: 2,
+      created_at: "CURRENT_TIME"
+    },
+    {
+      id: 2,
+      user_id: 1,
+      created_at: "TIMESTAMP now()",
+    }
+  ]
+  const carts = await Promise.all(
+    cartsToCreate.map((cart) => Cart.createCart(cart))
+  )
+  console.log("Carts Created: ", carts)
+  console.log("Finished creating carts.")
+}
 
 buildTables()
   .then(dropTables)
   .then(createTables)
   .then(populateInitialData)
   .then(createInitialProducts)
+  .then(createInitialCarts)
   .catch(console.error)
   .finally(() => client.end());
