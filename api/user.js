@@ -6,10 +6,10 @@ const jwt = require("jsonwebtoken");
 
 const {
   createUser,
-  getAllUsers,
   getUser,
   getUserById,
   getUserByEmail,
+  getCartById
 } = require("../db/models");
 
 
@@ -78,7 +78,7 @@ router.get("/me", requireUser,  async (req, res, next) => {
 
 //cannot finsih this because we need carts and cart products.
 // GET /api/users/:email/carts
-router.get("/:user_id/carts", requireUser, async (req, res, next) => {
+router.get("/:user_id/cart", requireUser, async (req, res, next) => {
     try{
       const {user_id} = req.params;
       const user = await getUserById(user_id);
@@ -89,13 +89,33 @@ router.get("/:user_id/carts", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const carts = await getAllCartsById({username: username});
-        res.send(routines)
+        const carts = await getCartById({user_id});
+        res.send(carts)
       }
-      const routines = await getPublicRoutinesByUser({username: username});
-      res.send(routines)
     } catch(error){
       next(error)
     }
   })
+
+  // GET /api/users/:user_idl/orders
+  router.get("/:user_id/order", requireUser, async (req, res, next) => {
+    try{
+      const {user_id} = req.params;
+      const user = await getUserById(user_id);
+      if (!user){
+        next({
+          name: "NO USER FOUND",
+          message: "USER IS NOT FOUND!"
+        });
+      }
+      if(req.user && user.id == req.user.id ){
+        const order = await getOrderById({user_id});
+        res.send(order)
+      }
+    } catch(error){
+      next(error)
+    }
+  })
+
+  
   
