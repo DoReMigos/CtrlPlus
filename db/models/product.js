@@ -1,4 +1,4 @@
-const { client } = require('../client')
+const client = require('../client')
 
 
 //database function
@@ -6,17 +6,16 @@ async function createProducts({ title, brand, description, price, inventory, cat
     // return the new activity
     try {
       const { 
-        rows:[product]
+        rows
       } = await client.query(
         `
           INSERT INTO products(title, brand, description, price, inventory, category, image) 
           VALUES($1, $2, $3, $4, $5, $6, $7) 
-          ON CONFLICT (title) DO NOTHING 
           RETURNING *;
         `,
         [title, brand, description, price, inventory, category, image]
       );
-      return product;
+      return rows;
     } catch (error) {
       console.error(error);
     }
