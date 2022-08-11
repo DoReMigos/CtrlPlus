@@ -1,19 +1,18 @@
-const { client } = require('../client')
-const { attachProductsToCarts } = require("./products");
+const  client  = require('../client')
+const { attachProductsToCarts } = require("./product");
 
 
-async function createCart({ id, userId, createdAt }) {
+async function createCart({ id, user_id, createdAt }) {
     try {
       const {
         rows: [cart],
       } = await client.query(
         `
-          INSERT INTO carts("id", "user_id", createdAt) 
-          VALUES($1, $2, $3) 
-          ON CONFLICT (name) DO NOTHING 
+          INSERT INTO carts( "user_id", "created_at") 
+          VALUES($1, $2) 
           RETURNING *;
         `,
-        [id, userId, createdAt]
+        [ user_id, createdAt]
       );
       return cart;
     } catch (error) {
@@ -64,7 +63,7 @@ async function createCart({ id, userId, createdAt }) {
       JOIN users ON users.id=carts."user_id";
       `
       );
-      const carts = await attachActivitiesToCarts(rows);
+      const carts = await attachProductsToCarts(rows);
       return carts;
     } catch (error) {
       console.error(error);
