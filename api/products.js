@@ -24,24 +24,59 @@ apiRouter.post('/', requireAdminUser, async (req, res, next) => {
     }
 })
 
-// apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
-//     const { title, brand, description, price, inventory, category, image } = req.body;
-//     const id = req.params.routineId;
-//     const routine = await getProductsById(id)
-//     try {
-//         if (!user.isAdmin) {
-//             res.status(403)
-//             next({
-//                 name: "UserNotAdminUserOrFound",
-//                 message: `User ${req.user.username} is not allowed to update ${routine.name}`,
-//             });
-//         }
-//         const updatedProduct = await updateProduct({ title, brand, description, price, inventory, category, image });
-//         res.send(updatedProduct);
-//     } catch ({ name, message }) {
-//         next({ name, message });
-//     }
-// })
+apiRouter.patch('/:productsId', requireAdminUser, async (req, res, next) => {
+    const { title, brand, description, price, inventory, category, image } = req.body;
+    const id = req.params.productsId;
+    const product = await getProductById(id)
+    try {
+        if (!req.user.isAdmin) {
+            res.status(403)
+            next({
+                name: "UserNotAdminUser",
+                message: `Only admins allowed to update ${product.name}`,
+            });
+        }
+        const updatedProduct = await updateProduct({ title, brand, description, price, inventory, category, image });
+        res.send(updatedProduct);
+    } catch ({ name, message }) {
+        next({ name, message });
+    }
+})
 
+apiRouter.delete('/:productsId', requireAdminUser, async (req, res, next) => {
+    const id = req.params.productsId;
+    const product = await getProductById(id)
+    try {
+        if (!req.user.isAdmin) {
+            res.status(403)
+            next({
+                name: "UserNotAdminUser",
+                message: `Only admins allowed to delete ${product.name}`,
+            })
+        }
+            const deletedProduct = deleteProduct(id)
+            res.send(deletedProduct)
+    } catch (error) {
+        next(error);
+    }
+})
+
+apiRouter.get('/categories', async (req, res, next) => {
+    try {
+        const productsByCategory = await getProductByCategory();
+        res.send(productsByCategory);
+    } catch (error) {
+        next(error);
+    }
+})
+
+apiRouter.get('/id', async (req, res, next) => {
+    try {
+        const productById = await getProductById();
+        res.send(productById);
+    } catch (error) {
+        next(error);
+    }
+})
 
 module.exports = apiRouter;
