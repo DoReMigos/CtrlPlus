@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { requireUser } = require("./utils");
+const { requireUser, requireAdminUser } = require("./utils");
 const { getAllProducts, createProducts, getProductByCategory, getProductById, updateProduct, deleteProduct } = require("../db/models")
 
 router.get('/', async (req, res, next) => {

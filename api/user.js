@@ -1,20 +1,20 @@
 const express = require("express");
-const router = express.Router();
+const apiRouter = express.Router();
 const { requireUser } = require("./utils");
 
 const jwt = require("jsonwebtoken");
 
 const {
   createUser,
-  getAllUsers,
   getUser,
   getUserById,
   getUserByEmail,
+  getCartById
 } = require("../db/models");
 
 
 // POST /api/user/register
-router.post("/register", async (req, res, next) => {
+apiRouter.post("/register", async (req, res, next) => {
     const { email, password } = req.body;
     try {
       const _user = await getUserByEmail(email);
@@ -39,7 +39,7 @@ router.post("/register", async (req, res, next) => {
   });
 
 //POST /api/user/login
-router.post("/login", async (req, res, next) => {
+apiRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
   if (!email || !password) {
     next({
@@ -68,7 +68,7 @@ router.post("/login", async (req, res, next) => {
 });
 
 // GET /api/users/me
-router.get("/me", requireUser,  async (req, res, next) => {
+apiRouter.get("/me", requireUser,  async (req, res, next) => {
     try{
       res.send(req.user);
     }catch(error){
@@ -78,7 +78,7 @@ router.get("/me", requireUser,  async (req, res, next) => {
 
 //cannot finsih this because we need carts and cart products.
 // GET /api/users/:email/carts
-router.get("/:user_id/carts", requireUser, async (req, res, next) => {
+apiRouter.get("/:user_id/cart", requireUser, async (req, res, next) => {
     try{
       const {user_id} = req.params;
       const user = await getUserById(user_id);
@@ -89,13 +89,34 @@ router.get("/:user_id/carts", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const carts = await getAllCartsById({username: username});
-        res.send(routines)
+        const carts = await getCartById({user_id});
+        res.send(carts)
       }
-      const routines = await getPublicRoutinesByUser({username: username});
-      res.send(routines)
     } catch(error){
       next(error)
     }
   })
+
+  // GET /api/users/:user_idl/orders
+  apiRouter.get("/:user_id/order", requireUser, async (req, res, next) => {
+    try{
+      const {user_id} = req.params;
+      const user = await getUserById(user_id);
+      if (!user){
+        next({
+          name: "NO USER FOUND",
+          message: "USER IS NOT FOUND!"
+        });
+      }
+      if(req.user && user.id == req.user.id ){
+        const order = await getOrderById({user_id});
+        res.send(order)
+      }
+    } catch(error){
+      next(error)
+    }
+  })
+
+  module.exports = apiRouter;
+  
   
