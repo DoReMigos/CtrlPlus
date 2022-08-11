@@ -24,7 +24,7 @@ apiRouter.post('/', requireAdminUser, async (req, res, next) => {
     }
 })
 
-apiRouter.patch('/:productsId', requireAdminUser, async (req, res, next) => {
+apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
     const { title, brand, description, price, inventory, category, image } = req.body;
     const id = req.params.productsId;
     const product = await getProductById(id)
@@ -43,7 +43,7 @@ apiRouter.patch('/:productsId', requireAdminUser, async (req, res, next) => {
     }
 })
 
-apiRouter.delete('/:productsId', requireAdminUser, async (req, res, next) => {
+apiRouter.delete('/:productId', requireAdminUser, async (req, res, next) => {
     const id = req.params.productsId;
     const product = await getProductById(id)
     try {
