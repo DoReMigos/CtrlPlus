@@ -62,7 +62,9 @@ async function createCart({ id, user_id, createdAt }) {
       JOIN users ON users.id=carts."user_id";
       `
       );
+      
       const carts = await attachProductsToCarts(rows);
+      console.log(carts, 'getallcarts attachProductsToCarts')
       return carts;
     } catch (error) {
       console.error(error);
@@ -129,16 +131,18 @@ async function attachProductsToCarts(carts) {
   if (!cartIds?.length) return [];
 
   try {
+    console.log(cartsToReturn,'cartsToReturn', binds, 'binds', cartIds, 'cartids')
     // get the activities, JOIN with routine_activities (so we can get a routineId), and only those that have those routine ids on the routine_activities join
     const { rows: products } = await client.query(
       `
       SELECT products.*, cart_products.quantity, cart_products."purchased_price", cart_products.id, cart_products."order_id"
       FROM products 
-      JOIN cart_products ON cart_products."product_id" = products.id
+      LEFT JOIN cart_products ON cart_products."product_id" = products.id
       WHERE cart_products."order_id" IN (${binds});
     `,
       cartIds
     );
+    console.log( products, 'products')
 
     // loop over the routines
     for (const carts of cartsToReturn) {
@@ -149,6 +153,7 @@ async function attachProductsToCarts(carts) {
       // attach the activities to each single routine
       carts.products = productsToAdd;
     }
+    console.log(cartsToReturn, 'cartstoretuttut')
     return cartsToReturn;
   } catch (error) {
     console.error("Error during attachActivitiesToRoutines")
