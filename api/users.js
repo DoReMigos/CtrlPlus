@@ -9,7 +9,7 @@ const {
   getUser,
   getUserById,
   getUserByEmail,
-  getCartById
+  getCartsByUser
 } = require("../db/models");
 
 
@@ -78,10 +78,10 @@ apiRouter.get("/me", requireUser,  async (req, res, next) => {
 
 //cannot finsih this because we need carts and cart products.
 // GET /api/users/:email/carts
-apiRouter.get("/:user_id/cart", requireUser, async (req, res, next) => {
+apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
     try{
-      const {user_id} = req.params;
-      const user = await getUserById(user_id);
+      const {email} = req.params;
+      const user = await getUserByEmail(email);
       if (!user){
         next({
           name: "NO USER FOUND",
@@ -89,7 +89,7 @@ apiRouter.get("/:user_id/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const carts = await getCartById({user_id});
+        const carts = await getCartsByUser({email:email});
         res.send(carts)
       }
     } catch(error){
@@ -97,11 +97,13 @@ apiRouter.get("/:user_id/cart", requireUser, async (req, res, next) => {
     }
   })
 
+
+  //still in progress!!!!
   // GET /api/users/:user_idl/orders
-  apiRouter.get("/:user_id/order", requireUser, async (req, res, next) => {
+  apiRouter.get("/:email/order", requireUser, async (req, res, next) => {
     try{
-      const {user_id} = req.params;
-      const user = await getUserById(user_id);
+      const {email} = req.params;
+      const user = await getUserByEmail(email);
       if (!user){
         next({
           name: "NO USER FOUND",
@@ -109,7 +111,7 @@ apiRouter.get("/:user_id/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const order = await getOrderById({user_id});
+        const order = await getOrderById({email});
         res.send(order)
       }
     } catch(error){

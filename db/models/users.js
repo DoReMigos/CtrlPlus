@@ -82,15 +82,10 @@ async function getUserByEmail(email) {
     `,
       [email]
     );
-
-    if (!user) {
-      return null;
-    }
-
-    return user;
-  } catch (error) {
+  }catch(error){
+    console.error('Error getUserByEmail')
     throw error;
-  }
+    }
 }
 
 module.exports = {
