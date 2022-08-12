@@ -137,7 +137,7 @@ async function attachProductsToCarts(carts) {
       `
       SELECT products.*, cart_products.quantity, cart_products."purchased_price", cart_products.id, cart_products."order_id"
       FROM products 
-      RIGHT JOIN cart_products ON cart_products."product_id" = products.id
+      LEFT JOIN cart_products ON cart_products."product_id" = products.id
       WHERE cart_products."order_id" IN (${binds});
     `,
       cartIds
