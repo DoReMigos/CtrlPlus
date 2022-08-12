@@ -1,5 +1,4 @@
-const  client  = require('../client')
-const { attachProductsToCarts } = require("./product");
+const client = require('../client')
 
 
 async function createCart({ id, user_id, createdAt }) {
@@ -104,24 +103,59 @@ async function createCart({ id, user_id, createdAt }) {
 //     }
 //   }
   
-//   async function getPublicRoutinesByUser({ username }) {
-//     try {
-//       const { rows } = await client.query(
-//         `SELECT routines.*, users.username AS "creatorName"
-//         FROM routines
-//         JOIN users ON users.id=routines."creatorId"
-//         WHERE users.username=$1 AND "isPublic"=true;
-//         `,
-//         [username]
-//       );
-//       const routines = await attachActivitiesToRoutines(rows);
+  async function getCartsByUser({ email }) {
+    try {
+      const { rows } = await client.query(
+        `SELECT carts.*, users.email AS "userName"
+        FROM carts
+        JOIN users ON users.id=carts."user_id"
+        WHERE users.email=$1 AND "isPurchased"=false;
+        `,
+        [email]
+      );
+      const routines = await attachProductsToCarts(rows);
   
-//       return routines;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
+      return routines;
+    } catch (error) {
+      console.error(error);
+    }
+  }
   
+async function attachProductsToCarts(carts) {
+  // no side effects
+  const cartsToReturn = [...carts];
+  const binds = carts.map((_, index) => `$${index + 1}`).join(", ");
+  const cartIds = carts.map((cart) => cart.id);
+  if (!cartIds?.length) return [];
+
+  try {
+    // get the activities, JOIN with routine_activities (so we can get a routineId), and only those that have those routine ids on the routine_activities join
+    const { rows: products } = await client.query(
+      `
+      SELECT products.*, cart_products.quantity, cart_products."purchased_price", cart_products.id, cart_products."order_id"
+      FROM products 
+      JOIN cart_products ON cart_products."product_id" = products.id
+      WHERE cart_products."order_id" IN (${binds});
+    `,
+      cartIds
+    );
+
+    // loop over the routines
+    for (const carts of cartsToReturn) {
+      // filter the activities to only include those that have this routineId
+      const productsToAdd = products.filter(
+        (product) => products.cart_id === carts.id
+      );
+      // attach the activities to each single routine
+      carts.products = productsToAdd;
+    }
+    return cartsToReturn;
+  } catch (error) {
+    console.error("Error during attachActivitiesToRoutines")
+    throw error;
+  }
+}
+
 //   async function getPublicRoutinesByActivity({ id }) {
 //     try {
 //       const { rows } = await client.query(
@@ -173,29 +207,33 @@ async function createCart({ id, user_id, createdAt }) {
 //     }
 //   }
   
-//   async function destroyRoutine(id) {
-//     await client.query(
-//       `
-//       DELETE FROM RoutineActivities
-//       WHERE "routineId"=$1
-//     `,
-//       [id]
-//     );
-//     const {
-//       rows: [routine],
-//     } = await client.query(
-//       `
-//       DELETE FROM routines
-//       WHERE id=$1
-//       RETURNING *;
-//     `,
-//       [id]
-//     );
-//     return routine;
-//   }
+  async function destroyCart(id) {
+    try{
+    await client.query(
+      `
+      DELETE FROM cart_products
+      WHERE "order_id"=$1
+    `,
+      [id]
+    );
+    const {
+      rows: [cart],
+    } = await client.query(
+      `
+      DELETE FROM routines
+      WHERE id=$1
+      RETURNING *;
+    `,
+      [id]
+    );
+    return routine;
+    }catch{
+      throw error
+    }
+  }
 module.exports = {
     // add your database adapter fns here
-    getCartById, createCart, getAllCarts
+    getCartById, createCart, getAllCarts, getCartsByUser, attachProductsToCarts,destroyCart
 }
 
 //haha
