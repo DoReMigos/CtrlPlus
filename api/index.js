@@ -54,8 +54,8 @@ apiRouter.use((req, res, next) => {
 // place your routers here
 
 // ROUTER: /api/user
-const usersRouter = require('./user');
-apiRouter.use('/user', usersRouter);
+const usersRouter = require('./users');
+apiRouter.use('/users', usersRouter);
 
 // // ROUTER: /api/products
 // const productsRouter = require('./products');

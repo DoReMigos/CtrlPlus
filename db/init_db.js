@@ -3,7 +3,9 @@ const {
   // declare your model imports here
   // for example, User
 } = require('./');
-const { createCart } = require('./models/cart');
+const { createCart, getAllCarts } = require('./models/cart');
+const { addProducttoCart } = require('./models/cartProducts');
+const { getAllProducts } = require('./models/product');
 
 async function buildTables() {
 
@@ -42,12 +44,13 @@ try{
         CREATE TABLE carts (
           id SERIAL PRIMARY KEY, 
           "user_id" INTEGER REFERENCES users(id), 
-          "created_at" TIME DEFAULT CURRENT_TIME
+          "created_at" TIME DEFAULT CURRENT_TIME,
+          "isPurchased" BOOLEAN DEFAULT false
         );
         CREATE TABLE cart_products (
-          id INTEGER NOT NULL, 
-          "product_id" INTEGER REFERENCES products(id),
+          id SERIAL PRIMARY KEY, 
           "order_id" INTEGER REFERENCES carts(id),
+          "product_id" INTEGER REFERENCES products(id),
           quantity INTEGER default 1,
           "purchased_price" VARCHAR(255),
           UNIQUE ("product_id" ,"order_id")
@@ -58,7 +61,7 @@ try{
           "product_id" INTEGER REFERENCES products(id),
           message TEXT NOT NULL,
           UNIQUE ("product_id" ,"user_id")
-        )
+        );
        ` )
             // build tables in correct order
           } catch (error) {
@@ -95,9 +98,14 @@ async function createInitialProducts() {
   console.log("Starting to create products...")
   try { 
     const productsToCreate = [
-      { title: "Razer Basilisk Ultimate with Charging Dock", brand:"Razer", description: "Wireless Gaming Mouse with 11 Programmable Buttons", price: 169.99, inventory: 20, category: "mouse", image: "text" },
-      { title: "Logitech G915", brand: "Logitech", description: "LIGHTSPEED Wireless RGB Mechanical Gaming Keyboard", price: 249.99, inventory: 20, category: "keyboard", image: "text" },
+      { title: "Razer Basilisk Ultimate", brand:"Razer", description: "Wireless Gaming Mouse", price: 169.99, inventory: 20, category: "mouse", image: "text" },
+      { title: "Logitech G915", brand: "Logitech", description: "Wireless RGB Mechanical Gaming Keyboard", price: 249.99, inventory: 20, category: "keyboard", image: "text" },
       { title: "SteelSeries Arctis 7+", brand: "SteelSeries", description: "Multi-Platform USB-C Gaming Headset", price: 169.99, inventory: 20, category: "headset", image: "text" },
+      { title: "SteelSeries Arctis 9", brand: "SteelSeries", description: "Wireless Gaming Headset", price: 209.99, inventory: 10, category: "headset", image: "text" },
+      { title: "Razer Naga", brand:"Razer", description: "Wireless Gaming Mouse", price: 87.99, inventory: 24, category: "mouse", image: "text" },
+      { title: "Logitech G630", brand: "Logitech", description: "Mechanical Gaming Keyboard", price: 149.99, inventory: 20, category: "keyboard", image: "text" },
+      { title: "Corsair K65", brand: "Corsair", description: "Mechanical Keyboard for Gaming", price: 69.69, inventory: 20, category: "keyboard", image: "text" },
+      { title: "Turtle Beach TalkieListenie", brand: "TortleBeach", description: "Wireless Gaming Headset", price: 39.99, inventory: 10, category: "headset", image: "text" },
     ];
     console.log(productsToCreate)
 
@@ -119,12 +127,26 @@ async function createInitialCarts() {
     {
       id: 1,
       user_id: 2,
-      created_at: "CURRENT_TIME"
+      created_at: "CURRENT_TIME",
+      isPurchased: false
     },
     {
       id: 2,
       user_id: 1,
       created_at: "TIMESTAMP now()",
+      isPurchased: false
+    },
+    {
+      id: 3,
+      user_id: 3,
+      created_at: "TIMESTAMP now()",
+      isPurchased: false
+    },
+    {
+      id: 4,
+      user_id: 4,
+      created_at: "TIMESTAMP now()",
+      isPurchased: false
     }
   ]
   const carts = await Promise.all(
@@ -133,6 +155,74 @@ async function createInitialCarts() {
   console.log("Carts Created: ", carts)
   console.log("Finished creating carts.")
 }
+async function creationInitalCartProducts(){
+  const [cart1, cart2, cart3, cart4] =
+    await getAllCarts()
+  const [bicep1, bicep2, chest1, chest2, leg1, leg2, leg3, leg4] =
+    await getAllProducts()
+
+  const cartProductsToCreate = [
+    {
+      order_id: cart1.id,
+      product_id: bicep1.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart1.id,
+      product_id: bicep2.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart2.id,
+      product_id: chest1.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart2.id,
+      product_id: chest2.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart3.id,
+      product_id: leg1.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart3.id,
+      product_id: leg2.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart3.id,
+      product_id: leg3.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart4.id,
+      product_id: leg2.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+    {
+      order_id: cart4.id,
+      product_id: leg4.id,
+      quantity: 10,
+      purchased_price: 5,
+    },
+  ]
+  const cartProducts = await Promise.all(
+    cartProductsToCreate.map(addProducttoCart)
+  )
+  console.log("cart Products created: ", cartProducts)
+  console.log("Finished creating cart_products!")
+}
 
 buildTables()
   .then(dropTables)
@@ -140,5 +230,6 @@ buildTables()
   .then(populateInitialData)
   .then(createInitialProducts)
   .then(createInitialCarts)
+  .then(creationInitalCartProducts)
   .catch(console.error)
   .finally(() => client.end());

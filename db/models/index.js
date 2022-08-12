@@ -1,5 +1,5 @@
 module.exports = {
-  User: require('./user'),
+  User: require('./users'),
   Products: require('./product'),
   Cart: require('./cart')
   
