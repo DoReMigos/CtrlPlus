@@ -24,7 +24,7 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1>Hello, World!</h1>
+      <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
       <p>API Status: {APIHealth}</p>
     </div>
   );

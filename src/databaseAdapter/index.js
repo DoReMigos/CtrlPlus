@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const URL = 'https://ctrlplus.herokuapp.com/api/'
+
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
 // to your React UI through AJAX calls
@@ -16,7 +18,28 @@ import axios from 'axios';
       console.error(err)
     }
   }
-*/
+  */
+  export async function RegisterUser ({email, password}){
+    try {
+    console.log(`${URL}/users/register`)
+    const response = await fetch(`${URL}/users/register`,{
+    method:"POST",
+    headers: {
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+            email: email,
+            password: password,
+    })
+  })
+  
+  const result = await response.json()
+  console.log(result)
+  return result
+  }catch(error){
+  throw error;
+  }
+  }
 
 export async function getAPIHealth() {
   try {
@@ -27,3 +50,4 @@ export async function getAPIHealth() {
     return { healthy: false };
   }
 }
+
