@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const URL = 'https://ctrlplus.herokuapp.com/api/'
+export const URL = 'http://localhost:3000/api'
 
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
@@ -21,9 +21,8 @@ export const URL = 'https://ctrlplus.herokuapp.com/api/'
   */
 
   //EVERYTHING BELOW HERE IS USER API
-  export async function RegisterUser ({email, password}){
+  export async function RegisterUser (email, password){
     try {
-    console.log(`${URL}/users/register`)
     const response = await fetch(`${URL}/users/register`,{
     method:"POST",
     headers: {
@@ -34,7 +33,6 @@ export const URL = 'https://ctrlplus.herokuapp.com/api/'
             password: password,
     })
   })
-  
   const result = await response.json()
   console.log(result)
   return result

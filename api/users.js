@@ -1,6 +1,7 @@
 const express = require("express");
 const apiRouter = express.Router();
 const { requireUser } = require("./utils");
+const User = require("../db/models/users")
 
 const jwt = require("jsonwebtoken");
 
@@ -17,7 +18,7 @@ const {
 apiRouter.post("/register", async (req, res, next) => {
     const { email, password } = req.body;
     try {
-      const _user = await getUserByEmail(email);
+      const _user = await User.getUserByEmail(email);
       if (_user) {
         next({
           name: "UserExistsError",
@@ -30,7 +31,7 @@ apiRouter.post("/register", async (req, res, next) => {
           message: "Password Too Short!",
         });
       }
-      const user = await createUser({ email, password });
+      const user = await User.createUser({ email, password });
       const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET);
       res.send({ message: "Thank you for signing up!", token, user });
     } catch ({ name, message }) {
@@ -48,7 +49,7 @@ apiRouter.post("/login", async (req, res, next) => {
     });
   }
   try {
-    const user = await getUser({ email, password });
+    const user = await User.getUser({ email, password });
     if (!user) {
       next({
         name: "IncorrectCredentialsError",
@@ -81,7 +82,7 @@ apiRouter.get("/me", requireUser,  async (req, res, next) => {
 apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
     try{
       const {email} = req.params;
-      const user = await getUserByEmail(email);
+      const user = await User.getUserByEmail(email);
       if (!user){
         next({
           name: "NO USER FOUND",
