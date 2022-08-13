@@ -13,8 +13,8 @@ export default function Register() {
     event.preventDefault();
     const result = await RegisterUser(newEmail, password);
     console.log(result, "this is result")
-    // localStorage.setItem("token", result.data.token);
-    // localStorage.setItem("Email", newEmail);
+    localStorage.setItem("token", result.token);
+    localStorage.setItem("Email", newEmail);
     navigate("/Login");
   }
   return (
@@ -28,7 +28,7 @@ export default function Register() {
             onChange={(event) => setnewEmail(event.target.value)}
           />
         </div>
-        <div className="form-outline mb-4">
+        <div>
           <input
             placeholder="Choose Your New Password"
             type="password"
