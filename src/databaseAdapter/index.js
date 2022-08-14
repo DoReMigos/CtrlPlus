@@ -70,7 +70,9 @@ export const URL = 'http://localhost:3000/api'
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(token)
     const result = await response.json();
+    console.log(result)
     return result;
   }
 

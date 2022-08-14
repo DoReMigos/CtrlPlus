@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { userLogin } from "../databaseAdapter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 
 
 export default function LoggedIn() {
@@ -19,6 +19,7 @@ export default function LoggedIn() {
     };
     const handleSubmit = async (event) => {
       event.preventDefault();
+      alert(`Happy Shopping ${email}!`)
       const token = await userLogin(email, password);
       console.log(token, "this is line 23 from Login")
       localStorage.setItem("token",token);
@@ -29,6 +30,7 @@ export default function LoggedIn() {
         <div>
             <h2>LOGIN</h2>
             <form onSubmit={handleSubmit}>
+              <div>
             <input
                    id="form2Example1"
                     type ="text"
@@ -36,15 +38,25 @@ export default function LoggedIn() {
                     value={email}
                     onChange={handleOnChange}  
                  />
+                 </div>
+                 <div>
              <input
                     id="form2Example2"
                     type="password"
                     placeholder="Password"
                     onChange={handleOnChange}
                   ></input>    
-            <button type="submit">
+                  </div>
+           <div> <button type="submit">
                   Login
-            </button>     
+            </button>   
+            </div> 
+            Don't have an account?
+            <div>
+            <Link to = "/Register">
+            <button> Register</button> 
+            </Link>
+            </div>
             </form>
         </div>
     )}

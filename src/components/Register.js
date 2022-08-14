@@ -11,6 +11,7 @@ export default function Register() {
 
   async function handleSubmit(event) {
     event.preventDefault();
+    alert(`Thank you for Registering with Ctrl+ ${newEmail}!`)
     const result = await RegisterUser(newEmail, password);
     console.log(result, "this is result")
     localStorage.setItem("token", result.token);
