@@ -1,5 +1,5 @@
 const express = require('express');
-const router = express.Router();
+const apiRouter = express.Router();
 const { requireUser, requireAdminUser } = require("./utils");
 const { getAllProducts, createProducts, getProductByCategory, getProductById, updateProduct, deleteProduct } = require("../db/models")
 

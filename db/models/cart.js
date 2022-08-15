@@ -189,7 +189,6 @@ async function attachProductsToCarts(carts) {
   //   } catch (error) {
   //     console.error(error);
   //   }
-  }
   
 //   async function updateRoutine({ id, ...fields }) {
 //     const setString = Object.keys(fields)
