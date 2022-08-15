@@ -3,7 +3,7 @@ const {
   // declare your model imports here
   // for example, User
 } = require('./');
-const { createCart, getAllCarts } = require('./models/cart');
+const { createCart, getAllCarts, attachProductsToCarts } = require('./models/cart');
 const { addProducttoCart } = require('./models/cartProducts');
 const { getAllProducts } = require('./models/product');
 
@@ -218,20 +218,25 @@ async function creationInitalCartProducts(){
       price: "5"
     },
   ]
-  console.log(cart1, cart2, bicep1, leg3,'ddddd')
+  
+  // console.log(cart1, cart2, bicep1, leg3,'ddddd')
   const cartProducts = await Promise.all(
     cartProductsToCreate.map(addProducttoCart)
-  )
-  console.log("cart Products created: ", cartProducts)
-  console.log("Finished creating cart_products!")
-}
-
-buildTables()
+    )
+    console.log("cart Products created: ", cartProducts)
+    console.log("Finished creating cart_products!")
+  }
+  async function getcbyus(id){
+  let cartsss =  await Cart.getCartsByUser({email: `albert@gmail.com`})
+  // let all =  attachProductsToCarts(cartsss)
+  console.log(cartsss[0].products,'all')}
+  buildTables()
   .then(dropTables)
   .then(createTables)
   .then(populateInitialData)
   .then(createInitialProducts)
   .then(createInitialCarts)
   .then(creationInitalCartProducts)
+  .then(getcbyus)
   .catch(console.error)
   .finally(() => client.end());
