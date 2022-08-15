@@ -18,8 +18,6 @@ fs.createReadStream('db/models/Products.csv')
     console.log(results)
   });
 
-
-
 async function buildTables() {
 
   await client.connect()
