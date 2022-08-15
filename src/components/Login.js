@@ -24,7 +24,7 @@ export default function LoggedIn() {
       console.log(token, "this is line 23 from Login")
       localStorage.setItem("token",token);
       localStorage.setItem("email",email);
-      navigate("/Register");
+      navigate("/Profile");
     };
     return (
         <div>

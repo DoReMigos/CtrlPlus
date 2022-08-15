@@ -33,8 +33,8 @@ const App = () => {
 
 
     </Routes>
-      {/* <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
-      <p>API Status: {APIHealth}</p> */}
+      <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
+      <p>API Status: {APIHealth}</p>
     </div>
   );
 };

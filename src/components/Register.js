@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { RegisterUser } from "../databaseAdapter";
-import { useNavigate, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import "./Register.css";
 
 export default function Register() {
@@ -78,12 +78,12 @@ export default function Register() {
                         Confirm Registration
                       </button>
                     </div>
-                    <p className="text-center text-muted mt-5 mb-0">
+                    {/* <p className="text-center text-muted mt-5 mb-0">
                       Have already an account?
                       <Link to="./Login">
                         <u>Login here</u>
                       </Link>
-                    </p>
+                    </p> */}
                   </form>
                 </div>
               </div>
