@@ -9,7 +9,6 @@ import '../style/App.css';
 
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
-  const [allProducts, setAllProducts] = useState([]);
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -31,7 +30,7 @@ const App = () => {
     <Route exact path = "/Register" element={<Register />}></Route>
     <Route exact path = "/Login" element={<Login />}></Route>
     <Route exact path = "/Profile" element={<Profile />}></Route>
-    <Route exact path = "/Store" element={<Store allProducts = {allProducts} setAllProducts = {setAllProducts} />}></Route>
+    <Route exact path = "/Store" element={<Store />}></Route>
 
 
     </Routes>
