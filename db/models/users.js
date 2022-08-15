@@ -40,15 +40,18 @@ async function getAllUsers() {
 async function getUser({ email, password }) {
   const user = await getUserByEmail(email);
   const hashedPassword = user.password;
-  const matchPassword = await bcrypt.compare(password, hashedPassword);
-  if (matchPassword) {
-    delete user.password;
-    return user;
-  } else if (!matchPassword) {
-    return;
-  } else {
-    throw console.log("Password does not match");
+  const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+  if (passwordsMatch) {
+  delete user.password;
+  return user;
+  } 
+  else if(!passwordsMatch) {
+    return ;
   }
+  else {
+    throw console.log("Thers an error in GetUser");
+  }
+  
 }
 
 async function getUserById(user_Id) {
