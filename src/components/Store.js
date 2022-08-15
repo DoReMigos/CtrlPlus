@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { getAllProducts } from "../databaseAdapter";
 
-export default function Store({allProducts, setAllProducts}) {
+export default function Store() {
+    const [allProducts, setAllProducts] = useState([]);
 
     useEffect(() => {
         async function fetchProducts() {

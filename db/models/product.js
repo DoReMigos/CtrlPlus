@@ -2,15 +2,15 @@ const client = require('../client')
 
 
 //database function
-async function createProducts({ title, brand, description, price, inventory, category, image }) {
+async function createProducts({ title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4 }) {
   try {
     const { rows } = await client.query(
       `
-          INSERT INTO products(title, brand, description, price, inventory, category, image) 
-          VALUES($1, $2, $3, $4, $5, $6, $7) 
+          INSERT INTO products(title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4) 
+          VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9, $10) 
           RETURNING *;
         `,
-      [title, brand, description, price, inventory, category, image]
+      [title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4]
     );
     return rows;
   } catch (error) {
@@ -24,7 +24,7 @@ async function getAllProducts() {
         SELECT *
         FROM products;
       `);
-
+    console.log(rows, "this is rows from products")
     return rows;
   } catch (error) {
     throw error;
