@@ -1,11 +1,12 @@
 const express = require('express');
-const router = express.Router();
+const apiRouter = express.Router();
 const { requireUser, requireAdminUser } = require("./utils");
-const { getAllProducts, createProducts, getProductByCategory, getProductById, updateProduct, deleteProduct } = require("../db/models")
+const { Products } = require("../db/models")
 
 apiRouter.get('/', async (req, res, next) => {
     try {
-        const allProducts = await getAllProducts();
+        const allProducts = await Products.getAllProducts();
+        console.log(allProducts , "this is all Products")
         res.send(allProducts);
     } catch (error) {
         next(error);
@@ -14,7 +15,7 @@ apiRouter.get('/', async (req, res, next) => {
 
 apiRouter.post('/', requireAdminUser, async (req, res, next) => {
     const { title, brand, description, price, inventory, category, image } = req.body;
-    const _product = await createProducts({ title, brand, description, price, inventory, category, image })
+    const _product = await Products.createProducts({ title, brand, description, price, inventory, category, image })
     try {
         if (_product) {
             res.send(_product)
@@ -27,7 +28,7 @@ apiRouter.post('/', requireAdminUser, async (req, res, next) => {
 apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
     const { title, brand, description, price, inventory, category, image } = req.body;
     const id = req.params.productsId;
-    const product = await getProductById(id)
+    const product = await Products.getProductById(id)
     try {
         if (!req.user.isAdmin) {
             res.status(403)
@@ -36,7 +37,7 @@ apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
                 message: `Only admins allowed to update ${product.name}`,
             });
         }
-        const updatedProduct = await updateProduct({ title, brand, description, price, inventory, category, image });
+        const updatedProduct = await Products.updateProduct({ title, brand, description, price, inventory, category, image });
         res.send(updatedProduct);
     } catch ({ name, message }) {
         next({ name, message });
@@ -45,7 +46,7 @@ apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
 
 apiRouter.delete('/:productId', requireAdminUser, async (req, res, next) => {
     const id = req.params.productsId;
-    const product = await getProductById(id)
+    const product = await Products.getProductById(id)
     try {
         if (!req.user.isAdmin) {
             res.status(403)
@@ -54,7 +55,7 @@ apiRouter.delete('/:productId', requireAdminUser, async (req, res, next) => {
                 message: `Only admins allowed to delete ${product.name}`,
             })
         }
-            const deletedProduct = deleteProduct(id)
+            const deletedProduct = Products.deleteProduct(id)
             res.send(deletedProduct)
     } catch (error) {
         next(error);
@@ -63,7 +64,7 @@ apiRouter.delete('/:productId', requireAdminUser, async (req, res, next) => {
 
 apiRouter.get('/categories', async (req, res, next) => {
     try {
-        const productsByCategory = await getProductByCategory();
+        const productsByCategory = await Products.getProductByCategory();
         res.send(productsByCategory);
     } catch (error) {
         next(error);
@@ -72,7 +73,7 @@ apiRouter.get('/categories', async (req, res, next) => {
 
 apiRouter.get('/id', async (req, res, next) => {
     try {
-        const productById = await getProductById();
+        const productById = await Products.getProductById();
         res.send(productById);
     } catch (error) {
         next(error);

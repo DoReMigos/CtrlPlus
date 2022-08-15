@@ -7,24 +7,36 @@ const { createCart, getAllCarts, attachProductsToCarts } = require('./models/car
 const { addProducttoCart } = require('./models/cartProducts');
 const { getAllProducts } = require('./models/product');
 
+const csv = require('csv-parser')
+const fs = require('fs')
+const results = []
+
+fs.createReadStream('db/models/Products.csv')
+  .pipe(csv({}))
+  .on('data', (data) => results.push(data))
+  .on('end', () => {
+    console.log(results)
+  });
+
 async function buildTables() {
 
-    await client.connect()} 
-    // drop tables in correct order
-async function dropTables(){
-      console.log("dropping Tables")    
-      await client.query(`
+  await client.connect()
+}
+// drop tables in correct order
+async function dropTables() {
+  console.log("dropping Tables")
+  await client.query(`
         DROP TABLE IF EXISTS reviews;
         DROP TABLE IF EXISTS cart_products;
         DROP TABLE IF EXISTS carts;
         DROP TABLE IF EXISTS products;
         DROP TABLE IF EXISTS users;
         `);
-      }
-async function createTables(){
-try{
-  console.log("building tables")
-        await client.query(`
+}
+async function createTables() {
+  try {
+    console.log("building tables")
+    await client.query(`
      CREATE TABLE users (
           id SERIAL PRIMARY KEY, 
           email VARCHAR(255) UNIQUE NOT NULL,
@@ -39,7 +51,10 @@ try{
           price MONEY,
           inventory INTEGER,
           category VARCHAR(255),
-          image TEXT
+          image_1 TEXT,
+          image_2 TEXT,
+          image_3 TEXT,
+          image_4 TEXT
         );
         CREATE TABLE carts (
           id SERIAL PRIMARY KEY, 
@@ -63,27 +78,27 @@ try{
           UNIQUE ("product_id" ,"user_id")
         );
        ` )
-            // build tables in correct order
-          } catch (error) {
-            throw error;
-          }
-        }
+    // build tables in correct order
+  } catch (error) {
+    throw error;
+  }
+}
 
 
 async function populateInitialData() {
   console.log("Starting to create users...")
-  try { 
+  try {
     // create useful starting data by leveraging your
     // Model.method() adapters to seed your db, for example:
     // const user1 = await User.createUser({ ...user info goes here... })
     const usersToCreate = [
-      {email:'albert@gmail.com', password: 'bertie99'},
-      {email:'sandra@gmail.com', password: 'sandra123'},
-      {email:'glamgal@gmail.com', password: 'glamgal123'},
-      {email:'georgie@gmail.com', password: 'georgie1234'},
-      {email:'productsgalore@ctrlplus.com', password: 'products1234', isAdmin: true},
+      { email: 'albert@gmail.com', password: 'bertie99' },
+      { email: 'sandra@gmail.com', password: 'sandra123' },
+      { email: 'glamgal@gmail.com', password: 'glamgal123' },
+      { email: 'georgie@gmail.com', password: 'georgie1234' },
+      { email: 'productsgalore@ctrlplus.com', password: 'products1234', isAdmin: true },
     ]
-   const users = await Promise.all(usersToCreate.map(User.createUser))
+    const users = await Promise.all(usersToCreate.map(User.createUser))
 
     console.log("Users Created!")
     console.log(users)
@@ -94,23 +109,12 @@ async function populateInitialData() {
   }
 }
 
+
 async function createInitialProducts() {
   console.log("Starting to create products...")
-  try { 
-    const productsToCreate = [
-      { title: "Razer Basilisk Ultimate", brand:"Razer", description: "Wireless Gaming Mouse", price: '$169.99', inventory: 20, category: "mouse", image: "text" },
-      { title: "Logitech G915", brand: "Logitech", description: "Wireless RGB Mechanical Gaming Keyboard", price: '$249.99', inventory: 20, category: "keyboard", image: "text" },
-      { title: "SteelSeries Arctis 7+", brand: "SteelSeries", description: "Multi-Platform USB-C Gaming Headset", price: '$169.99', inventory: 20, category: "headset", image: "text" },
-      { title: "SteelSeries Arctis 9", brand: "SteelSeries", description: "Wireless Gaming Headset", price: '$209.99', inventory: 10, category: "headset", image: "text" },
-      { title: "Razer Naga", brand:"Razer", description: "Wireless Gaming Mouse", price: '$87.99', inventory: 24, category: "mouse", image: "text" },
-      { title: "Logitech G630", brand: "Logitech", description: "Mechanical Gaming Keyboard", price: '$149.99', inventory: 20, category: "keyboard", image: "text" },
-      { title: "Corsair K65", brand: "Corsair", description: "Mechanical Keyboard for Gaming", price: '$69.69', inventory: 20, category: "keyboard", image: "text" },
-      { title: "Turtle Beach TalkieListenie", brand: "TortleBeach", description: "Wireless Gaming Headset", price: '$39.99', inventory: 10, category: "headset", image: "text" },
-    ];
-    console.log(productsToCreate)
-
-    const products = await Promise.all(productsToCreate.map(Products.createProducts));
-    console.log(products, "THIS IS PRODUCTS")
+  try {
+    console.log(results)
+    const products = await Promise.all(results.map(Products.createProducts));
 
     console.log("Products created:");
     console.log(products);
@@ -118,8 +122,10 @@ async function createInitialProducts() {
   } catch (error) {
     console.error("Error creating products!");
     throw error;
-  }
+  } 
 }
+
+
 async function createInitialCarts() {
   console.log("starting to create routines...")
 
@@ -146,7 +152,7 @@ async function createInitialCarts() {
       id: 4,
       user_id: 4,
       created_at: "TIMESTAMP now()",
-      isPurchased: false
+      isPurchased: true
     }
   ]
   const carts = await Promise.all(
@@ -155,10 +161,10 @@ async function createInitialCarts() {
   console.log("Carts Created: ", carts)
   console.log("Finished creating carts.")
 }
-async function creationInitalCartProducts(){
+async function creationInitalCartProducts() {
   const [cart1, cart2, cart3, cart4] =
     await getAllCarts()
-    console.log(cart1, cart2, cart3, cart4, 'carts')
+  console.log(cart1, cart2, cart3, cart4, 'carts')
   const [bicep1, bicep2, chest1, chest2, leg1, leg2, leg3, leg4] =
     await getAllProducts()
 
@@ -218,7 +224,7 @@ async function creationInitalCartProducts(){
       price: "5"
     },
   ]
-  
+
   // console.log(cart1, cart2, bicep1, leg3,'ddddd')
   const cartProducts = await Promise.all(
     cartProductsToCreate.map(addProducttoCart)
@@ -227,9 +233,9 @@ async function creationInitalCartProducts(){
     console.log("Finished creating cart_products!")
   }
   async function getcbyus(id){
-  let cartsss =  await Cart.getCartsByUser({email: `albert@gmail.com`})
+  let cartsss =  await Cart.getAllPurchasedCarts({id: 4})
   // let all =  attachProductsToCarts(cartsss)
-  console.log(cartsss[0].products,'all')}
+  console.log(cartsss,'all')}
   buildTables()
   .then(dropTables)
   .then(createTables)

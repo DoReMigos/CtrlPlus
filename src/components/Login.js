@@ -27,14 +27,25 @@ export default function LoggedIn() {
       navigate("/Profile");
     };
     return (
-        <div>
-            <h2>LOGIN</h2>
+      <section>
+        <div className="mask d-flex align-items-center h-100 gradient-custom-3">
+        <div className="container h-100">
+        <div className="row d-flex justify-content-center align-items-center h-100">
+        <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+        <div className="card" style={{ borderRadius: "15px", marginTop:"22%" }}>
+        <div className="card-body p-5">
+
+
+
+
+        <h2 className="text-uppercase text-center mb-5">LOGIN</h2>
             <form onSubmit={handleSubmit}>
               <div>
             <input
                    id="form2Example1"
+                   className="form-control form-control-lg"
                     type ="text"
-                    placeholder="Username"
+                    placeholder="Enter Email"
                     value={email}
                     onChange={handleOnChange}  
                  />
@@ -42,21 +53,31 @@ export default function LoggedIn() {
                  <div>
              <input
                     id="form2Example2"
+                    className="form-control form-control-lg"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Enter Password"
                     onChange={handleOnChange}
                   ></input>    
                   </div>
-           <div> <button type="submit">
+                  <div className="d-flex justify-content-center"> <button   className="btn btn-info" type="submit">
                   Login
-            </button>   
+            </button>
             </div> 
-            Don't have an account?
-            <div>
+            <div className="d-flex justify-content-center">
+              <h6>Don't have an account?</h6>
+              </div>
+              <div className="d-flex justify-content-center">
             <Link to = "/Register">
-            <button> Register</button> 
+            <button   className="btn btn-info"> Register</button> 
             </Link>
+        
             </div>
             </form>
-        </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+        </section>
     )}
