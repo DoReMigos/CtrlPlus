@@ -111,6 +111,19 @@ export const URL = 'http://localhost:3000/api'
 
   //END OF USER API
 
+  export async function getAllProducts() {
+    const response = await fetch(`${URL}/products`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result)
+    return result;
+  }
+
+
+
 export async function getAPIHealth() {
   try {
     const { data } = await axios.get('/api/health');
