@@ -19,7 +19,7 @@ export default function Profile() {
   }, []);
   return (
     <div>
-     <div className="card">
+     <div className="card" id = "card">
      <div className="card-body">
         <h2 className = "card-body">Hi, User{userInfo.email}.</h2>
         <h2 className = "card-body"> Welcome to CTRL+</h2>
