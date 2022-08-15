@@ -32,6 +32,7 @@ apiRouter.use(async (req, res, next) => {
 
       if (id) {
         req.user = await getUserById(id);
+        console.log(req.user, "MORTY MORTY MORTY MORTY")
         next();
       }
     } catch ({ name, message }) {
@@ -57,9 +58,9 @@ apiRouter.use((req, res, next) => {
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
 
-// // ROUTER: /api/products
-// const productsRouter = require('./products');
-// apiRouter.use('/products', productsRouter);
+// ROUTER: /api/products
+const productsRouter = require('./products');
+apiRouter.use('/products', productsRouter);
 
 apiRouter.use((error, req, res, next) => {
   res.send({

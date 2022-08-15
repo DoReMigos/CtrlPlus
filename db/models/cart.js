@@ -124,7 +124,6 @@ async function getCartByUserId({ id }) {
   }
 }
 
-
 async function attachProductsToCarts(carts) {
   // no side effects
   const cartsToReturn = [...carts];
@@ -262,5 +261,3 @@ module.exports = {
   getAllPurchasedCarts,
   updateCart,
 };
-
-//haha

@@ -1,6 +1,6 @@
 import axios from 'axios';
 
-export const URL = 'http://localhost:3000/api'
+export const URL = 'http://localhost:4000/api'
 
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
@@ -70,9 +70,9 @@ export const URL = 'http://localhost:3000/api'
         Authorization: `Bearer ${token}`,
       },
     });
-    console.log(token)
+    console.log(token, "THIS TOKEN IS CURRENTLY DISPLAYING, does not make it into response")
     const result = await response.json();
-    console.log(result)
+    console.log(response, "Response FROM JSON response")
     return result;
   }
 
@@ -110,6 +110,19 @@ export const URL = 'http://localhost:3000/api'
   */
 
   //END OF USER API
+
+  export async function getAllProducts() {
+    const response = await fetch(`${URL}/products`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result)
+    return result;
+  }
+
+
 
 export async function getAPIHealth() {
   try {
