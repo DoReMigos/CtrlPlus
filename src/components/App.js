@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { Route, Routes} from "react-router-dom";
+import {Register, Login, Profile} from "./"
 // getAPIHealth is defined in our axios-services directory index.js
 // you can think of that directory as a collection of api adapters
 // where each adapter fetches specific info from our express server's /api route
-import { getAPIHealth } from '../axios-services';
+import { getAPIHealth } from '../databaseAdapter';
 import '../style/App.css';
 
 const App = () => {
@@ -24,7 +26,14 @@ const App = () => {
 
   return (
     <div className="app-container">
-      <h1>Hello, World!</h1>
+    <Routes>
+    <Route exact path = "/Register" element={<Register />}></Route>
+    <Route exact path = "/Login" element={<Login />}></Route>
+    <Route exact path = "/Profile" element={<Profile />}></Route>
+
+
+    </Routes>
+      <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
       <p>API Status: {APIHealth}</p>
     </div>
   );
