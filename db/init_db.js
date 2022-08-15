@@ -227,7 +227,7 @@ async function creationInitalCartProducts(){
     console.log("Finished creating cart_products!")
   }
   async function getcbyus(id){
-  let cartsss =  await Cart.getCartsByUser({email: `albert@gmail.com`})
+  let cartsss =  await Cart.getCartByUserId({id: 4})
   // let all =  attachProductsToCarts(cartsss)
   console.log(cartsss[0].products,'all')}
   buildTables()

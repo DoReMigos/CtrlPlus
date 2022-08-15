@@ -105,24 +105,24 @@ async function getCartsByUser({ email }) {
   }
 }
 
-async function getCartsByUserId({ id }) {
+async function getCartByUserId({ id }) {
   try {
-    const { rows } = await client.query(
-      `SELECT *
-        FROM carts
-        LEFT JOIN cart_products ON cart_products."order_id" = carts.id
-        LEFT JOIN products ON products.id = cart_products."product_id"
-        WHERE carts.user_id=$1 AND "isPurchased"=false;
-        `,
-      [id]
-    );
+    const {
+      rows
+    } = await client.query(`
+      SELECT carts.*, users.email AS "userName"  
+      FROM carts
+      JOIN users ON users.id=carts."user_id"
+      WHERE carts."user_id"=$1 AND "isPurchased"=false;
+      `, [id]);
     const routines = await attachProductsToCarts(rows);
-
+    console.log(routines, "this is what we are checking")
     return routines;
   } catch (error) {
     console.error(error);
   }
 }
+
 
 async function attachProductsToCarts(carts) {
   // no side effects
@@ -257,7 +257,7 @@ module.exports = {
   getCartsByUser,
   attachProductsToCarts,
   destroyCart,
-  getCartsByUserId,
+  getCartByUserId,
 };
 
 //haha
