@@ -176,28 +176,28 @@ async function attachProductsToCarts(carts) {
   }
 }
 
-// async function getPublicRoutinesByActivity({ id }) {
-//   try {
-//     const { rows } = await client.query(
-//       `SELECT routines.*, users.username AS "creatorName", activities.id AS "thisisyourid"
-//       FROM routines
-//       JOIN users ON users.id=routines."creatorId"
-//       JOIN activities ON activities.id=activities.id
-//       WHERE activities.id=$1 AND "isPublic"=true;
-//       `,
-//       [id]
-//     );
-//     const routines = await attachActivitiesToRoutines(rows);
+async function getAllPurchasedCarts({id}) {
+  try {
+    const { rows } = await client.query(
+      `SELECT carts.*, users.email AS "customerName"
+      FROM carts
+      JOIN users ON users.id=carts."user_id"
+      JOIN cart_products ON cart_products."order_id"=carts.id
+      WHERE cart_products."product_id"=$1 AND "isPurchased"=true;
+      `,
+      [id]
+    );
+    const carts = await attachProductsToCarts(rows);
 
-//     const newRoutine = routines.filter((routine) => {
-//       return routine.activities.length > 1;
-//     });
+    const newCart = carts.filter((cart) => {
+      return cart.products.length > 1;
+    });
 
-//     return newRoutine;
-//   } catch (error) {
-//     console.error(error);
-//   }
-
+    return newCart;
+  } catch (error) {
+    console.error(error);
+  }
+}
   async function updateCart({id, fields}) {
     const setString = Object.keys(fields)
       .map((key, index) => `"${key}"=$${index + 1}`)
@@ -259,6 +259,8 @@ module.exports = {
   attachProductsToCarts,
   destroyCart,
   getCartByUserId,
+  getAllPurchasedCarts,
+  updateCart,
 };
 
 //haha

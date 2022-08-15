@@ -146,7 +146,7 @@ async function createInitialCarts() {
       id: 4,
       user_id: 4,
       created_at: "TIMESTAMP now()",
-      isPurchased: false
+      isPurchased: true
     }
   ]
   const carts = await Promise.all(
@@ -227,9 +227,9 @@ async function creationInitalCartProducts(){
     console.log("Finished creating cart_products!")
   }
   async function getcbyus(id){
-  let cartsss =  await Cart.getCartByUserId({id: 4})
+  let cartsss =  await Cart.getAllPurchasedCarts({id: 4})
   // let all =  attachProductsToCarts(cartsss)
-  console.log(cartsss[0].products,'all')}
+  console.log(cartsss,'all')}
   buildTables()
   .then(dropTables)
   .then(createTables)
