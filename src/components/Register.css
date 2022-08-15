@@ -1,0 +1,9 @@
+section {
+  margin-top: 5%;
+  margin-bottom: 22.5%;
+}
+
+.app-container {
+  background-image: url("https://pbs.twimg.com/media/FOZKlglUcAIoB2u?format=jpg&name=large");
+  background-size: cover;
+}
