@@ -73,6 +73,7 @@ apiRouter.post("/login", async (req, res, next) => {
 // GET /api/users/me
 apiRouter.get("/me", requireUser,  async (req, res, next) => {
     try{
+      console.log(req.user)
       res.send(req.user);
     }catch(error){
       next(error)
