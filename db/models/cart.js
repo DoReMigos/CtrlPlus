@@ -261,5 +261,3 @@ module.exports = {
   getAllPurchasedCarts,
   updateCart,
 };
-
-//haha

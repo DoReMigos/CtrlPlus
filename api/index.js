@@ -57,9 +57,9 @@ apiRouter.use((req, res, next) => {
 const usersRouter = require('./users');
 apiRouter.use('/users', usersRouter);
 
-// // ROUTER: /api/products
-// const productsRouter = require('./products');
-// apiRouter.use('/products', productsRouter);
+// ROUTER: /api/products
+const productsRouter = require('./products');
+apiRouter.use('/products', productsRouter);
 
 apiRouter.use((error, req, res, next) => {
   res.send({

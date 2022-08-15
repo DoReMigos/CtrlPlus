@@ -92,7 +92,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const carts = await getCartsByUser({email:email});
+        const carts = await User.getCartsByUser({email:email});
         res.send(carts)
       }
     } catch(error){
@@ -106,7 +106,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
   apiRouter.get("/:email/order", requireUser, async (req, res, next) => {
     try{
       const {email} = req.params;
-      const user = await getUserByEmail(email);
+      const user = await User.getUserByEmail(email);
       if (!user){
         next({
           name: "NO USER FOUND",
@@ -114,7 +114,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const order = await getOrderById({email});
+        const order = await User.getOrderById({email});
         res.send(order)
       }
     } catch(error){
