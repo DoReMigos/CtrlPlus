@@ -154,7 +154,7 @@ async function createInitialCarts() {
       id: 4,
       user_id: 4,
       created_at: "TIMESTAMP now()",
-      isPurchased: false
+      isPurchased: true
     }
   ]
   const carts = await Promise.all(
@@ -230,16 +230,15 @@ async function creationInitalCartProducts() {
   // console.log(cart1, cart2, bicep1, leg3,'ddddd')
   const cartProducts = await Promise.all(
     cartProductsToCreate.map(addProducttoCart)
-  )
-  console.log("cart Products created: ", cartProducts)
-  console.log("Finished creating cart_products!")
-}
-async function getcbyus(id) {
-  let cartsss = await Cart.getCartsByUser({ email: `albert@gmail.com` })
+    )
+    console.log("cart Products created: ", cartProducts)
+    console.log("Finished creating cart_products!")
+  }
+  async function getcbyus(id){
+  let cartsss =  await Cart.getAllPurchasedCarts({id: 4})
   // let all =  attachProductsToCarts(cartsss)
-  console.log(cartsss[0].products, 'all')
-}
-buildTables()
+  console.log(cartsss,'all')}
+  buildTables()
   .then(dropTables)
   .then(createTables)
   .then(populateInitialData)
