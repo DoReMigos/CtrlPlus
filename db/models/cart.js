@@ -56,56 +56,40 @@ async function createCart({ id, user_id, createdAt }) {
   
   async function getAllCarts() {
     try {
-      const { rows } = await client.query(
+      const { rows: carts } = await client.query(
         `SELECT carts.*, users.id AS "user_id"
       FROM carts
       JOIN users ON users.id=carts."user_id";
       `
       );
       
-      const carts = await attachProductsToCarts(rows);
-      console.log(carts, 'getallcarts attachProductsToCarts')
+      const cart = await attachProductsToCarts(carts);
+      console.log(cart, 'getallcarts attachProductsToCarts')
       return carts;
     } catch (error) {
       console.error(error);
     }
   }
   
-//   async function getAllPublicRoutines() {
-//     try {
-//       const { rows } = await client.query(
-//         `SELECT routines.*, users.username AS "creatorName"
-//         FROM routines
-//         JOIN users ON users.id=routines."creatorId"
-//         WHERE "isPublic"=true;
-//         `
-//       );
-//       const routines = await attachActivitiesToRoutines(rows);
-//       return routines;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
   
-//   async function getAllRoutinesByUser({ username }) {
-//     try {
-//       const { rows } = await client.query(
-//         `SELECT routines.*, users.username AS "creatorName"
-//         FROM routines
-//         JOIN users ON users.id=routines."creatorId"
-//         WHERE users.username=$1;
-//         `,
-//         [username]
-//       );
-//       const routines = await attachActivitiesToRoutines(rows);
+async function getAllCartsByUser({ email }) {
+    try {
+      const { rows } = await client.query(
+        `SELECT carts.*, users.email AS "userName"
+        FROM carts
+        JOIN users ON users.id=carts."user_id"
+        WHERE users.email=$1;
+        `,
+        [email]
+      );
+      const routines = await attachProductsToCarts(rows);
   
-//       return routines;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
-  
-  async function getCartsByUser({ email }) {
+      return routines;
+    } catch (error) {
+      console.error(error);
+    }
+  } 
+async function getCartsByUser({ email }) {
     try {
       const { rows } = await client.query(
         `SELECT carts.*, users.email AS "userName"
@@ -121,6 +105,25 @@ async function createCart({ id, user_id, createdAt }) {
     } catch (error) {
       console.error(error);
     }
+  }  
+
+  async function getCartsByUserId({ id }) {
+    try {
+      const { rows } = await client.query(
+        `SELECT *
+        FROM carts
+        LEFT JOIN cart_products ON cart_products."order_id" = carts.id
+        LEFT JOIN products ON products.id = cart_products."product_id"
+        WHERE carts.user_id=$1 AND "isPurchased"=false;
+        `,
+        [id]
+      );
+      const routines = await attachProductsToCarts(rows);
+  
+      return routines;
+    } catch (error) {
+      console.error(error);
+    }
   }
   
 async function attachProductsToCarts(carts) {
@@ -128,7 +131,7 @@ async function attachProductsToCarts(carts) {
   const cartsToReturn = [...carts];
   const binds = carts.map((_, index) => `$${index + 1}`).join(", ");
   const cartIds = carts.map((cart) => cart.id);
-  if (!cartIds?.length) return [];
+  if (!cartIds.length) return [];
 
   try {
     console.log(cartsToReturn,'cartsToReturn', binds, 'binds', cartIds, 'cartids')
@@ -142,18 +145,22 @@ async function attachProductsToCarts(carts) {
     `,
       cartIds
     );
-    console.log( products, 'products')
+    // console.log( products, 'products')
 
     // loop over the routines
     for (const carts of cartsToReturn) {
-      // filter the activities to only include those that have this routineId
+      // filter the products to only include those that have this routineId
+      console.log(products.forEach(element => {
+        console.log(element)  }));
       const productsToAdd = products.filter(
-        (product) => products.cart_id === carts.id
-      );
-      // attach the activities to each single routine
+        (product) => 
+        product.order_id === carts.id,
+        );
+        console.log(productsToAdd), 
+      // attach the products to each single routine
       carts.products = productsToAdd;
     }
-    console.log(cartsToReturn, 'cartstoretuttut')
+    console.log(cartsToReturn, 'cartsToReturn')
     return cartsToReturn;
   } catch (error) {
     console.error("Error during attachActivitiesToRoutines")
@@ -161,28 +168,28 @@ async function attachProductsToCarts(carts) {
   }
 }
 
-//   async function getPublicRoutinesByActivity({ id }) {
-//     try {
-//       const { rows } = await client.query(
-//         `SELECT routines.*, users.username AS "creatorName", activities.id AS "thisisyourid"
-//         FROM routines
-//         JOIN users ON users.id=routines."creatorId"
-//         JOIN activities ON activities.id=activities.id
-//         WHERE activities.id=$1 AND "isPublic"=true;
-//         `,
-//         [id]
-//       );
-//       const routines = await attachActivitiesToRoutines(rows);
+  // async function getPublicRoutinesByActivity({ id }) {
+  //   try {
+  //     const { rows } = await client.query(
+  //       `SELECT routines.*, users.username AS "creatorName", activities.id AS "thisisyourid"
+  //       FROM routines
+  //       JOIN users ON users.id=routines."creatorId"
+  //       JOIN activities ON activities.id=activities.id
+  //       WHERE activities.id=$1 AND "isPublic"=true;
+  //       `,
+  //       [id]
+  //     );
+  //     const routines = await attachActivitiesToRoutines(rows);
   
-//       const newRoutine = routines.filter((routine) => {
-//         return routine.activities.length > 1;
-//       });
+  //     const newRoutine = routines.filter((routine) => {
+  //       return routine.activities.length > 1;
+  //     });
   
-//       return newRoutine;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
+  //     return newRoutine;
+  //   } catch (error) {
+  //     console.error(error);
+  //   }
+  }
   
 //   async function updateRoutine({ id, ...fields }) {
 //     const setString = Object.keys(fields)
@@ -238,7 +245,7 @@ async function attachProductsToCarts(carts) {
   }
 module.exports = {
     // add your database adapter fns here
-    getCartById, createCart, getAllCarts, getCartsByUser, attachProductsToCarts,destroyCart
+    getCartById, createCart, getAllCarts, getCartsByUser, attachProductsToCarts,destroyCart,getCartsByUserId
 }
 
 //haha
