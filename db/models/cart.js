@@ -1,3 +1,4 @@
+const { createRoutesFromChildren } = require("react-router-dom");
 const client = require("../client");
 
 async function createCart({ id, user_id, createdAt }) {
@@ -197,33 +198,33 @@ async function attachProductsToCarts(carts) {
 //     console.error(error);
 //   }
 
-//   async function updateRoutine({ id, ...fields }) {
-//     const setString = Object.keys(fields)
-//       .map((key, index) => `"${key}"=$${index + 1}`)
-//       .join(", ");
+  async function updateCart({id, fields}) {
+    const setString = Object.keys(fields)
+      .map((key, index) => `"${key}"=$${index + 1}`)
+      .join(", ");
 
-//     if (setString.length === 0) {
-//       return;
-//     }
+    if (setString.length === 0) {
+      return;
+    }
 
-//     try {
-//       const {
-//         rows: [routine],
-//       } = await client.query(
-//         `
-//           UPDATE routines
-//           SET ${setString}
-//           WHERE id=${id}
-//           RETURNING *;
-//         `,
-//         Object.values(fields)
-//       );
+    try {
+      const {
+        rows: [cart],
+      } = await client.query(
+        `
+          UPDATE carts
+          SET ${setString}
+          WHERE id=${id}
+          RETURNING *;
+        `,
+        Object.values(fields)
+      );
 
-//       return routine;
-//     } catch (error) {
-//       console.error(error);
-//     }
-//   }
+      return cart;
+    } catch (error) {
+      console.error(error);
+    }
+  }
 
 async function destroyCart(id) {
   try {
@@ -244,7 +245,7 @@ async function destroyCart(id) {
     `,
       [id]
     );
-    return routine;
+    return cart;
   } catch {
     throw error;
   }
