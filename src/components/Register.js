@@ -25,8 +25,8 @@ export default function Register() {
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
             <div className="row d-flex justify-content-center align-items-center h-100">
-              {/* <div className="col-12 col-md-9 col-lg-7 col-xl-6"> */}
-              <div className="card" style={{ borderRadius: "15px" }}>
+              <div className="col-12 col-md-9 col-lg-7 col-xl-6">
+              <div className="card" style={{ borderRadius: "15px", marginTop:"22%" }}>
                 <div className="card-body p-5">
                   <h2 className="text-uppercase text-center mb-5">
                     Register With CTRL+
@@ -86,6 +86,8 @@ export default function Register() {
                     </p> */}
                   </form>
                 </div>
+                </div>
+
               </div>
             </div>
             {/* </div> */}
