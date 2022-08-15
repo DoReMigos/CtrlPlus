@@ -34,7 +34,7 @@ export default function LoggedIn() {
             <input
                    id="form2Example1"
                     type ="text"
-                    placeholder="Username"
+                    placeholder="Enter Email"
                     value={email}
                     onChange={handleOnChange}  
                  />
@@ -43,7 +43,7 @@ export default function LoggedIn() {
              <input
                     id="form2Example2"
                     type="password"
-                    placeholder="Password"
+                    placeholder="Enter Password"
                     onChange={handleOnChange}
                   ></input>    
                   </div>
