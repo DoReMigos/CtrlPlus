@@ -41,7 +41,7 @@ export const URL = 'http://localhost:3000/api'
   }
   }
 
-  export async function userLogin ({email, password}) {
+  export async function userLogin (email, password) {
     try{
     const response = await fetch(`${URL}/users/login`,{
       method: "POST",
@@ -55,6 +55,7 @@ export const URL = 'http://localhost:3000/api'
     }
     )
     const result = await response.json()
+    console.log(result)
     const token = result.token
     return token
   }catch(error){
@@ -69,7 +70,9 @@ export const URL = 'http://localhost:3000/api'
         Authorization: `Bearer ${token}`,
       },
     });
+    console.log(token)
     const result = await response.json();
+    console.log(result)
     return result;
   }
 

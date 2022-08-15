@@ -4,6 +4,7 @@ const { requireUser } = require("./utils");
 const User = require("../db/models/users")
 
 const jwt = require("jsonwebtoken");
+const { JWT_SECRET } = process.env;
 
 const {
   createUser,
@@ -32,7 +33,7 @@ apiRouter.post("/register", async (req, res, next) => {
         });
       }
       const user = await User.createUser({ email, password });
-      const token = jwt.sign({ id: user.id, email }, process.env.JWT_SECRET);
+      const token = jwt.sign({ id: user.id, email }, `${process.env.JWT_SECRET_KEY}`);
       res.send({ message: "Thank you for signing up!", token, user });
     } catch ({ name, message }) {
       next({ name, message });
@@ -42,6 +43,7 @@ apiRouter.post("/register", async (req, res, next) => {
 //POST /api/user/login
 apiRouter.post("/login", async (req, res, next) => {
   const { email, password } = req.body;
+  //request must have either or.
   if (!email || !password) {
     next({
       name: "MissingCredentialsError",
@@ -58,7 +60,7 @@ apiRouter.post("/login", async (req, res, next) => {
     } else {
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        process.env.JWT_SECRET
+        `${process.env.JWT_SECRET_KEY}`
       );
       res.send({ message: "you're logged in!", token, user });
     }
