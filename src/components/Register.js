@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { RegisterUser } from "../databaseAdapter";
 import { useNavigate } from "react-router-dom";
 import "./Register.css"
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+
 
 
 export default function Register() {
@@ -24,7 +23,6 @@ export default function Register() {
   }
   return (
     <section>
-      <Navbar/>
       <div id="containerDiv">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
@@ -98,7 +96,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-      <Footer/>
     </section>
   );
 }

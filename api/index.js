@@ -3,8 +3,8 @@ const apiRouter = express.Router();
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-
-const {getUserById} = require("../db/models");
+const User = require("../db/models/users")
+// const {getUserById} = require("../db/models");
 
 apiRouter.get('/', (req, res, next) => {
   res.send({
@@ -31,7 +31,7 @@ apiRouter.use(async (req, res, next) => {
       const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
-        req.user = await getUserById(id);
+        req.user = await User.getUserById(id);
         console.log(req.user, "MORTY MORTY MORTY MORTY")
         next();
       }

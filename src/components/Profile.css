@@ -1,4 +1,16 @@
-/* #card {
-  margin-left: -130%;
+#ProfileDiv {
+  margin: 2%;
   width: 350px;
-} */
+}
+
+
+#ProfileDiv2 {
+  margin-left: 35%;
+  margin-bottom: 2%;
+  /* margin: 2%; */
+  width: 750px;
+  height: 505px;
+  display:flex;
+  justify-content: flex-start;
+}
+/* make sure to change car name as it will mess with jessicas */
