@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { RegisterUser } from "../databaseAdapter";
 import { useNavigate } from "react-router-dom";
-import "./Register.css";
+import "./Register.css"
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
