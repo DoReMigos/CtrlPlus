@@ -18,24 +18,24 @@ export default function Profile() {
   }, []);
   return (
     <div id = "profileContainer">
-      <div className="card" id="profileDiv">
+      <div className="card bg-dark" id="profileDiv">
         <div className="card-body">
-        <h2 className="card-body"> Welcome to CTRL+</h2>
-          <h2 className="card-body">My Account:</h2>
-          <h2 className="card-body">Hi, {userInfo.email}</h2>
-          <hr></hr>
+        <h2 className="card-body" style = {{color: "#3a86ff"}}> Welcome to CTRL+</h2>
+          <h2 className="card-body" style = {{color: "#3a86ff"}}>My Account:</h2>
+          <h2 className="card-body" style = {{color: "#3a86ff"}}>Hi, {userInfo.email}</h2>
+          <hr className = "text-white"></hr>
           <Link to="/Store">
             <button className="btn btn-info"> Products</button>
           </Link>
-          <hr></hr>
+          <hr className = "text-white"></hr>
           <Link to="/Store">
             <button className="btn btn-info"> History </button>
           </Link>
-          <hr></hr>
+          <hr className = "text-white"></hr>
           <Link to="/Store">
             <button className="btn btn-info"> Admin Profile </button>
           </Link>
-          <hr></hr>
+          <hr className = "text-white"></hr>
           <Link to="/">
           <button
             id="allButton"
@@ -47,14 +47,14 @@ export default function Profile() {
             Sign Out
           </button>
         </Link>
-          <hr></hr>
+          <hr className = "text-white"></hr>
         </div>
       </div>
       {/* History DIV */}
-      <div className="card" id = "ProfileDiv2">
+      <div className="card bg-dark" id = "ProfileDiv2">
         <div className="card-body">
-        <h2 className="card-body"> Order History for {userInfo.email} </h2>
-          <hr></hr>
+        <h2 className="card-body text-white"> Order History for {userInfo.email} </h2>
+          <hr className = "text-white"></hr>
           <Link to="/Store">
            Product
           </Link>

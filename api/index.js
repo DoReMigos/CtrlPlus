@@ -32,7 +32,7 @@ apiRouter.use(async (req, res, next) => {
 
       if (id) {
         req.user = await User.getUserById(id);
-        console.log(req.user, "MORTY MORTY MORTY MORTY")
+        console.log(JWT_SECRET, "MORTY MORTY MORTY MORTY")
         next();
       }
     } catch ({ name, message }) {
