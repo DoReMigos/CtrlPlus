@@ -75,7 +75,7 @@ export default function LoggedIn() {
                     </div>
                     <div className="d-flex justify-content-center">
                       <Link to="/Register">
-                        <button className="btn btn-info"> Register</button>
+                        <p> Register</p>
                       </Link>
                     </div>
                   </form>

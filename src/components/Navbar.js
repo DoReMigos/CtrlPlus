@@ -7,7 +7,8 @@ export default function Navbar() {
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark">
         <div className="container-fluid">
-            <img src = {Logo} style = {{width: "60px", height: "60px"}}/><h2 className = "text-info bg-dark">CTRL+</h2>
+          <Link to = "/">
+            <img src = {Logo} style = {{width: "60px", height: "60px"}}/></Link><h2 className = "text-info bg-dark">CTRL+</h2>
           {/* <h4 className="text-info bg-dark">CTRL +</h4> */}
           <button
             className="navbar-toggler"

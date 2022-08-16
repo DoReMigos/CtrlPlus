@@ -17,8 +17,8 @@ export default function Profile() {
     getUserInfo();
   }, []);
   return (
-    <div>
-      <div className="card" id="ProfileDiv">
+    <div id = "profileContainer">
+      <div className="card" id="profileDiv">
         <div className="card-body">
         <h2 className="card-body"> Welcome to CTRL+</h2>
           <h2 className="card-body">My Account:</h2>
@@ -30,6 +30,10 @@ export default function Profile() {
           <hr></hr>
           <Link to="/Store">
             <button className="btn btn-info"> History </button>
+          </Link>
+          <hr></hr>
+          <Link to="/Store">
+            <button className="btn btn-info"> Admin Profile </button>
           </Link>
           <hr></hr>
           <Link to="/">

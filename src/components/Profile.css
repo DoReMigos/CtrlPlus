@@ -1,16 +1,15 @@
-#ProfileDiv {
+#profileDiv {
   margin: 2%;
   width: 350px;
 }
 
 
 #ProfileDiv2 {
-  margin-left: 35%;
-  margin-bottom: 2%;
-  /* margin: 2%; */
-  width: 750px;
-  height: 505px;
-  display:flex;
-  justify-content: flex-start;
+  margin: 2%;
+  width: 550px;
+  height: 605px;
 }
-/* make sure to change car name as it will mess with jessicas */
+
+#profileContainer{
+  display:flex;
+}
