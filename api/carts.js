@@ -18,14 +18,17 @@ apiRouter.get("/", async (req, res, next ) => {
 })
 
 //grabbing current cart
-apiRouter.get("/cart", requireUser, async (req, res, next) => {
-    const {id} = req.user
+apiRouter.get("/:id", requireUser, async (req, res, next) => {
+    const {id} = req.user //if trouble params
     try {
-        const Cart = await Cart.getCartById ({ id })
-        res.send(Cart);
+        const cart = await Cart.getCartById ({ id })
+        res.send(cart);
     } catch (error) {
         next(error)
     }
 }
 )
-apiRouter.get("./cart")
+
+apiRouter.post("/")
+apiRouter.patch("/")
+
