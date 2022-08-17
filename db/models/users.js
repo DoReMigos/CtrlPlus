@@ -42,29 +42,32 @@ async function getUser({ email, password }) {
   const hashedPassword = user.password;
   const passwordsMatch = await bcrypt.compare(password, hashedPassword);
   if (passwordsMatch) {
-    delete user.password;
-    return user;
-  } else if (!passwordsMatch) {
-    return;
-  } else {
+  delete user.password;
+  return user;
+  } 
+  else if(!passwordsMatch) {
+    return ;
+  }
+  else {
     throw console.log("Thers an error in GetUser");
   }
+  
 }
 
-async function getUserById(userId) {
+async function getUserById(user_Id) {
   try {
     const {
       rows: [user],
     } = await client.query(
       `
-      SELECT id, email, "isAdmin"
+      SELECT id, email
       FROM users
       WHERE id=$1
     `,
-      [userId]
+      [user_Id]
     );
-    if (!user) return null
-    return user
+
+    return user;
   } catch (error) {
     throw error;
   }
@@ -82,11 +85,11 @@ async function getUserByEmail(email) {
     `,
       [email]
     );
-    return user;
-  } catch (error) {
-    console.error("Error getUserByEmail");
+    return user
+  }catch(error){
+    console.error('Error getUserByEmail')
     throw error;
-  }
+    }
 }
 
 module.exports = {
