@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes} from "react-router-dom";
-import {Register, Login, Profile, Store} from "./"
+import {Register, Login, Profile, Store, Cart} from "./"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 
@@ -35,6 +35,7 @@ const App = () => {
     <Route exact path = "/Login" element={<Login />}></Route>
     <Route exact path = "/Profile" element={<Profile />}></Route>
     <Route exact path = "/Store" element={<Store />}></Route>
+    <Route exact path = "/Cart" element={<Cart />}></Route> 
 
 
     </Routes>
