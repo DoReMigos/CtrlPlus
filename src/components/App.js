@@ -35,7 +35,7 @@ const App = () => {
     <Route exact path = "/Register" element={<Register />}></Route>
     <Route exact path = "/Login" element={<Login />}></Route>
     <Route exact path = "/Profile" element={<Profile userInfo = {userInfo} setUserInfo={setUserInfo} />}></Route>
-    <Route exact path = "/Store" element={<Store />}></Route>
+    <Route exact path = "/Store" element={<Store userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route>
     <Route exact path = "/Cart" element={<Cart />}></Route> 
 
 
