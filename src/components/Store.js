@@ -105,7 +105,6 @@ export default function Store() {
                     >
                       Description
                     </button>
-
                     <div class="collapse mt-3" id="collapseExample">
                       {products.description}
                     </div>
