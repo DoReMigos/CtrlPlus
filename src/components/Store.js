@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts } from "../databaseAdapter";
+import { getAllProducts, getUserProfile } from "../databaseAdapter";
 import "./Store.css"
 
-export default function Store() {
+export default function Store({userInfo, setUserInfo}) {
   const [allProducts, setAllProducts] = useState([]);
+
 
   useEffect(() => {
     async function fetchProducts() {
@@ -14,6 +15,27 @@ export default function Store() {
     fetchProducts();
   }, [])
 
+
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    console.log(token);
+    async function getUserInfo() {
+      try {
+        const response = await getUserProfile(token)
+        console.log(token);
+      console.log(response, "Message Please Read");
+      setUserInfo(response);
+      } catch (error) {
+        console.log(error)
+      } ;
+      
+    }
+    getUserInfo();
+  }, []);
+
+  const isAdmin = userInfo.isAdmin
+  console.log(userInfo, "this is userInfo on Store")
+  console.log(isAdmin,"this is isAdmin on Store Page")
 
   return (
     <div>
@@ -109,7 +131,14 @@ export default function Store() {
                       {products.description}
                     </div>
                   </div> */}
-
+                      <div>
+                        {isAdmin ? (
+                          <div>
+                            <button>Edit</button>
+                            <button>Delete</button>
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
 
