@@ -9,10 +9,15 @@ export default function Profile({userInfo, setUserInfo}) {
     let token = localStorage.getItem("token");
     console.log(token);
     async function getUserInfo() {
-      const response = await getUserProfile(token);
-      console.log(token);
-      console.log(response);
+      try {
+        const response = await getUserProfile(token)
+        console.log(token);
+      console.log(response, "Message Please Read");
       setUserInfo(response);
+      } catch (error) {
+        console.log(error)
+      } ;
+      
     }
     getUserInfo();
   }, []);
