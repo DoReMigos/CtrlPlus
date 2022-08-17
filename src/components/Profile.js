@@ -3,8 +3,8 @@ import { getUserProfile } from "../databaseAdapter";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
-export default function Profile() {
-  const [userInfo, setUserInfo] = useState({});
+export default function Profile({userInfo, setUserInfo}) {
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     console.log(token);
