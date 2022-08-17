@@ -26,7 +26,7 @@ export default function LoggedIn() {
     navigate("/Profile");
   };
   return (
-    <section id = "RegisterSection">
+    <section id = "registerSection">
       <div className="mask d-flex align-items-center h-100 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center" style ={{marginTop: "50px", marginBottom: "50px"}}>

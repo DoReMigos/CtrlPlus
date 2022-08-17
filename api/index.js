@@ -1,10 +1,10 @@
 const express = require('express');
 const apiRouter = express.Router();
-
+const {User} = require("../db/models")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-const User = require("../db/models/users")
-// const {getUserById} = require("../db/models");
+
+const {getUserById} = require("../db/models");
 
 apiRouter.get('/', (req, res, next) => {
   res.send({
@@ -32,7 +32,7 @@ apiRouter.use(async (req, res, next) => {
 
       if (id) {
         req.user = await User.getUserById(id);
-        console.log(JWT_SECRET, "MORTY MORTY MORTY MORTY")
+        console.log(req.user, "MORTY MORTY MORTY MORTY")
         next();
       }
     } catch ({ name, message }) {

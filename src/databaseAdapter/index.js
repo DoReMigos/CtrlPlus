@@ -130,7 +130,7 @@ export const URL = 'http://localhost:4000/api'
       Authorization: `Bearer ${token}`,
     },
     method: "POST",
-    body: JSON. stringify({
+    body: JSON.stringify({
       title: title,
       brand: brand,
       description: description,

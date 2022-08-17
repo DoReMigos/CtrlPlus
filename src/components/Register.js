@@ -22,7 +22,7 @@ export default function Register() {
     navigate("/Login");
   }
   return (
-    <section id = "RegisterSection">
+    <section id = "registerSection">
       <div id="containerDiv">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">

@@ -2,17 +2,25 @@
     display:flex;
     flex-wrap: wrap;
     justify-content: center;
+    margin-right: 30px;
 }
 .productsCard{
     width: 400px;
-    min-height: 400px;
-    height: 400px;
+    min-height: 600px;
+    height: 600px;
     margin-left:30px;
-    margin-bottom: 30px;
+    margin-bottom: 10px;
 }
 
 .carousel{
-    width: 100%;
-    min-height: 400px;
-    height: 400px;
+    width: 370px;
+    min-height: 300px;
+    height: 300px;
+}
+
+.priceCartBar{
+    display: flex;
+    width: 370px;
+    justify-content: space-between;
+    margin-bottom: 5px;
 }
