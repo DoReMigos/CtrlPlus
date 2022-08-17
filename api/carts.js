@@ -1,12 +1,12 @@
 const express = require("express");
 const apiRouter = express.Router();
 const { requireUser } = require("./utils");
-const [User, Cart, Order] = require("../db/models");
+const {User, Cart, Order} = require("../db/models");
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
-//getAllCarts across website hehe
+//getAllCarts across website hehes
 apiRouter.get("/", async (req, res, next ) => {
     try {
         const getAllCarts = await Cart.getAllCarts()
