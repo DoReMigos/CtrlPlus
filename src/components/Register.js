@@ -1,9 +1,8 @@
 import React, { useState } from "react";
 import { RegisterUser } from "../databaseAdapter";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import "./Register.css"
-import Navbar from "./Navbar";
-import Footer from "./Footer";
+
 
 
 export default function Register() {
@@ -23,8 +22,7 @@ export default function Register() {
     navigate("/Login");
   }
   return (
-    <section>
-      <Navbar/>
+    <section id = "RegisterSection">
       <div id="containerDiv">
         <div className="mask d-flex align-items-center h-100 gradient-custom-3">
           <div className="container h-100">
@@ -82,12 +80,12 @@ export default function Register() {
                         Confirm Registration
                       </button>
                     </div>
-                    {/* <p className="text-center text-muted mt-5 mb-0">
-                      Have already an account?
-                      <Link to="./Login">
+                    <p className="text-center text-muted mt-5 mb-0">
+                     <p> Have already an account?</p>
+                      <Link to="/Login">
                         <u>Login here</u>
                       </Link>
-                    </p> */}
+                    </p>
                   </form>
                 </div>
                 </div>
@@ -98,7 +96,6 @@ export default function Register() {
           </div>
         </div>
       </div>
-      <Footer/>
     </section>
   );
 }
