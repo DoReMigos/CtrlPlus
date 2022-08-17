@@ -37,7 +37,7 @@ const Cart = () => {
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
                     <div styles="width: 50px;">
-                          <h5 class="fw-normal mb-0">2</h5>
+                          <h5 className="fw-normal mb-0">2</h5>
                         </div>
                     </div>
                     <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
@@ -125,46 +125,83 @@ const Cart = () => {
                 </div>
               </div>
               <div className="col-lg-4 bg-grey">
-                <div className="p-5">
-                  <h3 className="fw-bold mb-5 mt-2 pt-1">Summary</h3>
-                  <hr className="my-4"></hr>
 
-                  <div className="d-flex justify-content-between mb-4">
-                    <h5 className="text-uppercase">Total # of Items</h5>
-                    <h5>Total Price</h5>
-                  </div>
-
-                  <h5 className="text-uppercase mb-3">Shipping</h5>
-
-                  <div className="mb-4 pb-2">
-                    <select className="select">
-                      <option value="1">Standard-Delivery- €5.00</option>
-                      <option value="2">Two</option>
-                      <option value="3">Three</option>
-                      <option value="4">Four</option>
-                    </select>
-                  </div>
-
-                  <h5 className="text-uppercase mb-3">Give code</h5>
-
-                  <div className="mb-5">
-                    <div className="form-outline">
-                      <input type="text" id="form3Examplea2" className="form-control form-control-lg" />
-                      <label className="form-label" for="form3Examplea2">Enter your code</label>
+                <div className="card bg-primary text-white rounded-3">
+                  <div className="card-body">
+                    <div className="d-flex justify-content-between align-items-center mb-4">
+                      <h5 className="mb-0">Card details</h5>
+                      {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
+                        className="img-fluid rounded-3" styles="width: 45px;" alt="Avatar"></img> */}
                     </div>
+
+                    <p className="small mb-2">Card type</p>
+                    <a href="#!" type="submit" className="text-white"><i
+                        className="fab fa-cc-mastercard fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" className="text-white"><i
+                        className="fab fa-cc-visa fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" className="text-white"><i
+                        className="fab fa-cc-amex fa-2x me-2"></i></a>
+                    <a href="#!" type="submit" className="text-white"><i className="fab fa-cc-paypal fa-2x"></i></a>
+
+                    <form className="mt-4">
+                      <div className="form-outline form-white mb-4">
+                        <input type="text" id="typeName" className="form-control form-control-lg" siez="17"
+                          placeholder="Cardholder's Name" />
+                        <label className="form-label" for="typeName">Cardholder's Name</label>
+                      </div>
+
+                      <div className="form-outline form-white mb-4">
+                        <input type="text" id="typeText" className="form-control form-control-lg" siez="17"
+                          placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                        <label className="form-label" for="typeText">Card Number</label>
+                      </div>
+
+                      <div className="row mb-4">
+                        <div className="col-md-6">
+                          <div className="form-outline form-white">
+                            <input type="text" id="typeExp" className="form-control form-control-lg"
+                              placeholder="MM/YYYY" size="7" minlength="7" maxlength="7" />
+                            <label className="form-label" for="typeExp">Expiration</label>
+                          </div>
+                        </div>
+                        <div className="col-md-6">
+                          <div className="form-outline form-white">
+                            <input type="password" id="typeText" className="form-control form-control-lg"
+                              placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                            <label className="form-label" for="typeText">Cvv</label>
+                          </div>
+                        </div>
+                      </div>
+
+                    </form>
+
+                    <hr className="my-4"></hr>
+
+                    <div className="d-flex justify-content-between">
+                      <p className="mb-2">Subtotal</p>
+                      <p className="mb-2">$4798.00</p>
+                    </div>
+
+                    <div className="d-flex justify-content-between">
+                      <p className="mb-2">Shipping</p>
+                      <p className="mb-2">$20.00</p>
+                    </div>
+
+                    <div className="d-flex justify-content-between mb-4">
+                      <p className="mb-2">Total(Incl. taxes)</p>
+                      <p className="mb-2">$4818.00</p>
+                    </div>
+
+                    <button type="button" className="btn btn-info btn-block btn-lg">
+                      <div className="d-flex justify-content-between">
+                        <span>$4818.00</span>
+                        <span>Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i></span>
+                      </div>
+                    </button>
+
                   </div>
-
-                  <hr className="my-4"></hr>
-
-                  <div className="d-flex justify-content-between mb-5">
-                    <h5 className="text-uppercase">Total price</h5>
-                    <h5>$</h5>
-                  </div>
-
-                  <button type="button" className="btn btn-dark btn-block btn-lg"
-                    data-mdb-ripple-color="dark">Proceed to Checkout</button>
-
                 </div>
+
               </div>
             </div>
           </div>
