@@ -125,92 +125,92 @@ export async function getAllProducts() {
   return result;
 }
 
-export async function createProduct(
-  title,
-  brand,
-  description,
-  price,
-  quantity,
-  token
-) {
-  try {
-    const response = await fetch(`${URL}/products`, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      method: "POST",
-      body: JSON.stringify({
-        title: title,
-        brand: brand,
-        description: description,
-        price: price,
-        quantity: quantity,
-      }),
-    });
-    const result = response.json();
-    return result;
-  } catch (error) {
-    console.log(error);
-  }
-}
+// export async function createProduct(
+//   title,
+//   brand,
+//   description,
+//   price,
+//   quantity,
+//   token
+// ) {
+//   try {
+//     const response = await fetch(`${URL}/products`, {
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//       method: "POST",
+//       body: JSON.stringify({
+//         title: title,
+//         brand: brand,
+//         description: description,
+//         price: price,
+//         quantity: quantity,
+//       }),
+//     });
+//     const result = response.json();
+//     return result;
+//   } catch (error) {
+//     console.log(error);
+//   }
+// }
 
-export async function updateProduct(
-  productId,
-  token,
-  title,
-  brand,
-  description,
-  price,
-  inventory,
-  category,
-  image_1,
-  image_2,
-  image_3,
-  image_4
-) {
-  try {
-    const response = await fetch(`${URL}/products/${productId}`, {
-      method: "PATCH",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      },
-      body: JSON.stringify({
-        title: title,
-        brand: brand,
-        description: description,
-        price: price,
-        inventory: inventory,
-        category: category,
-        image_1: image_1,
-        image_2: image_2,
-        image_3: image_3,
-        image_4: image_4
-      })
-    })
-    const result = response.json();
-    return result
-  } catch (error) {
-    console.log("error");
-  }
-}
+// export async function updateProduct(
+//   productId,
+//   token,
+//   title,
+//   brand,
+//   description,
+//   price,
+//   inventory,
+//   category,
+//   image_1,
+//   image_2,
+//   image_3,
+//   image_4
+// ) {
+//   try {
+//     const response = await fetch(`${URL}/products/${productId}`, {
+//       method: "PATCH",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       },
+//       body: JSON.stringify({
+//         title: title,
+//         brand: brand,
+//         description: description,
+//         price: price,
+//         inventory: inventory,
+//         category: category,
+//         image_1: image_1,
+//         image_2: image_2,
+//         image_3: image_3,
+//         image_4: image_4
+//       })
+//     })
+//     const result = response.json();
+//     return result
+//   } catch (error) {
+//     console.log("error");
+//   }
+// }
 
-export async function deleteProduct(productId, token){
-  try{
-    const response = await fetch (`${URL}/products/${productId}`,{
-      method: "DELETE",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
-      }
-    })
-    const result = response.json()
-    return result
-  }catch(error){
-    console.log(error)
-  }
-}
+// export async function deleteProduct(productId, token){
+//   try{
+//     const response = await fetch (`${URL}/products/${productId}`,{
+//       method: "DELETE",
+//       headers: {
+//         "Content-Type": "application/json",
+//         Authorization: `Bearer ${token}`,
+//       }
+//     })
+//     const result = response.json()
+//     return result
+//   }catch(error){
+//     console.log(error)
+//   }
+// }
 //END OF PRODUCT
 
 
