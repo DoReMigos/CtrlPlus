@@ -1,6 +1,8 @@
 module.exports = {
-  User: require('./user'),
-  Products: require('./product')
+  User: require('./users'),
+  Products: require('./product'),
+  Cart: require('./cart'),
+  Order: require('./cartProducts'),
   
   // add each model to your exports object here
   // so that you can use them in your express server api routers

@@ -1,8 +1,8 @@
 // grab our db client connection to use with our adapters
-const client = require('../client');
+const client = require("../client");
 const bcrypt = require("bcrypt");
 
-async function createUser({ email, password, isAdmin=false }) {
+async function createUser({ email, password, isAdmin = false }) {
   const SALT_COUNT = 10;
   const hashedPassword = await bcrypt.hash(password, SALT_COUNT);
   try {
@@ -38,17 +38,17 @@ async function getAllUsers() {
 }
 
 async function getUser({ email, password }) {
-  const user = await getUserByEmail(email)
+  const user = await getUserByEmail(email);
   const hashedPassword = user.password;
-  const matchPassword = await bcrypt.compare(password, hashedPassword);
-    if (matchPassword){
-      delete user.password;
-      return user;
-    } else if(!matchPassword){
-      return ;
-    } else {
-      throw console.log("Password does not match")
-    }
+  const passwordsMatch = await bcrypt.compare(password, hashedPassword);
+  if (passwordsMatch) {
+    delete user.password;
+    return user;
+  } else if (!passwordsMatch) {
+    return;
+  } else {
+    throw console.log("Thers an error in GetUser");
+  }
 }
 
 async function getUserById(userId) {
@@ -57,14 +57,14 @@ async function getUserById(userId) {
       rows: [user],
     } = await client.query(
       `
-      SELECT id, email
+      SELECT id, email, "isAdmin"
       FROM users
       WHERE id=$1
     `,
       [userId]
     );
-
-    return user;
+    if (!user) return null
+    return user
   } catch (error) {
     throw error;
   }
@@ -82,19 +82,18 @@ async function getUserByEmail(email) {
     `,
       [email]
     );
-
-    if (!user) {
-      return null;
-    }
-
     return user;
   } catch (error) {
+    console.error("Error getUserByEmail");
     throw error;
   }
 }
 
 module.exports = {
   // add your database adapter fns here
-   getAllUsers, createUser, getUserByEmail, getUserById, getUser
-
+  getAllUsers,
+  createUser,
+  getUserByEmail,
+  getUserById,
+  getUser,
 };

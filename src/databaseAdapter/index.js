@@ -1,5 +1,7 @@
 import axios from 'axios';
 
+export const URL = 'http://localhost:4000/api'
+
 // this file holds your frontend network request adapters
 // think about each function as a service that provides data
 // to your React UI through AJAX calls
@@ -16,7 +18,135 @@ import axios from 'axios';
       console.error(err)
     }
   }
-*/
+  */
+
+  //EVERYTHING BELOW HERE IS USER API
+  export async function RegisterUser (email, password){
+    try {
+    const response = await fetch(`${URL}/users/register`,{
+    method:"POST",
+    headers: {
+        "Content-Type":"application/json"
+    },
+    body:JSON.stringify({
+            email: email,
+            password: password,
+    })
+  })
+  const result = await response.json()
+  console.log(result)
+  return result
+  }catch(error){
+  throw error;
+  }
+  }
+
+  export async function userLogin (email, password) {
+    try{
+    const response = await fetch(`${URL}/users/login`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+          email: email,
+          password: password
+        })
+    }
+    )
+    const result = await response.json()
+    console.log(result)
+    const token = result.token
+    return token
+  }catch(error){
+    throw error;
+    }
+  }
+
+  export async function getUserProfile(token) {
+    const response = await fetch(`${URL}/users/me`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    console.log(token, "THIS TOKEN IS CURRENTLY DISPLAYING, does not make it into response")
+    const result = await response.json();
+    console.log(response, "Response FROM JSON response")
+    return result;
+  }
+
+  export async function getUserCarts(token,email){
+    try{
+      const response = await fetch(`${URL}/users/${email}/cart`,{
+        headers:{
+          'Content-Type' : 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+    }
+      )
+      const result = response.json()
+      return result
+    }catch(error){
+      console.log(error);
+    }
+  } 
+/*
+  export async function getUserOrders (token,email){
+    try{
+      const response = await fetch(`${URL}/users/${email}/order`,{
+        headers:{
+          'Content-Type' : 'application/json',
+          'Authorization': `Bearer ${token}`
+        }
+    }
+      )
+      const result = response.json()
+      return result
+    }catch(error){
+      console.log(error);
+    }
+  } 
+  */
+
+  //END OF USER API
+
+  export async function getAllProducts() {
+    const response = await fetch(`${URL}/products`, {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = await response.json();
+    console.log(result)
+    return result;
+  }
+  
+  export async function createProduct(title, brand, description, price, quantity, token){
+    try{
+    const response = await fetch (`${URL}/products`, {
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${token}`,
+    },
+    method: "POST",
+    body: JSON. stringify({
+      title: title,
+      brand: brand,
+      description: description,
+      price: price,
+      quantity: quantity
+    }),
+    })
+  const result = response.json()
+  return result
+  }catch(error){
+    console.log(error)
+  }}
+
+
+
+
 
 export async function getAPIHealth() {
   try {
@@ -27,3 +157,4 @@ export async function getAPIHealth() {
     return { healthy: false };
   }
 }
+

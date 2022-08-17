@@ -1,0 +1,15 @@
+#profileDiv {
+  margin: 2%;
+  width: 350px;
+}
+
+
+#ProfileDiv2 {
+  margin: 2%;
+  width: 550px;
+  height: 605px;
+}
+
+#profileContainer{
+  display:flex;
+}
