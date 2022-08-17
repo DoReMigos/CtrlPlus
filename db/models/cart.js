@@ -1,4 +1,3 @@
-const { createRoutesFromChildren } = require("react-router-dom");
 const client = require("../client");
 
 async function createCart({ id, user_id, createdAt }) {
@@ -254,6 +253,7 @@ module.exports = {
   getCartById,
   createCart,
   getAllCarts,
+  getAllCartsByUser,
   getCartsByUser,
   attachProductsToCarts,
   destroyCart,
