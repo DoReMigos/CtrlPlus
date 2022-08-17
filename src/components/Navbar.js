@@ -1,8 +1,9 @@
 import React from "react";
-import { Link,Navigate,useNavigate } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 let Logo = require("./CtrlPlusLogo.png")
 
 export default function Navbar() {
+  const authorizationToken = localStorage.getItem("token") ? true : false;
   let navigate = useNavigate()
   function handleChange(value){
     navigate(`${value}`)
@@ -45,9 +46,16 @@ export default function Navbar() {
                   {/* <p className="text-info bg-dark"> Info Tab</p> */}
                   <select onChange  ={event => handleChange(event.target.value)}style = {{background:"#222529", color:"white", border: "none", width: "40px", clicker: "pointer"}}>
                     <option className="text-info bg-dark" value ="/" >👤</option>
-                    <option className="text-info bg-dark" value ="Register">Register</option>
-                    <option className="text-info bg-dark" value ="Login">Login</option>
-                    <option className="text-info bg-dark" value ="/Profile">Support</option>
+                    {authorizationToken === true ? (
+                    <option className="text-info bg-dark" value ="/Cart">Checkout</option>
+                    ):<option className="text-info bg-dark" value ="Login">Login</option>}
+                     {authorizationToken === true ? (
+                    null
+                     ): <option className="text-info bg-dark" value ="Register">Register</option>}
+                    {authorizationToken === true ? (
+                    <option className="text-info bg-dark" value ="/Profile">My Account</option>
+                    ):( <option className="text-info bg-dark" value ="/">Support</option>)}
+                    
                   </select>
                   </Link>
                 </div>

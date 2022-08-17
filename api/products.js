@@ -45,7 +45,7 @@ apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
 })
 
 apiRouter.delete('/:productId', requireAdminUser, async (req, res, next) => {
-    const id = req.params.productsId;
+    const id = req.params.productId;
     const product = await Products.getProductById(id)
     try {
         if (!req.user.isAdmin) {
