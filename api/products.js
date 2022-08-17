@@ -24,10 +24,10 @@ apiRouter.post('/', requireAdminUser, async (req, res, next) => {
         next(error);
     }
 })
-
+///might need to pass productId insure of line
 apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
     const { title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4 } = req.body;
-    const id = req.params.productsId;
+    const id = req.params.productId;
     const product = await Products.getProductById(id)
     try {
         if (!req.user.isAdmin) {
@@ -37,7 +37,7 @@ apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
                 message: `Only admins allowed to update ${product.name}`,
             });
         }
-        const updatedProduct = await Products.updateProduct({ title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4 });
+        const updatedProduct = await Products.updateProduct({ id:id, title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4 });
         res.send(updatedProduct);
     } catch ({ name, message }) {
         next({ name, message });
