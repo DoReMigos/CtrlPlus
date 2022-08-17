@@ -1,11 +1,11 @@
 const express = require('express');
 const apiRouter = express.Router();
-const {User} = require("../db/models")
+const User = require("../db/models/users")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
 const {getUserById} = require("../db/models");
-
+console.log(JWT_SECRET, "JWT SECRET HERE")
 apiRouter.get('/', (req, res, next) => {
   res.send({
     message: 'API is under construction!',

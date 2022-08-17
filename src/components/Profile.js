@@ -3,16 +3,21 @@ import { getUserProfile } from "../databaseAdapter";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
-export default function Profile() {
-  const [userInfo, setUserInfo] = useState({});
+export default function Profile({userInfo, setUserInfo}) {
+
   useEffect(() => {
     let token = localStorage.getItem("token");
     console.log(token);
     async function getUserInfo() {
-      const response = await getUserProfile(token);
-      console.log(token);
-      console.log(response);
+      try {
+        const response = await getUserProfile(token)
+        console.log(token);
+      console.log(response, "Message Please Read");
       setUserInfo(response);
+      } catch (error) {
+        console.log(error)
+      } ;
+      
     }
     getUserInfo();
   }, []);
