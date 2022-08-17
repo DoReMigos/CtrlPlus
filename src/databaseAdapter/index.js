@@ -74,7 +74,7 @@ export async function getUserProfile(token) {
     "THIS TOKEN IS CURRENTLY DISPLAYING, does not make it into response"
   );
   const result = await response.json();
-  console.log(response, "Response FROM JSON response");
+  console.log(result, "Response FROM JSON response");
   return result;
 }
 

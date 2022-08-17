@@ -5,13 +5,13 @@ const User = require("../db/models/users")
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-
+console.log(JWT_SECRET, "USER FILE JWT SECRET")
 const {
-  createUser,
-  getUser,
-  getUserById,
-  getUserByEmail,
-  getCartsByUser
+  // createUser,
+  // getUser,
+  // getUserById,
+  // getUserByEmail,
+  // getCartsByUser
 } = require("../db/models");
 
 
@@ -33,7 +33,7 @@ apiRouter.post("/register", async (req, res, next) => {
         });
       }
       const user = await User.createUser({ email, password });
-      const token = jwt.sign({ id: user.id, email }, `${process.env.JWT_SECRET_KEY}`);
+      const token = jwt.sign({ id: user.id, email }, JWT_SECRET);
       res.send({ message: "Thank you for signing up!", token, user });
     } catch ({ name, message }) {
       next({ name, message });
@@ -60,7 +60,7 @@ apiRouter.post("/login", async (req, res, next) => {
     } else {
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        `${process.env.JWT_SECRET_KEY}`
+        JWT_SECRET
       );
       res.send({ message: "you're logged in!", token, user });
     }
@@ -73,7 +73,7 @@ apiRouter.post("/login", async (req, res, next) => {
 // GET /api/users/me
 apiRouter.get("/me", requireUser,  async (req, res, next) => {
     try{
-      console.log(req.user)
+      console.log(req.user, "User in USERjs")
       res.send(req.user);
     }catch(error){
       next(error)
