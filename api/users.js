@@ -1,11 +1,8 @@
 const express = require("express");
 const apiRouter = express.Router();
 const { requireUser } = require("./utils");
-<<<<<<< HEAD
+
 const {User} = require("../db/models")
-=======
-const User = require("../db/models/users")
->>>>>>> 11d305c70f1338a2988193664bfb85e69c2f24bc
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;

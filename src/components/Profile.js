@@ -20,9 +20,9 @@ export default function Profile() {
     <div id = "profileContainer">
       <div className="card bg-dark" id="profileDiv">
         <div className="card-body">
-        <h2 className="card-body" style = {{color: "#60dde2"}}> Welcome to CTRL+</h2>
-          <h2 className="card-body" style = {{color: "#60dde2"}}>My Account:</h2>
-          <h2 className="card-body" style = {{color: "#60dde2"}}>Hi, {userInfo.email}</h2>
+        <h2 className="card-body" style = {{color: "#3a86ff"}}> Welcome to CTRL+</h2>
+          <h2 className="card-body" style = {{color: "#3a86ff"}}>My Account:</h2>
+          <h2 className="card-body" style = {{color: "#3a86ff"}}>Hi, {userInfo.email}</h2>
           <hr className = "text-white"></hr>
           <Link to="/Store">
             <button className="btn btn-info"> Products</button>

@@ -1,6 +1,6 @@
 const express = require('express');
 const apiRouter = express.Router();
-
+const {User} = require("../db/models")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
@@ -31,7 +31,7 @@ apiRouter.use(async (req, res, next) => {
       const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
-        req.user = await getUserById(id);
+        req.user = await User.getUserById(id);
         console.log(req.user, "MORTY MORTY MORTY MORTY")
         next();
       }
@@ -61,11 +61,6 @@ apiRouter.use('/users', usersRouter);
 // ROUTER: /api/products
 const productsRouter = require('./products');
 apiRouter.use('/products', productsRouter);
-<<<<<<< HEAD
-// const cartsRouter = require('./carts')
-// apiRouter.use('./carts', cartsRouter)
-=======
->>>>>>> 11d305c70f1338a2988193664bfb85e69c2f24bc
 
 apiRouter.use((error, req, res, next) => {
   res.send({
