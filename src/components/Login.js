@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import { userLogin } from "../databaseAdapter";
 import { useNavigate, Link } from "react-router-dom";
+import Navbar from "./Navbar"
+import Footer from "./Footer"
 import "./Login.css";
 
 
@@ -26,7 +28,8 @@ export default function LoggedIn() {
     navigate("/Profile");
   };
   return (
-    <section id = "RegisterSection">
+    <section>
+          <Navbar/>
       <div className="mask d-flex align-items-center h-100 gradient-custom-3">
         <div className="container h-100">
           <div className="row d-flex justify-content-center align-items-center" style ={{marginTop: "50px", marginBottom: "50px"}}>
@@ -75,7 +78,7 @@ export default function LoggedIn() {
                     </div>
                     <div className="d-flex justify-content-center">
                       <Link to="/Register">
-                        <p> Register</p>
+                        <button className="btn btn-info"> Register</button>
                       </Link>
                     </div>
                   </form>
@@ -86,6 +89,7 @@ export default function LoggedIn() {
           </div>
         </div>
       </div>
+      <Footer/>
     </section>
   );
 }
