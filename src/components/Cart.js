@@ -37,14 +37,14 @@ const Cart = () => {
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
                     <div styles="width: 50px;">
-                          <h5 className="fw-normal mb-0">2</h5>
+                          <h5 className="fw-normal mb-0">#</h5>
                         </div>
                     </div>
                     <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 className="mb-0">Price</h6>
                     </div>
                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" className="text-muted"><i className="fas fa-times"></i></a>
+                    <button type="button" className="btn btn-danger btn-sm">Remove</button>
                     </div>
                   </div>
 
@@ -61,24 +61,15 @@ const Cart = () => {
                       <h6 className="text-black mb-0">Name of Item</h6>
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button className="btn btn-link px-2"
-                        onClick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i className="fas fa-minus"></i>
-                      </button>
-
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
-                        className="form-control form-control-sm" />
-
-                      <button className="btn btn-link px-2"
-                        onClick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i className="fas fa-plus"></i>
-                      </button>
+                    <div styles="width: 50px;">
+                         <h5 className="fw-normal mb-0">#</h5>
+                        </div> 
                     </div>
                     <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 className="mb-0">Price</h6>
                     </div>
                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" className="text-muted"><i className="fas fa-times"></i></a>
+                    <button type="button" className="btn btn-danger btn-sm">Remove</button>
                     </div>
                   </div>
 
@@ -95,32 +86,22 @@ const Cart = () => {
                       <h6 className="text-black mb-0">Name of Item</h6>
                     </div>
                     <div className="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <button className="btn btn-link px-2"
-                        onClick="this.parentNode.querySelector('input[type=number]').stepDown()">
-                        <i className="fas fa-minus"></i>
-                      </button>
-
-                      <input id="form1" min="0" name="quantity" value="1" type="number"
-                        className="form-control form-control-sm" />
-
-                      <button className="btn btn-link px-2"
-                        onClick="this.parentNode.querySelector('input[type=number]').stepUp()">
-                        <i className="fas fa-plus"></i>
-                      </button>
+                    <div styles="width: 50px;">
+                         <h5 className="fw-normal mb-0">#</h5>
+                        </div>
                     </div>
                     <div className="col-md-3 col-lg-2 col-xl-2 offset-lg-1">
                       <h6 className="mb-0">Price</h6>
                     </div>
                     <div className="col-md-1 col-lg-1 col-xl-1 text-end">
-                      <a href="#!" className="text-muted"><i className="fas fa-times"></i></a>
+                    <button type="button" className="btn btn-danger btn-sm">Remove</button>
                     </div>
                   </div>
 
                   <hr className="my-4"></hr>
 
                   <div className="pt-5">
-                    <h6 className="mb-0"><a href="#!" className="text-body"><i
-                          className="fas fa-long-arrow-alt-left me-2"></i>Back to shop</a></h6>
+                    <h6 className="mb-0"><a href="/store" className="text-body">Back to shop</a></h6>
                   </div>
                 </div>
               </div>
@@ -133,42 +114,39 @@ const Cart = () => {
                       {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
                         className="img-fluid rounded-3" styles="width: 45px;" alt="Avatar"></img> */}
                     </div>
-
-                    <p className="small mb-2">Card type</p>
-                    <a href="#!" type="submit" className="text-white"><i
-                        className="fab fa-cc-mastercard fa-2x me-2"></i></a>
-                    <a href="#!" type="submit" className="text-white"><i
-                        className="fab fa-cc-visa fa-2x me-2"></i></a>
-                    <a href="#!" type="submit" className="text-white"><i
-                        className="fab fa-cc-amex fa-2x me-2"></i></a>
-                    <a href="#!" type="submit" className="text-white"><i className="fab fa-cc-paypal fa-2x"></i></a>
-
+                    <p>We accept</p>
+                      <img className="me-2" width="45px"
+                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/visa.svg"/>
+                      <img className="me-2" width="45px"
+                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/amex.svg"/>
+                      <img className="me-2" width="45px"
+                        src="https://mdbcdn.b-cdn.net/wp-content/plugins/woocommerce-gateway-stripe/assets/images/mastercard.svg"/>
                     <form className="mt-4">
                       <div className="form-outline form-white mb-4">
                         <input type="text" id="typeName" className="form-control form-control-lg" siez="17"
                           placeholder="Cardholder's Name" />
-                        <label className="form-label" for="typeName">Cardholder's Name</label>
+                        <label className="form-label" htmlFor="typeName">Cardholder's Name</label>
                       </div>
 
                       <div className="form-outline form-white mb-4">
                         <input type="text" id="typeText" className="form-control form-control-lg" siez="17"
-                          placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
-                        <label className="form-label" for="typeText">Card Number</label>
+                          placeholder="1234 5678 9012 3457" minLength="19" maxLength="19" />
+                        <label className="form-label" htmlFor="typeText">Card Number</label>
                       </div>
 
                       <div className="row mb-4">
                         <div className="col-md-6">
                           <div className="form-outline form-white">
                             <input type="text" id="typeExp" className="form-control form-control-lg"
-                              placeholder="MM/YYYY" size="7" minlength="7" maxlength="7" />
-                            <label className="form-label" for="typeExp">Expiration</label>
+                              placeholder="MM/YYYY" size="7" minLength="7" maxLength="7" />
+                            <label className="form-label" htmlFor="typeExp">Expiration</label>
                           </div>
                         </div>
                         <div className="col-md-6">
                           <div className="form-outline form-white">
                             <input type="password" id="typeText" className="form-control form-control-lg"
-                              placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                            <label className="form-label" for="typeText">Cvv</label>
+                              placeholder="&#9679;&#9679;&#9679;" size="1" minLength="3" maxLength="3" />
+                            <label className="form-label" htmlFor="typeText">Cvv</label>
                           </div>
                         </div>
                       </div>
@@ -179,7 +157,7 @@ const Cart = () => {
 
                     <div className="d-flex justify-content-between">
                       <p className="mb-2">Subtotal</p>
-                      <p className="mb-2">$4798.00</p>
+                      <p className="mb-2">$0.00</p>
                     </div>
 
                     <div className="d-flex justify-content-between">
@@ -189,15 +167,10 @@ const Cart = () => {
 
                     <div className="d-flex justify-content-between mb-4">
                       <p className="mb-2">Total(Incl. taxes)</p>
-                      <p className="mb-2">$4818.00</p>
+                      <p className="mb-2">$20.00</p>
                     </div>
 
-                    <button type="button" className="btn btn-info btn-block btn-lg">
-                      <div className="d-flex justify-content-between">
-                        <span>$4818.00</span>
-                        <span>Checkout <i className="fas fa-long-arrow-alt-right ms-2"></i></span>
-                      </div>
-                    </button>
+                    <a className="btn btn-info btn-lg px-4 me-sm-3" href="/profile">Checkout</a>
 
                   </div>
                 </div>
