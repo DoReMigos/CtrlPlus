@@ -7,7 +7,7 @@ export default function Footer(){
 </div>
 <div className="text-center p-3" style={{ backgroundColor: "black" }}>
   <h6>NOT A REAL E-COMMERCE WEBSITE</h6>
-  <h5>Created by: Jessica, Preston, Ruby & Simu</h5>
+  <h4>Created by: Jessica, Preston, Ruby & Simu</h4>
 </div>
 </footer>
     )
