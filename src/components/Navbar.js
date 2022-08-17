@@ -5,13 +5,12 @@ let Logo = require("./CtrlPlusLogo.png")
 export default function Navbar() {
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
-        <div className="container-fluid">
-          <Link to = "/">
-            <img src = {Logo} style = {{width: "60px", height: "60px"}}/></Link><h2 className = "text-info bg-dark">CTRL+</h2>
-          {/* <h4 className="text-info bg-dark">CTRL +</h4> */}
+      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
+        <div class="container-fluid">
+            <img src = {Logo} style = {{width: "60px", height: "60px"}}/><h2 className = "text-info bg-dark">CTRL+</h2>
+          {/* <h4 class="text-info bg-dark">CTRL +</h4> */}
           <button
-            className="navbar-toggler"
+            class="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
             data-mdb-target="#navbarRightAlignExample"
@@ -19,31 +18,31 @@ export default function Navbar() {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-         <i className="fas fa-bars"></i>
+         <i class="fas fa-bars"></i>
           </button>
 
-          <div className="collapse navbar-collapse" id="navbarRightAlignExample">
-            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li className="nav-item">
+          <div class="collapse navbar-collapse" id="navbarRightAlignExample">
+            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+              <li class="nav-item">
                 <div>
                   <Link
                     to="/Store"
-                    className="nav-link active"
+                    class="nav-link active"
                   >
-                    <p className="text-info bg-dark"> Store</p>
+                    <p class="text-info bg-dark"> Store</p>
                   </Link>
                 </div>
               </li>
-              <li className="nav-item">
+              <li class="nav-item">
                 <div>
-                  <Link to="/Store" className="nav-link">
-                  <p className="text-info bg-dark"> Support</p>
+                  <Link to="/Store" class="nav-link">
+                  <p class="text-info bg-dark"> Support</p>
                   </Link>
                 </div>
               </li>
-              <li className="nav-item">
+              <li class="nav-item">
                 <div>
-                  <Link to="/Store" className="nav-link">
+                  <Link to="/Store" class="nav-link">
                  🛒
                   </Link>
                 </div>
