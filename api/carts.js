@@ -21,7 +21,8 @@ apiRouter.get("/", async (req, res, next) => {
 apiRouter.get("/:id", requireUser, async (req, res, next) => {
   const { id } = req.user; //if trouble params
   try {
-    const cart = await Cart.getCartById({ id });
+    const cart = await Cart.getCartByUserId({ id });
+    console.log(cart,'cartlog')
     res.send(cart);
   } catch (error) {
     next(error);
