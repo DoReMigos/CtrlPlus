@@ -40,7 +40,7 @@ export default function AdminUpdate({products}){
                 value = {category}
                 onChange = {(event)=> setCategory(event.target.value)}></input>
             </div>
-            <button type="submit"> Submit</button>
+            <button type="submit">Submit changes</button>
 
         </form>
     //     <button
