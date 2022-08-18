@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts, getUserProfile } from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct} from "../databaseAdapter";
+import AdminUpdate from "./AdminUpdate"
 import "./Store.css"
 
 export default function Store({userInfo, setUserInfo}) {
@@ -33,6 +34,12 @@ export default function Store({userInfo, setUserInfo}) {
     getUserInfo();
   }, []);
 
+  async function handleDelete(productId){
+    const token = localStorage.getItem("token")
+    const deleteProducts = await deleteProduct(token, productId)
+    return deleteProducts
+  }
+
   const isAdmin = userInfo.isAdmin
   console.log(userInfo, "this is userInfo on Store")
   console.log(isAdmin,"this is isAdmin on Store Page")
@@ -43,6 +50,7 @@ export default function Store({userInfo, setUserInfo}) {
       <div className="storeContainer">
         {allProducts.length
           ? allProducts.map((products, index) => {
+            const productId = products.id
             return (
               <div key={index} className="mx-auto my-5">
 
@@ -134,8 +142,8 @@ export default function Store({userInfo, setUserInfo}) {
                       <div>
                         {isAdmin ? (
                           <div>
-                            <button>Edit</button>
-                            <button>Delete</button>
+                            <AdminUpdate products = {products}/>
+                            <button onClick={()=>{handleDelete(productId)}}>Delete</button>
                           </div>
                         ) : null}
                       </div>
