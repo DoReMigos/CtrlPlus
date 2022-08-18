@@ -1,7 +1,9 @@
 const express = require("express");
 const cartsRouter = express.Router();
 const { requireUser } = require("./utils");
-const {}= require("../db/models/cartProducts");
+const {deleteCartProd} = require("../db/models/cartProducts")
+const { Order, Cart } = require("../db/models")
+
 const {getAllUsers} = require("../db/models/users")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
@@ -34,7 +36,7 @@ cartsRouter.delete("/:order_id", requireUser, async (req, res, next) => {
   console.log(req.params,"HELLO DELETE")
   
   try {
-    const order = await Order.deleteCartProd(id);
+    const order = await deleteCartProd(id);
     res.send(order);
   } catch (error) {
     console.log(error);
