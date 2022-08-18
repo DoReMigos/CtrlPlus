@@ -1,13 +1,13 @@
 const express = require("express");
-const apiRouter = express.Router();
+const cartsRouter = express.Router();
 const { requireUser } = require("./utils");
-const { User, Cart, Order } = require("../db/models");
-
+const {}= require("../db/models/cartProducts");
+const {getAllUsers} = require("../db/models/users")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
 //getAllCarts across website hehe
-apiRouter.get("/", async (req, res, next) => {
+cartsRouter.get("/", async (req, res, next) => {
   try {
     const getAllCarts = await Cart.getAllCarts();
     console.log(getAllCarts);
@@ -18,7 +18,7 @@ apiRouter.get("/", async (req, res, next) => {
 });
 
 //grabbing current cart
-apiRouter.get("/:id", requireUser, async (req, res, next) => {
+cartsRouter.get("/:id", requireUser, async (req, res, next) => {
   const { id } = req.user; //if trouble params
   try {
     const cart = await Cart.getCartByUserId({ id });
@@ -29,8 +29,21 @@ apiRouter.get("/:id", requireUser, async (req, res, next) => {
   }
 });
 
-apiRouter.post("/");
-apiRouter.patch("/");
+cartsRouter.delete("/:order_id", requireUser, async (req, res, next) => {
+  const id = req.params.order_id
+  console.log(req.params,"HELLO DELETE")
+  
+  try {
+    const order = await Order.deleteCartProd(id);
+    res.send(order);
+  } catch (error) {
+    console.log(error);
+  }
+});
 
 
-module.exports = apiRouter
+cartsRouter.post("/");
+cartsRouter.patch("/");
+
+
+module.exports = cartsRouter

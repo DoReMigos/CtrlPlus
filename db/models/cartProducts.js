@@ -21,8 +21,24 @@ async function addProducttoCart({
     throw error
   }
 }
+async function deleteCartProd({id}){
+  console.log(id, "THIS IS ID")
+  try{
+    const rows= await client.query(`
+    DELETE FROM cart_products
+    where id = $1
+    RETURNING *`
+    ,[id])
+    console.log(rows, "THIS IS ROWS!!!!")
+    return rows
+  }catch(error){
+    console.log(error)
+  }
+  }
+  
 
 module.exports={
     addProducttoCart,
+    deleteCartProd
 
 }
