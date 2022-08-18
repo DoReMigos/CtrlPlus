@@ -6,7 +6,7 @@ export default function AdminUpdate({products}){
     const [price, setPrice] = useState(products.price)
     const [inventory, setInventory] = useState(products.inventory)
     const [category, setCategory] = useState(products.category)
-    let productId = products.id
+    const productId = products.id
 
  async function handleSubmit(event){
     event.preventDefault();

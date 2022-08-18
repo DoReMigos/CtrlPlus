@@ -21,9 +21,6 @@ export default function Profile({userInfo, setUserInfo}) {
     }
     getUserInfo();
   }, []);
-  let isAdmin = userInfo.isAdmin
-  console.log(userInfo, "THIS IS USER INFO FROM PROFILE")
-  console.log(isAdmin, "ADMIN ADMIN ADMINS")
   return (
     <div id = "profileContainer">
       <div className="card bg-dark" id="profileDiv">
