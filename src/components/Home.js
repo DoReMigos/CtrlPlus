@@ -28,7 +28,7 @@ const Home = () => {
                 <div className="row gx-4 justify-content-center">
                     <div className="col-lg-8 text-success mb-2">
                         <h2 className="fw-bolder">Change the font ANNOUNCING CALL OF DUTY®:</h2>
-                        <h4>THE FRANCHISE SHOWCASE EVENT, AND OPEN BETA DATE TIMES FOR CALL OF DUTY®: MODERN WARFARE® II. Mark your calendars for September 15: The future of Call of Duty® will be revealed at Call of Duty: Next, a Franchise Showcase Event. Then clear your schedule for September 16–-26: Detailed Beta dates and timing is locked and loaded. </h4>
+                        <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </h4>
                     </div>
                 </div>
             </div>
