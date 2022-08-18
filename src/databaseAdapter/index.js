@@ -155,64 +155,77 @@ export async function getAllProducts() {
 //   }
 // }
 
+export async function updateProduct(
+  productId,
+  price,
+  inventory,
+  category,
+  token
+) {
+  try {
+    const response = await fetch(`${URL}/products/${productId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        price: price,
+        inventory: inventory,
+        category: category,
+      }),
+    });
+    console.log(response, "THIS IS RESPONSE FOMR UDPATE PRODUCT");
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.log("error");
+  }
+}
+
 // export async function updateProduct(
 //   productId,
-//   token,
-//   title,
-//   brand,
-//   description,
 //   price,
 //   inventory,
 //   category,
-//   image_1,
-//   image_2,
-//   image_3,
-//   image_4
+//   token
 // ) {
 //   try {
-//     const response = await fetch(`${URL}/products/${productId}`, {
+//     const response = await fetch(`${URL}products/${productId}`, {
 //       method: "PATCH",
 //       headers: {
 //         "Content-Type": "application/json",
 //         Authorization: `Bearer ${token}`,
 //       },
 //       body: JSON.stringify({
-//         title: title,
-//         brand: brand,
-//         description: description,
 //         price: price,
 //         inventory: inventory,
-//         category: category,
-//         image_1: image_1,
-//         image_2: image_2,
-//         image_3: image_3,
-//         image_4: image_4
-//       })
-//     })
+//         category: category
+//       }),
+//     });
 //     const result = response.json();
-//     return result
+//     return result;
 //   } catch (error) {
-//     console.log("error");
+//     console.error(error);
 //   }
 // }
 
-// export async function deleteProduct(productId, token){
-//   try{
-//     const response = await fetch (`${URL}/products/${productId}`,{
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       }
-//     })
-//     const result = response.json()
-//     return result
-//   }catch(error){
-//     console.log(error)
-//   }
-// }
+export async function deleteProduct(token, productId){
+  try{
+    const response = await fetch (`${URL}/products/${productId}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = response.json();
+    return result;
+  }catch(error){
+    console.log(error);
+  }
+}
 //END OF PRODUCT
-
 
 export async function getAPIHealth() {
   try {
