@@ -78,15 +78,16 @@ export async function getUserProfile(token) {
   return result;
 }
 
-export async function getUserCarts(token, email) {
+export async function getUserCarts(token, id) {
   try {
-    const response = await fetch(`${URL}/users/${email}/cart`, {
+    const response = await fetch(`${URL}/carts/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     const result = response.json();
+    console.log(result, 'getusercarts log')
     return result;
   } catch (error) {
     console.log(error);
