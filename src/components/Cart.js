@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, getUserCarts, deleteCartProd } from "../databaseAdapter";
+import CartUpdate from "./CartUpdate"
 
 const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
@@ -178,6 +179,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                      <DeleteRoutine routineId={element.id} /> */}
                                     {element.products.map((product, index) => {
                                       const id = product.id;
+
                                       return (
                                         <>
                                             <div
@@ -210,7 +212,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                     </h5>
                                                     <h5 className='fw-normal mb-0'>
                                                       Quantity:{" "}
-                                                      {product.quantity}
+                                                      <CartUpdate product={product}/>
                                                     </h5>
                                                   </div>
                                                 </div>
@@ -225,7 +227,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                     className='text-muted'>
                                                     <i className='fas fa-times'></i>
                                                   </a>
-                      <button onClick={()=>{handleDelete(id)}}>Delete</button>
+                      <button onClick={()=>{handleDelete(id)}}>Remove</button>
 
                                                 </div>
                                               </div>

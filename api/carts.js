@@ -1,7 +1,7 @@
 const express = require("express");
 const cartsRouter = express.Router();
 const { requireUser } = require("./utils");
-const {deleteCartProd} = require("../db/models/cartProducts")
+const {deleteCartProd, updateCartProdQuantity} = require("../db/models/cartProducts")
 const { Order, Cart } = require("../db/models")
 
 const {getAllUsers} = require("../db/models/users")
@@ -43,9 +43,18 @@ cartsRouter.delete("/:order_id", requireUser, async (req, res, next) => {
   }
 });
 
-
 cartsRouter.post("/");
-cartsRouter.patch("/");
+
+cartsRouter.patch("/:order_id", requireUser, async (req, res, next) =>{
+  const id = req.params.order_id
+  const quantity = req.body.quantity
+try{
+  const order = await updateCartProdQuantity(id, quantity)
+  res.send(order)
+}catch(error){
+  next(error)
+}
+});
 
 
 module.exports = cartsRouter
