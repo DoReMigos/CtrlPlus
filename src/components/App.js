@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes} from "react-router-dom";
-import {Register, Login, Profile, Store, Cart, Home, AddToCart} from "./"
+import {Register, Login, Profile, Store, Cart, Home, AddToCart, Products} from "./"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 
@@ -13,6 +13,7 @@ import '../style/App.css';
 const App = () => {
   const [APIHealth, setAPIHealth] = useState('');
   const [userInfo, setUserInfo] = useState({});
+  const [productsData, setProductsData] = useState([])
 
   useEffect(() => {
     // follow this pattern inside your useEffect calls:
@@ -38,6 +39,7 @@ const App = () => {
     <Route exact path = "/Store" element={<Store userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route>
     <Route exact path = "/Cart" element={<Cart />}></Route> 
     <Route exact path = "/" element={<Home />}></Route>
+    <Route exact path = "/Products" element={<Products userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route>
 
 
     </Routes>

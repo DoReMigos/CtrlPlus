@@ -125,35 +125,35 @@ export async function getAllProducts() {
   return result;
 }
 
-// export async function createProduct(
-//   title,
-//   brand,
-//   description,
-//   price,
-//   quantity,
-//   token
-// ) {
-//   try {
-//     const response = await fetch(`${URL}/products`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       method: "POST",
-//       body: JSON.stringify({
-//         title: title,
-//         brand: brand,
-//         description: description,
-//         price: price,
-//         quantity: quantity,
-//       }),
-//     });
-//     const result = response.json();
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function createProduct(
+  title,
+  brand,
+  description,
+  price,
+  inventory,
+  token
+) {
+  try {
+    const response = await fetch(`${URL}/products`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        title: title,
+        brand: brand,
+        description: description,
+        price: price,
+        inventory: inventory,
+      }),
+    });
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function updateProduct(
   productId,

@@ -18,7 +18,6 @@ export default function AdminUpdate({products}){
         category,
         token)
         console.log(response, "THIS IS RESPONSE FOMR ADMIN UPDATE")
-    return response
  }
  console.log(price, inventory, category)
     return (
