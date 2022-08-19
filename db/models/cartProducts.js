@@ -38,8 +38,23 @@ async function deleteCartProd(id){
   }
   }
 
+  async function updateCartProdQuantity(id, quantity){
+    try{
+      const {rows} = await client.query(`
+      UPDATE cart_products
+      SET quantity = $1
+      WHERE id = $2
+      RETURNING *
+      `,[id, quantity])
+      return rows
+    }catch(error){
+      console.log(error)
+    }
+  }
+  
+
 module.exports={
   addProducttoCart,
-  deleteCartProd
-  
+  deleteCartProd,
+  updateCartProdQuantity
 }

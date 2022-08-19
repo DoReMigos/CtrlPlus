@@ -30,23 +30,18 @@ const App = () => {
   }, []);
 
   return (
-    <div className='app-container'>
-      <Navbar />
-      <Routes>
-        <Route exact path='/Register' element={<Register />}></Route>
-        <Route exact path='/Login' element={<Login />}></Route>
-        <Route
-          exact
-          path='/Profile'
-          element={
-            <Profile userInfo={userInfo} setUserInfo={setUserInfo} />
-          }></Route>
-        <Route exact path='/Store' element={<Store userInfo={userInfo} setUserInfo={setUserInfo} />}></Route>
-        <Route exact path='/Cart' element={<Cart userInfo={userInfo} setUserInfo={setUserInfo} />}>
-            </Route>
-            <Route exact path='/Home' element={<Home />}></Route>
-            <Route exact path='/' element={<Home />}></Route>
-      </Routes>
+    <div className="app-container">
+      <Navbar/>
+    <Routes>
+    <Route exact path = "/Register" element={<Register />}></Route>
+    <Route exact path = "/Login" element={<Login />}></Route>
+    <Route exact path = "/Profile" element={<Profile userInfo = {userInfo} setUserInfo={setUserInfo} />}></Route>
+    <Route exact path = "/Store" element={<Store userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route>
+    <Route exact path = "/Cart" element={<Cart userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route> 
+    <Route exact path = "/" element={<Home />}></Route>
+
+
+    </Routes>
       {/* <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
       <p>API Status: {APIHealth}</p> */}
       <Footer />
