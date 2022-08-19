@@ -222,6 +222,12 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                   className='text-muted'>
                                                   <i className='fas fa-times'></i>
                                                 </a>
+                                                <button
+                                                  onClick={() => {
+                                                    handleDelete(id);
+                                                  }}>
+                                                  Delete
+                                                </button>
                                               </div>
                                             </div>
                                           </div>
