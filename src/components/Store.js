@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate"
+import AddToCart from "./AddToCart"
 import "./Store.css"
-
-export default function Store({ userInfo, setUserInfo }) {
+import { addProductToCart } from "../databaseAdapter";
+// import  AddToCart  from "./AddToCart"
+// import handleAdd from "./AddToCart"
+export default function Store({userInfo, setUserInfo}) {
   const [allProducts, setAllProducts] = useState([]);
   const [showEdit, setShowEdit] = useState(null)
   const [selectedPage, setSelectedPage] = useState(1)
@@ -14,9 +17,11 @@ export default function Store({ userInfo, setUserInfo }) {
       const returnProducts = await getAllProducts();
       setAllProducts(returnProducts)
       console.log(returnProducts)
+     ;
     }
     fetchProducts();
   }, [])
+
 
 
   useEffect(() => {
@@ -78,7 +83,7 @@ useEffect(()=>{
                       <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
                       <div className="priceCartBar">
                         <div className="card-text">{products.price}</div>
-                        <button>Add to Cart</button>
+                      <AddToCart products={products} userInfo={userInfo}/>
                       </div>
 
 
@@ -130,7 +135,7 @@ useEffect(()=>{
                           </div>
                         </div>
                         <button className="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="prev">
-                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>=
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span className="visually-hidden">Previous</span>
                         </button>
                         <button className="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="next">
@@ -139,15 +144,15 @@ useEffect(()=>{
                         </button>
                       </div>
 
-                      <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      <div className="accordion accordion-flush" id="accordionFlushExample">
+                        <div className="accordion-item">
+                          <h2 className="accordion-header" id="flush-headingOne">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                               Description
                             </button>
                           </h2>
-                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">{products.description}</div>
+                          <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body">{products.description}</div>
                           </div>
                         </div>
                       </div>
@@ -157,7 +162,7 @@ useEffect(()=>{
 
                           showEdit != products.id ?
 
-                                <button onClick={() => handleEditSelect(products.id)}class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button onClick={() => handleEditSelect(products.id)}className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
                                   Edit or Delete
                                 </button>
 :

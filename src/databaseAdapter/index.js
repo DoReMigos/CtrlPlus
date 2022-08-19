@@ -247,3 +247,27 @@ export async function getAPIHealth() {
     return { healthy: false };
   }
 }
+
+export async function addProductToCart(productId, price, order_id,quantity,token){
+  console.log(productId, order_id, price)
+
+  try{
+    const response = await fetch(`${URL}/orders/${order_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId: productId,
+        price: price,
+        quantity: quantity,
+      }),
+    });
+    console.log(response)
+    const result = response.json();
+    return result;
+  }catch(error){
+    console.log(error);
+  }
+}
