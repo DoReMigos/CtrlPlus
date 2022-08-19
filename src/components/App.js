@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes} from "react-router-dom";
-import {Register, Login, Profile, Store, Cart} from "./"
+import {Register, Login, Profile, Store, Cart, Home, AddToCart} from "./"
 import Navbar from "./Navbar"
 import Footer from "./Footer"
 

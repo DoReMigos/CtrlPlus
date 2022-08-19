@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts } from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct} from "../databaseAdapter";
+import AdminUpdate from "./AdminUpdate"
 import "./Store.css"
 
-export default function Store() {
+export default function Store({userInfo, setUserInfo}) {
   const [allProducts, setAllProducts] = useState([]);
+
 
   useEffect(() => {
     async function fetchProducts() {
@@ -15,12 +17,40 @@ export default function Store() {
   }, [])
 
 
+  useEffect(() => {
+    let token = localStorage.getItem("token");
+    console.log(token);
+    async function getUserInfo() {
+      try {
+        const response = await getUserProfile(token)
+        console.log(token);
+      console.log(response, "Message Please Read");
+      setUserInfo(response);
+      } catch (error) {
+        console.log(error)
+      } ;
+      
+    }
+    getUserInfo();
+  }, []);
+
+  async function handleDelete(productId){
+    const token = localStorage.getItem("token")
+    const deleteProducts = await deleteProduct(token, productId)
+    return deleteProducts
+  }
+
+  const isAdmin = userInfo.isAdmin
+  console.log(userInfo, "this is userInfo on Store")
+  console.log(isAdmin,"this is isAdmin on Store Page")
+
   return (
     <div>
       <h1 className="text-center">Shop</h1>
       <div className="storeContainer">
         {allProducts.length
           ? allProducts.map((products, index) => {
+            const productId = products.id
             return (
               <div key={index} className="mx-auto my-5">
 
@@ -109,7 +139,14 @@ export default function Store() {
                       {products.description}
                     </div>
                   </div> */}
-
+                      <div>
+                        {isAdmin ? (
+                          <div>
+                            <AdminUpdate products = {products}/>
+                            <button onClick={()=>{handleDelete(productId)}}>Delete</button>
+                          </div>
+                        ) : null}
+                      </div>
                     </div>
                   </div>
 

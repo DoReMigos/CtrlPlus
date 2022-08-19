@@ -290,45 +290,45 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                       </label>
                                     </div>
 
-                                    <div className='row mb-4'>
-                                      <div className='col-md-6'>
-                                        <div className='form-outline form-white'>
-                                          <input
-                                            type='text'
-                                            id='typeExp'
-                                            className='form-control form-control-lg'
-                                            placeholder='MM/YYYY'
-                                            size='7'
-                                            minLength='7'
-                                            maxLength='7'
-                                          />
-                                          <label
-                                            className='form-label'
-                                            htmlFor='typeExp'>
-                                            Expiration
-                                          </label>
-                                        </div>
-                                      </div>
-                                      <div className='col-md-6'>
-                                        <div className='form-outline form-white'>
-                                          <input
-                                            type='password'
-                                            id='typeText'
-                                            className='form-control form-control-lg'
-                                            placeholder='&#9679;&#9679;&#9679;'
-                                            size='1'
-                                            minLength='3'
-                                            maxLength='3'
-                                          />
-                                          <label
-                                            className='form-label'
-                                            htmlFor='typeText'>
-                                            Cvv
-                                          </label>
-                                        </div>
-                                      </div>
+                                <div className='row mb-4'>
+                                  <div className='col-md-6'>
+                                    <div className='htmlForm-outline htmlForm-white'>
+                                      <input
+                                        type='text'
+                                        id='typeExp'
+                                        className='htmlForm-control htmlForm-control-lg'
+                                        placeholder='MM/YYYY'
+                                        size='7'
+                                        minLength='7'
+                                        maxLength='7'
+                                      />
+                                      <label
+                                        className='htmlForm-label'
+                                        htmlFor='typeExp'>
+                                        Expiration
+                                      </label>
                                     </div>
-                                  </form>
+                                  </div>
+                                  <div className='col-md-6'>
+                                    <div className='htmlForm-outline htmlForm-white'>
+                                      <input
+                                        type='password'
+                                        id='typeText'
+                                        className='htmlForm-control htmlForm-control-lg'
+                                        placeholder='&#9679;&#9679;&#9679;'
+                                        size='1'
+                                        minLength='3'
+                                        maxLength='3'
+                                      />
+                                      <label
+                                        className='htmlForm-label'
+                                        htmlFor='typeText'>
+                                        Cvv
+                                      </label>
+                                    </div>
+                                  </div>
+                                </div>
+                              </form>
 
                                   <hr className='my-4'></hr>
 
@@ -337,10 +337,10 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                     <p className='mb-2'>$0.00</p>
                                   </div>
 
-                                  <div className='d-flex justify-content-between'>
-                                    <p className='mb-2'>Shipping</p>
-                                    <p className='mb-2'>$20.00</p>
-                                  </div>
+                                                                  <div className='d-flex justify-content-between'>
+                                                                      <p className='mb-2'>Shipping</p>
+                                                                      <p className='mb-2'>$20.00</p>
+                                                                  </div>
 
                                   <div className='d-flex justify-content-between mb-4'>
                                     <p className='mb-2'>Total(Incl. taxes)</p>
