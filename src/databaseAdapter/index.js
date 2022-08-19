@@ -254,15 +254,15 @@ export async function getAPIHealth() {
   }
 }
 
-export async function addProductToCart(productId, price){
+export async function addProductToCart(productId, price, orderId){
   try{
-    const response = await fetch (`${URL}/products/${productId}`,{
+    const response = await fetch (`${URL}/orders/${orderId}`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
       method: "POST",
-      body: JSON.stringify.stringify({
+      body: JSON.stringify({
         productId: productId,
         price
       })
