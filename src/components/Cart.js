@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { getUserProfile, getUserCarts } from "../databaseAdapter";
+import { getUserProfile, getUserCarts, deleteCartProd } from "../databaseAdapter";
 
 const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
@@ -18,6 +18,13 @@ const Cart = ({ userInfo, setUserInfo }) => {
   useEffect(() => {
     getMyInfo();
   }, []);
+
+  async function handleDelete(id){
+    const token = localStorage.getItem("token")
+    const deleteCartProducts = await deleteCartProd(id, token)
+    return deleteCartProducts
+  }
+  console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
 
   //         <div id="myroutines">
   //             {userCart.map((element, index) => {
@@ -168,7 +175,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                     {/* <UpdateRoutine routineId={element.id} />
                                      <DeleteRoutine routineId={element.id} /> */}
                                     {element.products.map((product, index) => {
-                                      let productId = product.id;
+                                      const id = product.id;
                                       return (
                                         <>
                                           <div
