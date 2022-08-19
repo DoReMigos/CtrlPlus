@@ -245,12 +245,12 @@ export async function addProductToCart(productId, price){
       headers: {
         "Content-Type": "application/json",
       },
-      method: "POST",
-      body: JSON.stringify.stringify({
+      body: JSON.stringify({
         productId: productId,
         price
       })
     });
+    console.log(response)
     const result = response.json();
     return result;
   }catch(error){
