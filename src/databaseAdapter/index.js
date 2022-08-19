@@ -238,14 +238,18 @@ export async function getAPIHealth() {
   }
 }
 
-export async function addProductToCart(token, productId){
+export async function addProductToCart(productId, price){
   try{
     const response = await fetch (`${URL}/products/${productId}`,{
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
       },
+      method: "POST",
+      body: JSON.stringify.stringify({
+        productId: productId,
+        price
+      })
     });
     const result = response.json();
     return result;
