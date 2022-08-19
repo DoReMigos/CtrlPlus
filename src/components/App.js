@@ -32,7 +32,6 @@ const App = () => {
   return (
     <div className='app-container'>
       <Navbar />
-      <Navbar />
       <Routes>
         <Route exact path='/Register' element={<Register />}></Route>
         <Route exact path='/Login' element={<Login />}></Route>
