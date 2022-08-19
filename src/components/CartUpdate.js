@@ -3,7 +3,7 @@ import { updateCartProdQuantity } from "../databaseAdapter";
 
 
 export default function CartUpdate({product}){
-    const [quantity, setQuantity] = useState(product.quantity)
+    const [quantity, setQuantity] = useState(1)
     const id = product.id
 
  async function handleSubmit(event){

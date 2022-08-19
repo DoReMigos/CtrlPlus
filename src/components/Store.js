@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate"
 import AddToCart from "./AddToCart"
 import "./Store.css"
 import { addProductToCart } from "../databaseAdapter";
-
 // import  AddToCart  from "./AddToCart"
 // import handleAdd from "./AddToCart"
 export default function Store({userInfo, setUserInfo}) {
@@ -18,9 +17,11 @@ export default function Store({userInfo, setUserInfo}) {
       const returnProducts = await getAllProducts();
       setAllProducts(returnProducts)
       console.log(returnProducts)
+     ;
     }
     fetchProducts();
   }, [])
+
 
 
   useEffect(() => {
@@ -82,7 +83,7 @@ useEffect(()=>{
                       <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
                       <div className="priceCartBar">
                         <div className="card-text">{products.price}</div>
-                      <AddToCart products={products}/>
+                      <AddToCart products={products} userInfo={userInfo}/>
                       </div>
 
 

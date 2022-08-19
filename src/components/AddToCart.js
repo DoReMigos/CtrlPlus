@@ -1,22 +1,28 @@
 import React, { useState, useEffect } from 'react'
-import { addProductToCart } from '../databaseAdapter'
+import { addProductToCart,getUserCarts } from '../databaseAdapter'
 
 
-export default function AddToCart({products}){
+export default function AddToCart({products, userInfo}){
     // const [userCart, setUserCart] = useState([])
     const price = products.price
     const productId = products.id
+    const quantity = products.quantity
+    // console.log(order, 'orderddd')
     async function handleAdd(){
+        
 
         
-        console.log()
-        // const token = localStorage.getItem("token");
+       
+        const token = localStorage.getItem("token");
+         const pdata = await getUserCarts(token, userInfo.id);
+         // pdata.products.push(product)
+         console.log(pdata, "dapafs");
         // const price = event.target[0].value;
         console.log( productId, "ADD TO CART")
-        
-
+        let order_id = pdata[0].id
+        console.log(order_id)
         const response = await addProductToCart(productId,
-            price)
+            price,order_id,quantity, token)
         console.log(response)
     
         return response
