@@ -126,35 +126,35 @@ export async function getAllProducts() {
   return result;
 }
 
-// export async function createProduct(
-//   title,
-//   brand,
-//   description,
-//   price,
-//   quantity,
-//   token
-// ) {
-//   try {
-//     const response = await fetch(`${URL}/products`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       method: "POST",
-//       body: JSON.stringify({
-//         title: title,
-//         brand: brand,
-//         description: description,
-//         price: price,
-//         quantity: quantity,
-//       }),
-//     });
-//     const result = response.json();
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function createProduct(
+  title,
+  brand,
+  description,
+  price,
+  inventory,
+  token
+) {
+  try {
+    const response = await fetch(`${URL}/products`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        title: title,
+        brand: brand,
+        description: description,
+        price: price,
+        inventory: inventory,
+      }),
+    });
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 export async function updateProduct(
   productId,
@@ -184,33 +184,6 @@ export async function updateProduct(
   }
 }
 
-// export async function updateProduct(
-//   productId,
-//   price,
-//   inventory,
-//   category,
-//   token
-// ) {
-//   try {
-//     const response = await fetch(`${URL}products/${productId}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({
-//         price: price,
-//         inventory: inventory,
-//         category: category
-//       }),
-//     });
-//     const result = response.json();
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
 export async function deleteProduct(token, productId){
   try{
     const response = await fetch (`${URL}/products/${productId}`,{
@@ -228,6 +201,43 @@ export async function deleteProduct(token, productId){
 }
 //END OF PRODUCT
 
+export async function deleteCartProd(id, token){
+  try{
+    const response = await fetch (`${URL}/carts/${id}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    const result = await response.json()
+    return result
+  }catch(error){
+    console.log(error)
+  }
+}
+
+export async function updateCartProdQuantity(id, quantity, token){
+  console.log(id, quantity, token, "THIS IS ID QUANTITY TOKEN FROM FRONTEND API")
+  try{
+    const response = await fetch (`${URL}/carts/${id}`,{
+      method: "PATCH",
+      headers:{
+        'Content-Type' : 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        quantity: quantity
+      })
+    })
+    const result = response.json()
+    console.log(result, "THIS IS RESULT FROM FRONT END API CART PRODDDD")
+    return result
+  }catch(error){
+    console.log(error)
+  }
+}
+
 export async function getAPIHealth() {
   try {
     const { data } = await axios.get("/api/health");
@@ -238,17 +248,21 @@ export async function getAPIHealth() {
   }
 }
 
-export async function addProductToCart(productId, price){
+export async function addProductToCart(productId, price, order_id,quantity,token){
+  console.log(productId, order_id, price)
+
   try{
-    const response = await fetch (`${URL}/products/${productId}`,{
+    const response = await fetch(`${URL}/orders/${order_id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
       },
       body: JSON.stringify({
         productId: productId,
-        price
-      })
+        price: price,
+        quantity: quantity,
+      }),
     });
     console.log(response)
     const result = response.json();
