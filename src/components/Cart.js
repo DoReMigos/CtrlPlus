@@ -349,11 +349,10 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                     <p className='mb-2'>Subtotal</p>
                                     <p className='mb-2'>$0.00</p>
                                   </div>
-
-                                                                  <div className='d-flex justify-content-between'>
-                                                                      <p className='mb-2'>Shipping</p>
-                                                                      <p className='mb-2'>$20.00</p>
-                                                                  </div>
+                                  <div className='d-flex justify-content-between'>
+                                    <p className='mb-2'>Shipping</p>
+                                    <p className='mb-2'>$20.00</p>
+                                  </div>
 
                                   <div className='d-flex justify-content-between mb-4'>
                                     <p className='mb-2'>Total(Incl. taxes)</p>

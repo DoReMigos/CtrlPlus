@@ -130,7 +130,7 @@ useEffect(()=>{
                           </div>
                         </div>
                         <button className="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="prev">
-                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>=
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span className="visually-hidden">Previous</span>
                         </button>
                         <button className="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="next">
