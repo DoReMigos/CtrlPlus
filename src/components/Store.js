@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate"
+import AddToCart from "./AddToCart"
 import "./Store.css"
+import { addProductToCart } from "../databaseAdapter";
 
-export default function Store({ userInfo, setUserInfo }) {
+// import  AddToCart  from "./AddToCart"
+// import handleAdd from "./AddToCart"
+export default function Store({userInfo, setUserInfo}) {
   const [allProducts, setAllProducts] = useState([]);
   const [showEdit, setShowEdit] = useState(null)
   const [selectedPage, setSelectedPage] = useState(1)
@@ -78,7 +82,7 @@ useEffect(()=>{
                       <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
                       <div className="priceCartBar">
                         <div className="card-text">{products.price}</div>
-                        <button onClick={() => handleAdd(productId)}>Add to Cart</button>
+                      <AddToCart products={products}/>
                       </div>
 
 
