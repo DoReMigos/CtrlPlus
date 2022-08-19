@@ -2,11 +2,12 @@ import React, {useState} from "react";
 import { updateProduct } from "../databaseAdapter";
 
 
-export default function AdminUpdate({products}){
-    const [price, setPrice] = useState(products.price)
-    const [inventory, setInventory] = useState(products.inventory)
-    const [category, setCategory] = useState(products.category)
-    const productId = products.id
+export default function AdminUpdate({product}){
+    const [price, setPrice] = useState(product.price)
+    const [inventory, setInventory] = useState(product.inventory)
+    const [category, setCategory] = useState(product.category)
+    const [description, setDescription] = useState (product.description)
+    const productId = product.id
 
  async function handleSubmit(event){
     event.preventDefault();
@@ -15,7 +16,8 @@ export default function AdminUpdate({products}){
     const response = await updateProduct(productId,
         price,
         inventory,
-        category,
+        // category,
+        description,
         token)
         console.log(response, "THIS IS RESPONSE FOMR ADMIN UPDATE")
  }
@@ -33,11 +35,16 @@ export default function AdminUpdate({products}){
                 placeholder = "Inventory"
                 value = {inventory}
                 onChange = {(event)=>setInventory(event.target.value)}></input>
-                <input
+                {/* <input
                 type = "text"
                 placeholder = "Category"
                 value = {category}
-                onChange = {(event)=> setCategory(event.target.value)}></input>
+                onChange = {(event)=> setCategory(event.target.value)}></input> */}
+                <input
+                type = "text"
+                placeholder = "Description"
+                value = {description}
+                onChange = {(event)=> setDescription(event.target.value)}></input>
             </div>
             <button type="submit">Submit changes</button>
 

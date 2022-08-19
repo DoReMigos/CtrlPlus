@@ -22,7 +22,8 @@ async function getAllProducts() {
   try {
     const { rows } = await client.query(`
         SELECT *
-        FROM products;
+        FROM products
+        ORDER BY id DESC;
       `);
     console.log(rows, "this is rows from products")
     return rows;

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
-import AdminUpdate from "./AdminUpdate"
+import AdminUpdate from "./AdminUpdate";
+import AdminCreate from "./AdminCreate";
 import "./Store.css"
 
 export default function Store({ userInfo, setUserInfo }) {
@@ -65,22 +66,22 @@ useEffect(()=>{
   return (
     <div>
       <h1 className="text-center">Store</h1>
+      <AdminCreate allProducts={allProducts} />
       <div className="storeContainer">
         {productsToShow.length
-          ? productsToShow.map((products, index) => {
-            const productId = products.id
+          ? productsToShow.map((product, index) => {
+            const productId = product.id
             return (
-              <div key={`${products.id}`} className="mx-auto my-5">
+              <div key={`${product.id}`} className="mx-auto my-5">
 
                 <div className="card productsCard">
                   <div className="card-body d-flex flex-row">
                     <div>
-                      <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
+                      <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{product.title}</h5>
                       <div className="priceCartBar">
-                        <div className="card-text">{products.price}</div>
+                        <div className="card-text">{product.price}</div>
                         <button>Add to Cart</button>
                       </div>
-
 
                       <div id="carouselExampleIndicators" className="carousel slide" data-mdb-ride="carousel">
                         <div className="carousel-indicators">
@@ -113,19 +114,19 @@ useEffect(()=>{
                         </div>
                         <div className="carousel-inner">
                           <div className="carousel-item active">
-                            <img src={products.image_1}
+                            <img src={product.image_1}
                               className="d-block w-100 object-cover object-center" height="300px" alt="img1" />
                           </div>
                           <div className="carousel-item">
-                            <img src={products.image_2}
+                            <img src={product.image_2}
                               className="d-block w-100 object-cover object-center" alt="img2" />
                           </div>
                           <div className="carousel-item">
-                            <img src={products.image_3}
+                            <img src={product.image_3}
                               className="d-block w-100 object-cover object-center" alt="img3" />
                           </div>
                           <div className="carousel-item">
-                            <img src={products.image_4}
+                            <img src={product.image_4}
                               className="d-block w-100 object-cover object-center" alt="img4" />
                           </div>
                         </div>
@@ -139,15 +140,15 @@ useEffect(()=>{
                         </button>
                       </div>
 
-                      <div class="accordion accordion-flush" id="accordionFlushExample">
-                        <div class="accordion-item">
-                          <h2 class="accordion-header" id="flush-headingOne">
-                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                      <div className="accordion accordion-flush" id="accordionFlushExample">
+                        <div className="accordion-item">
+                          <h2 className="accordion-header" id="flush-headingOne">
+                            <button className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
                               Description
                             </button>
                           </h2>
-                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
-                            <div class="accordion-body">{products.description}</div>
+                          <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div className="accordion-body">{product.description}</div>
                           </div>
                         </div>
                       </div>
@@ -155,14 +156,14 @@ useEffect(()=>{
                       <div>
                         {isAdmin ? (
 
-                          showEdit != products.id ?
+                          showEdit != product.id ?
 
-                                <button onClick={() => handleEditSelect(products.id)}class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <button onClick={() => handleEditSelect(product.id)}className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
                                   Edit or Delete
                                 </button>
 :
                                   <div>
-                                    <AdminUpdate products={products} />
+                                    <AdminUpdate product={product} />
                                     <button onClick={() => { handleDelete(productId) }}>Delete product</button>
                                     <button onClick={() => { setShowEdit(null) }}>Hide Menu</button>
                                   </div>
@@ -181,6 +182,12 @@ useEffect(()=>{
           })
           : null}
       </div>
+        {/* create buttons for page numbers/previous/next
+            onClick for specific numbers goes into a handleClick function that will set selected page as the template literal for the selected page
+            previous and next buttons will +-1 for selected page, but need edge cases if you're on the first page or last page that it disables the prev or next button -- this is probably extra but looks nice. can technically do this just with the numbers and no prev/next if it's too time consuming/difficult.
+         */}
+
+
     </div>
   )
 }
