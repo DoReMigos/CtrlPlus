@@ -253,3 +253,19 @@ export async function getAPIHealth() {
     return { healthy: false };
   }
 }
+
+export async function addProductToCart(token, productId){
+  try{
+    const response = await fetch (`${URL}/products/${productId}`,{
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = response.json();
+    return result;
+  }catch(error){
+    console.log(error);
+  }
+}
