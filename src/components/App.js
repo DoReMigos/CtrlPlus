@@ -41,20 +41,11 @@ const App = () => {
           element={
             <Profile userInfo={userInfo} setUserInfo={setUserInfo} />
           }></Route>
-        <Route
-          exact
-          path='/Store'
-          element={
-            <Store userInfo={userInfo} setUserInfo={setUserInfo} />
-          }></Route>
-        <Route
-          exact
-          path='/Cart'
-          element={
-            <Cart userInfo={userInfo} setUserInfo={setUserInfo} />
-          }></Route>
-        <Route exact path='/Home' element={<Home />}></Route>
-        <Route exact path='/' element={<Home />}></Route>
+        <Route exact path='/Store' element={<Store userInfo={userInfo} setUserInfo={setUserInfo} />}></Route>
+        <Route exact path='/Cart' element={<Cart userInfo={userInfo} setUserInfo={setUserInfo} />}>
+            </Route>
+            <Route exact path='/Home' element={<Home />}></Route>
+            <Route exact path='/' element={<Home />}></Route>
       </Routes>
       {/* <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
       <p>API Status: {APIHealth}</p> */}

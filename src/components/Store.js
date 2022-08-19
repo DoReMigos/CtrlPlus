@@ -78,7 +78,7 @@ useEffect(()=>{
                       <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
                       <div className="priceCartBar">
                         <div className="card-text">{products.price}</div>
-                        <button>Add to Cart</button>
+                        <button onClick={() => handleAdd(productId)}>Add to Cart</button>
                       </div>
 
 
