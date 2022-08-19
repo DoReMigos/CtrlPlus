@@ -6,8 +6,8 @@
 }
 .productsCard{
     width: 400px;
-    min-height: 600px;
-    height: 600px;
+    min-height: 500px;
+    height: fit-content;
     margin-left:30px;
     margin-bottom: 10px;
 }

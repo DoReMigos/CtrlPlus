@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts, getUserProfile, deleteProduct} from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate"
 import "./Store.css"
 
-export default function Store({userInfo, setUserInfo}) {
+export default function Store({ userInfo, setUserInfo }) {
   const [allProducts, setAllProducts] = useState([]);
-
-
+  const [showEdit, setShowEdit] = useState(null)
+  const [selectedPage, setSelectedPage] = useState(1)
+  const [volumeSelect, setVolumeSelect] = useState(20)
+  const [productsToShow, setProductsToShow] = useState([])
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getAllProducts();
@@ -24,17 +26,17 @@ export default function Store({userInfo, setUserInfo}) {
       try {
         const response = await getUserProfile(token)
         console.log(token);
-      console.log(response, "Message Please Read");
-      setUserInfo(response);
+        console.log(response, "Message Please Read");
+        setUserInfo(response);
       } catch (error) {
         console.log(error)
-      } ;
-      
+      };
+
     }
     getUserInfo();
   }, []);
 
-  async function handleDelete(productId){
+  async function handleDelete(productId) {
     const token = localStorage.getItem("token")
     const deleteProducts = await deleteProduct(token, productId)
     return deleteProducts
@@ -42,17 +44,33 @@ export default function Store({userInfo, setUserInfo}) {
 
   const isAdmin = userInfo.isAdmin
   console.log(userInfo, "this is userInfo on Store")
-  console.log(isAdmin,"this is isAdmin on Store Page")
+  console.log(isAdmin, "this is isAdmin on Store Page")
+function handleEditSelect(productId){
+  setShowEdit(productId)
+}
+useEffect(()=>{
+  if (allProducts.length) {
+    const listOfProducts = allProducts.filter((_, index) =>{
+      if (selectedPage == 1){
+         return (volumeSelect - 1)*(selectedPage - 1) <= index && index < (volumeSelect)
+        } else {
+        return  (volumeSelect - 1)*(selectedPage - 1) < index && index < (volumeSelect)*(selectedPage)
+
+      }
+    })
+    setProductsToShow(listOfProducts)
+  }
+},[allProducts])
 
   return (
     <div>
-      <h1 className="text-center">Shop</h1>
+      <h1 className="text-center">Store</h1>
       <div className="storeContainer">
-        {allProducts.length
-          ? allProducts.map((products, index) => {
+        {productsToShow.length
+          ? productsToShow.map((products, index) => {
             const productId = products.id
             return (
-              <div key={index} className="mx-auto my-5">
+              <div key={`${products.id}`} className="mx-auto my-5">
 
                 <div className="card productsCard">
                   <div className="card-body d-flex flex-row">
@@ -112,7 +130,7 @@ export default function Store({userInfo, setUserInfo}) {
                           </div>
                         </div>
                         <button className="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="prev">
-                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>=
                           <span className="visually-hidden">Previous</span>
                         </button>
                         <button className="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="next">
@@ -120,31 +138,34 @@ export default function Store({userInfo, setUserInfo}) {
                           <span className="visually-hidden">Next</span>
                         </button>
                       </div>
-                      <div>
-                        {products.description}
+
+                      <div class="accordion accordion-flush" id="accordionFlushExample">
+                        <div class="accordion-item">
+                          <h2 class="accordion-header" id="flush-headingOne">
+                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseOne" aria-expanded="false" aria-controls="flush-collapseOne">
+                              Description
+                            </button>
+                          </h2>
+                          <div id="flush-collapseOne" class="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+                            <div class="accordion-body">{products.description}</div>
+                          </div>
+                        </div>
                       </div>
 
-                      {/* <div className="text-center">
-                    <button
-                      class="btn btn-primary"
-                      type="button"
-                      data-mdb-toggle="collapse"
-                      data-mdb-target="#collapseExample"
-                      aria-expanded="false"
-                      aria-controls="collapseExample"
-                    >
-                      Description
-                    </button>
-                    <div class="collapse mt-3" id="collapseExample">
-                      {products.description}
-                    </div>
-                  </div> */}
                       <div>
                         {isAdmin ? (
-                          <div>
-                            <AdminUpdate products = {products}/>
-                            <button onClick={()=>{handleDelete(productId)}}>Delete</button>
-                          </div>
+
+                          showEdit != products.id ?
+
+                                <button onClick={() => handleEditSelect(products.id)}class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  Edit or Delete
+                                </button>
+:
+                                  <div>
+                                    <AdminUpdate products={products} />
+                                    <button onClick={() => { handleDelete(productId) }}>Delete product</button>
+                                    <button onClick={() => { setShowEdit(null) }}>Hide Menu</button>
+                                  </div>
                         ) : null}
                       </div>
                     </div>

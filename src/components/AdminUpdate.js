@@ -18,7 +18,6 @@ export default function AdminUpdate({products}){
         category,
         token)
         console.log(response, "THIS IS RESPONSE FOMR ADMIN UPDATE")
-    return response
  }
  console.log(price, inventory, category)
     return (
@@ -40,7 +39,7 @@ export default function AdminUpdate({products}){
                 value = {category}
                 onChange = {(event)=> setCategory(event.target.value)}></input>
             </div>
-            <button type="submit"> Submit</button>
+            <button type="submit">Submit changes</button>
 
         </form>
     //     <button
