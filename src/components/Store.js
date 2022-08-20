@@ -166,10 +166,10 @@ useEffect(()=>{
                                   Edit or Delete
                                 </button>
 :
-                                  <div>
+                                  <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                    <button onClick={() => { handleDelete(productId) }}  className="btn btn-dark" style ={{marginBottom: "10px"}}>Delete product</button>
                                     <AdminUpdate products={products} />
-                                    <button onClick={() => { handleDelete(productId) }}>Delete product</button>
-                                    <button onClick={() => { setShowEdit(null) }}>Hide Menu</button>
+                                    <button onClick={() => { setShowEdit(null) }}  className="btn btn-dark">Hide Menu</button>
                                   </div>
                         ) : null}
                       </div>
