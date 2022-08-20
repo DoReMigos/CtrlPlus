@@ -44,7 +44,7 @@ export default function Store({userInfo, setUserInfo}) {
   async function handleDelete(productId) {
     const token = localStorage.getItem("token")
     const deleteProducts = await deleteProduct(token, productId)
-    return deleteProducts
+    window.location.reload(true);
   }
 
   const isAdmin = userInfo.isAdmin

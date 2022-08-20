@@ -23,7 +23,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
   async function handleDelete(id){
     const token = localStorage.getItem("token")
     const deleteCartProducts = await deleteCartProd(id, token)
-    return deleteCartProducts
+    window.location.reload(true);
   }
   console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
 
@@ -225,7 +225,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                     className='text-muted'>
                                                     <i className='fas fa-times'></i>
                                                   </a>
-                      <button onClick={()=>{handleDelete(id)}}>Remove</button>
+                      <h6 style = {{color: "red", fontSize:"25px", cursor: "pointer" }}onClick={()=>{handleDelete(id)}}>X</h6>
 
                                                 </div>
                                               </div>

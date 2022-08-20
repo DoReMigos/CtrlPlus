@@ -17,7 +17,7 @@ export default function AdminUpdate({products}){
         inventory,
         category,
         token)
-        console.log(response, "THIS IS RESPONSE FOMR ADMIN UPDATE")
+    window.location.reload(true);
  }
  console.log(price, inventory, category)
     return (
