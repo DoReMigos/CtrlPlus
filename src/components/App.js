@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
-import { Register, Login, Profile, Store, Cart, Home, AddToCart } from "./";
+import { Register, Login, Profile, Store, Cart, Home, AddToCart, Checkout } from "./";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
 
@@ -38,6 +38,8 @@ const App = () => {
     <Route exact path = "/Profile" element={<Profile userInfo = {userInfo} setUserInfo={setUserInfo} />}></Route>
     <Route exact path = "/Store" element={<Store userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route>
     <Route exact path = "/Cart" element={<Cart userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route> 
+    <Route exact path = "/Checkout" element={<Checkout/>}></Route> 
+
     <Route exact path = "/" element={<Home />}></Route>
 
 

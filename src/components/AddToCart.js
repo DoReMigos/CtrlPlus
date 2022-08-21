@@ -4,12 +4,12 @@ import { addProductToCart,getUserCarts } from '../databaseAdapter'
 
 export default function AddToCart({products, userInfo}){
     // const [userCart, setUserCart] = useState([])
+    const [quantity, setQuantity] = useState(1)
     const price = products.price
     const productId = products.id
-    const quantity = products.quantity
+    // const quantity = products.quantity
     // console.log(order, 'orderddd')
-    async function handleAdd(){
-        
+    async function handleAdd(){      
 
         
        
@@ -28,7 +28,7 @@ export default function AddToCart({products, userInfo}){
         return response
     }
     return(
-           <button onClick={() => handleAdd(productId)}>Add to Cart</button> 
+           <button onClick={() => handleAdd(productId)} onChange = {(event)=>setQuantity(event.target.value)}  className="btn btn-dark" style ={{height: "35px", width:"110px"}}>Add to Cart</button> 
 
     )
 }

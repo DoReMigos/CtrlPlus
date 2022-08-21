@@ -44,7 +44,7 @@ export default function Store({userInfo, setUserInfo}) {
   async function handleDelete(productId) {
     const token = localStorage.getItem("token")
     const deleteProducts = await deleteProduct(token, productId)
-    return deleteProducts
+    window.location.reload(true);
   }
 
   const isAdmin = userInfo.isAdmin
@@ -166,10 +166,10 @@ useEffect(()=>{
                                   Edit or Delete
                                 </button>
 :
-                                  <div>
+                                  <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                    <button onClick={() => { handleDelete(productId) }}  className="btn btn-dark" style ={{marginBottom: "10px"}}>Delete product</button>
                                     <AdminUpdate products={products} />
-                                    <button onClick={() => { handleDelete(productId) }}>Delete product</button>
-                                    <button onClick={() => { setShowEdit(null) }}>Hide Menu</button>
+                                    <button onClick={() => { setShowEdit(null) }}  className="btn btn-dark">Hide Menu</button>
                                   </div>
                         ) : null}
                       </div>
