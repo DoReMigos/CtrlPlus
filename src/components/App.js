@@ -38,14 +38,9 @@ const App = () => {
     <Route exact path = "/Profile" element={<Profile userInfo = {userInfo} setUserInfo={setUserInfo} />}></Route>
     <Route exact path = "/Store" element={<Store userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route>
     <Route exact path = "/Cart" element={<Cart userInfo={userInfo} setUserInfo={setUserInfo}/>}></Route> 
-<<<<<<< HEAD
-=======
     <Route exact path = "/Checkout" element={<Checkout/>}></Route> 
-
->>>>>>> 03cb0414371683d76a792412e1320d929411d161
     <Route exact path = "/" element={<Home />}></Route>
-
-
+  
     </Routes>
       {/* <h1>Hello Jessica, Preston, Ruby & Simu!</h1>
       <p>API Status: {APIHealth}</p> */}
