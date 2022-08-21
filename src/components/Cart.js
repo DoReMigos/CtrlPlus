@@ -160,7 +160,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                           <h1 className='fw-bold mb-0 text-black'>
                             Shopping Cart <h2 id='MyTitle'></h2>
                             <h4 id='subTitles'>
-                              Here's your Cart <h3>{userCart.userName}!</h3>
+                              Here's your Cart: {userInfo.email}!
                             </h4>
                           </h1>
                       <div className='p-5'>
