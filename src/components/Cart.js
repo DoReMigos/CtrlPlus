@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { getUserProfile, getUserCarts, deleteCartProd } from "../databaseAdapter";
+import CartUpdate from "./CartUpdate"
 
 const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
@@ -22,7 +23,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
   async function handleDelete(id){
     const token = localStorage.getItem("token")
     const deleteCartProducts = await deleteCartProd(id, token)
-    return deleteCartProducts
+    window.location.reload(true);
   }
   console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
 
@@ -176,55 +177,59 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                      <DeleteRoutine routineId={element.id} /> */}
                                     {element.products.map((product, index) => {
                                       const id = product.id;
+
                                       return (
                                         <>
-                                          <div
-                                            className='cartProducts'
-                                            key={`myroutines${index}`}>
-                                            <hr className='my-4'></hr>
-                                            <h2 id='MyTitle'>
-                                              {product.title}
-                                            </h2>
-                                            <div className='row mb-4 d-flex justify-content-between align-items-center'>
-                                              <div className='col-md-2 col-lg-2 col-xl-2'>
-                                                <img
-                                                  src={product.image_1}
-                                                  className='img-fluid rounded-3'
-                                                  alt='Cotton T-shirt'></img>
-                                              </div>
-                                              <div className='col-md-3 col-lg-3 col-xl-3'>
-                                                <h6 className='text-muted'>
-                                                  Brand: {product.brand}
-                                                </h6>
-                                                <h6 className='text-black mb-0'>
-                                                  {product.title}
-                                                </h6>
-                                              </div>
-                                              <div className='col-md-3 col-lg-3 col-xl-2 d-flex'>
-                                                <div styles='width: 50px;'>
-                                                  <h5 className='fw-normal mb-0'>
-                                                    Description:{" "}
-                                                    {product.description}
-                                                  </h5>
-                                                  <h5 className='fw-normal mb-0'>
-                                                    Quantity: {product.quantity}
-                                                  </h5>
+                                            <div
+                                              className='cartProducts'
+                                              key={`myroutines${index}`}>
+                                              <h2 id='MyTitle'>
+                                                {product.title}
+                                              </h2>
+                                              <hr className='my-4'></hr>
+                                              <div className='row mb-4 d-flex justify-content-between align-items-center'>
+                                                <div className='col-md-2 col-lg-2 col-xl-2'>
+                                                  <img
+                                                    src={product.image_1}
+                                                    className='img-fluid rounded-3'
+                                                    alt='Cotton T-shirt'></img>
+                                                </div>
+                                                <div className='col-md-3 col-lg-3 col-xl-3'>
+                                                  <h6 className='text-muted'>
+                                                    Brand: {product.brand}
+                                                  </h6>
+                                                  <h6 className='text-black mb-0'>
+                                                    {product.title}
+                                                  </h6>
+                                                </div>
+                                                <div className='col-md-3 col-lg-3 col-xl-2 d-flex'>
+                                                  <div styles='width: 50px;'>
+                                                    <h5 className='fw-normal mb-0'>
+                                                      Description:{" "}
+                                                      {product.description}
+                                                    </h5>
+                                                    <h5 className='fw-normal mb-0'>
+                                                      Quantity:{" "}
+                                                      <CartUpdate product={product}/>
+                                                    </h5>
+                                                  </div>
+                                                </div>
+                                                <div className='col-md-3 col-lg-2 col-xl-2 offset-lg-1'>
+                                                  <h6 className='mb-0'>
+                                                    Price:{product.price}
+                                                  </h6>
+                                                </div>
+                                                <div className='col-md-1 col-lg-1 col-xl-1 text-end'>
+                                                  <a
+                                                    href='#!'
+                                                    className='text-muted'>
+                                                    <i className='fas fa-times'></i>
+                                                  </a>
+                      <h6 style = {{color: "red", fontSize:"25px", cursor: "pointer" }}onClick={()=>{handleDelete(id)}}>X</h6>
+
                                                 </div>
                                               </div>
-                                              <div className='col-md-3 col-lg-2 col-xl-2 offset-lg-1'>
-                                                <h6 className='mb-0'>
-                                                  Price:{product.price}
-                                                </h6>
-                                              </div>
-                                              <div className='col-md-1 col-lg-1 col-xl-1 text-end'>
-                                                <a
-                                                  href='#!'
-                                                  className='text-muted'>
-                                                  <i className='fas fa-times'></i>
-                                                </a>
-                                              </div>
                                             </div>
-                                          </div>
                                         </>
                                       );
                                     })}
@@ -343,11 +348,10 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                     <p className='mb-2'>Subtotal</p>
                                     <p className='mb-2'>$0.00</p>
                                   </div>
-
-                                                                  <div className='d-flex justify-content-between'>
-                                                                      <p className='mb-2'>Shipping</p>
-                                                                      <p className='mb-2'>$20.00</p>
-                                                                  </div>
+                                  <div className='d-flex justify-content-between'>
+                                    <p className='mb-2'>Shipping</p>
+                                    <p className='mb-2'>$20.00</p>
+                                  </div>
 
                                   <div className='d-flex justify-content-between mb-4'>
                                     <p className='mb-2'>Total(Incl. taxes)</p>

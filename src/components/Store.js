@@ -1,10 +1,18 @@
 import React, { useState, useEffect } from "react";
+<<<<<<< HEAD
 import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate";
 import AdminCreate from "./AdminCreate";
+=======
+import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../databaseAdapter";
+import AdminUpdate from "./AdminUpdate"
+import AddToCart from "./AddToCart"
+>>>>>>> 03cb0414371683d76a792412e1320d929411d161
 import "./Store.css"
-
-export default function Store({ userInfo, setUserInfo }) {
+import { addProductToCart } from "../databaseAdapter";
+// import  AddToCart  from "./AddToCart"
+// import handleAdd from "./AddToCart"
+export default function Store({userInfo, setUserInfo}) {
   const [allProducts, setAllProducts] = useState([]);
   const [showEdit, setShowEdit] = useState(null)
   const [selectedPage, setSelectedPage] = useState(1)
@@ -15,9 +23,11 @@ export default function Store({ userInfo, setUserInfo }) {
       const returnProducts = await getAllProducts();
       setAllProducts(returnProducts)
       console.log(returnProducts)
+     ;
     }
     fetchProducts();
   }, [])
+
 
 
   useEffect(() => {
@@ -40,7 +50,7 @@ export default function Store({ userInfo, setUserInfo }) {
   async function handleDelete(productId) {
     const token = localStorage.getItem("token")
     const deleteProducts = await deleteProduct(token, productId)
-    return deleteProducts
+    window.location.reload(true);
   }
 
   const isAdmin = userInfo.isAdmin
@@ -79,8 +89,13 @@ useEffect(()=>{
                     <div>
                       <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{product.title}</h5>
                       <div className="priceCartBar">
+<<<<<<< HEAD
                         <div className="card-text">{product.price}</div>
                         <button>Add to Cart</button>
+=======
+                        <div className="card-text">{products.price}</div>
+                      <AddToCart products={products} userInfo={userInfo}/>
+>>>>>>> 03cb0414371683d76a792412e1320d929411d161
                       </div>
 
                       <div id="carouselExampleIndicators" className="carousel slide" data-mdb-ride="carousel">
@@ -131,7 +146,7 @@ useEffect(()=>{
                           </div>
                         </div>
                         <button className="carousel-control-prev" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="prev">
-                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>=
+                          <span className="carousel-control-prev-icon" aria-hidden="true"></span>
                           <span className="visually-hidden">Previous</span>
                         </button>
                         <button className="carousel-control-next" type="button" data-mdb-target="#carouselExampleIndicators" data-mdb-slide="next">
@@ -148,7 +163,11 @@ useEffect(()=>{
                             </button>
                           </h2>
                           <div id="flush-collapseOne" className="accordion-collapse collapse" aria-labelledby="flush-headingOne" data-bs-parent="#accordionFlushExample">
+<<<<<<< HEAD
                             <div className="accordion-body">{product.description}</div>
+=======
+                            <div className="accordion-body">{products.description}</div>
+>>>>>>> 03cb0414371683d76a792412e1320d929411d161
                           </div>
                         </div>
                       </div>
@@ -158,6 +177,7 @@ useEffect(()=>{
 
                           showEdit != product.id ?
 
+<<<<<<< HEAD
                                 <button onClick={() => handleEditSelect(product.id)}className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
                                   Edit or Delete
                                 </button>
@@ -166,6 +186,16 @@ useEffect(()=>{
                                     <AdminUpdate product={product} />
                                     <button onClick={() => { handleDelete(productId) }}>Delete product</button>
                                     <button onClick={() => { setShowEdit(null) }}>Hide Menu</button>
+=======
+                                <button onClick={() => handleEditSelect(products.id)}className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  Edit or Delete
+                                </button>
+:
+                                  <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+                                    <button onClick={() => { handleDelete(productId) }}  className="btn btn-dark" style ={{marginBottom: "10px"}}>Delete product</button>
+                                    <AdminUpdate products={products} />
+                                    <button onClick={() => { setShowEdit(null) }}  className="btn btn-dark">Hide Menu</button>
+>>>>>>> 03cb0414371683d76a792412e1320d929411d161
                                   </div>
                         ) : null}
                       </div>

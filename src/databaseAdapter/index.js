@@ -184,33 +184,6 @@ export async function updateProduct(
   }
 }
 
-// export async function updateProduct(
-//   productId,
-//   price,
-//   inventory,
-//   category,
-//   token
-// ) {
-//   try {
-//     const response = await fetch(`${URL}products/${productId}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({
-//         price: price,
-//         inventory: inventory,
-//         category: category
-//       }),
-//     });
-//     const result = response.json();
-//     return result;
-//   } catch (error) {
-//     console.error(error);
-//   }
-// }
-
 export async function deleteProduct(token, productId){
   try{
     const response = await fetch (`${URL}/products/${productId}`,{
@@ -244,6 +217,27 @@ export async function deleteCartProd(id, token){
   }
 }
 
+export async function updateCartProdQuantity(id, quantity, token){
+  console.log(id, quantity, token, "THIS IS ID QUANTITY TOKEN FROM FRONTEND API")
+  try{
+    const response = await fetch (`${URL}/carts/${id}`,{
+      method: "PATCH",
+      headers:{
+        'Content-Type' : 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        quantity: quantity
+      })
+    })
+    const result = response.json()
+    console.log(result, "THIS IS RESULT FROM FRONT END API CART PRODDDD")
+    return result
+  }catch(error){
+    console.log(error)
+  }
+}
+
 export async function getAPIHealth() {
   try {
     const { data } = await axios.get("/api/health");
@@ -254,15 +248,23 @@ export async function getAPIHealth() {
   }
 }
 
-export async function addProductToCart(token, productId){
+export async function addProductToCart(productId, price, order_id,quantity,token){
+  console.log(productId, order_id, price)
+
   try{
-    const response = await fetch (`${URL}/products/${productId}`,{
+    const response = await fetch(`${URL}/orders/${order_id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${token}`,
+        'Authorization': `Bearer ${token}`,
       },
+      body: JSON.stringify({
+        productId: productId,
+        price: price,
+        quantity: quantity,
+      }),
     });
+    console.log(response)
     const result = response.json();
     return result;
   }catch(error){
