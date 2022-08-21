@@ -127,26 +127,35 @@ export async function getAllProducts() {
 }
 
 export async function createProduct(
-  title,
+  {title,
   brand,
   description,
   price,
   inventory,
-  token
+  image_1,
+  image_2,
+  image_3,
+  image_4,
+  token}
 ) {
   try {
     const response = await fetch(`${URL}/products`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      method: "POST",
+
       body: JSON.stringify({
         title: title,
         brand: brand,
         description: description,
         price: price,
         inventory: inventory,
+        image_1: image_1,
+        image_2: image_2,
+        image_3: image_3,
+        image_4: image_4
       }),
     });
     const result = response.json();

@@ -72,7 +72,7 @@ export default function Store({ userInfo, setUserInfo }) {
   return (
     <div>
       <h1 className="text-center">Store</h1>
-      <AdminCreate allProducts={allProducts} />
+      <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
       <div className="storeContainer">
         {productsToShow.length
           ? productsToShow.map((products, index) => {

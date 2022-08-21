@@ -2,21 +2,25 @@ import React, {useState} from "react";
 import { createProduct } from "../databaseAdapter";
 
 
-export default function AdminUpdate({allProducts}){
-    const [title, setTitle] = useState(allProducts.title)
-    const [brand, setBrand] = useState(allProducts.title)
-    const [price, setPrice] = useState(allProducts.price)
-    const [inventory, setInventory] = useState(allProducts.inventory)
-    const [category, setCategory] = useState(allProducts.category)
-    const [description, setDescription] = useState(allProducts.description)
-    const [image_1, setImage_1] = useState(allProducts.image_1)
-    const [image_2, setImage_2] = useState(allProducts.image_2)
-    const [image_3, setImage_3] = useState(allProducts.image_3)
-    const [image_4, setImage_4] = useState(allProducts.image_4)
+export default function AdminCreate(){
+    const [title, setTitle] = useState("")
+    const [brand, setBrand] = useState("")
+    const [price, setPrice] = useState("")
+    const [inventory, setInventory] = useState("")
+    const [category, setCategory] = useState("")
+    const [description, setDescription] = useState("")
+    const [image_1, setImage_1] = useState("")
+    const [image_2, setImage_2] = useState("")
+    const [image_3, setImage_3] = useState("")
+    const [image_4, setImage_4] = useState("")
+    const[error,setError] = useState(null)
 
  async function handleSubmit(event){
     event.preventDefault();
-    const response = await createProduct(title, 
+    alert("New Product Added");
+    const token = localStorage.getItem("token");
+    const result = await createProduct({
+        title, 
         brand,
         price,
         inventory,
@@ -26,8 +30,10 @@ export default function AdminUpdate({allProducts}){
         image_2,
         image_3,
         image_4,
-        )
-    return response
+        token
+    });
+    window.location.reload(true);
+    return result
  }
 
     return (
