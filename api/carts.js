@@ -6,6 +6,8 @@ const { Order, Cart } = require("../db/models")
 
 const {getAllUsers} = require("../db/models/users")
 const jwt = require("jsonwebtoken");
+const { createCart } = require("../db/models/cart");
+const { defaults } = require("pg");
 const { JWT_SECRET } = process.env;
 
 //getAllCarts across website hehe
@@ -43,7 +45,22 @@ cartsRouter.delete("/:order_id", requireUser, async (req, res, next) => {
   }
 });
 
-cartsRouter.post("/");
+cartsRouter.post("/:userId/orders", requireUser, async(req,res,next)=>{
+    const userId = req.params.userId
+    console.log(userId,'cart create userid')
+      try {
+
+        const cart = Cart.createCart({ user_id: userId });
+        console.log(cart,'cart api log')
+        console.log(cart,'cart')
+        res.send(cart)
+
+      } catch (error) {
+        next(error)
+        
+      }
+
+});
 
 cartsRouter.patch("/:order_id", requireUser, async (req, res, next) =>{
   const id = req.params.order_id

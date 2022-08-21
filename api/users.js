@@ -6,13 +6,7 @@ const User = require("../db/models/users")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 console.log(JWT_SECRET, "USER FILE JWT SECRET")
-const {
-  // createUser,
-  // getUser,
-  // getUserById,
-  // getUserByEmail,
-  // getCartsByUser
-} = require("../db/models");
+const { Order, Cart } = require("../db/models");
 
 
 // POST /api/user/register
@@ -33,6 +27,8 @@ apiRouter.post("/register", async (req, res, next) => {
         });
       }
       const user = await User.createUser({ email, password });
+      const cart = await Cart.createCart({id:user.id, user_id:user.id, createdAt: Date})
+      console.log(cart,'cart to create')
       const token = jwt.sign({ id: user.id, email }, JWT_SECRET);
       res.send({ message: "Thank you for signing up!", token, user });
     } catch ({ name, message }) {
@@ -93,7 +89,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const carts = await User.getCartsByUser({email:email});
+        const carts = await Cart.getCartsByUser({email:email});
         res.send(carts)
       }
     } catch(error){
@@ -115,7 +111,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const order = await User.getOrderById({email});
+        const order = await Cart.getCartsByUser({email});
         res.send(order)
       }
     } catch(error){
