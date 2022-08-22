@@ -59,7 +59,7 @@ async function createTables() {
         CREATE TABLE carts (
           id SERIAL PRIMARY KEY, 
           "user_id" INTEGER REFERENCES users(id), 
-          "created_at" TIME DEFAULT CURRENT_TIME,
+          "created_at" TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP,
           "isPurchased" BOOLEAN DEFAULT false
         );
         CREATE TABLE cart_products (
@@ -77,7 +77,7 @@ async function createTables() {
           message TEXT NOT NULL,
           UNIQUE ("product_id" ,"user_id")
         );
-       ` )
+       `);
     // build tables in correct order
   } catch (error) {
     throw error;
@@ -113,7 +113,7 @@ async function populateInitialData() {
 async function createInitialProducts() {
   console.log("Starting to create products...")
   try {
-    console.log(results)
+    // console.log(results)
     const products = await Promise.all(results.map(Products.createProducts));
 
     console.log("Products created:");
@@ -127,34 +127,41 @@ async function createInitialProducts() {
 
 
 async function createInitialCarts() {
-  console.log("starting to create routines...")
+  let date = new Date()
+  console.log(date, "starting to create routines...");
+  console.log(date, "time");
 
   const cartsToCreate = [
     {
       id: 1,
       user_id: 2,
-      created_at: "CURRENT_TIME",
-      isPurchased: false
+      created_at: "DEFAULT",
+      isPurchased: false,
     },
     {
       id: 2,
       user_id: 1,
-      created_at: "TIMESTAMP now()",
-      isPurchased: false
+      created_at: `${date.toJSON()}`,
+      isPurchased: false,
     },
     {
       id: 3,
       user_id: 3,
-      created_at: "TIMESTAMP now()",
-      isPurchased: false
+      created_at: `${date.toISOString()}`,
+      isPurchased: false,
     },
     {
-      id: 4,
       user_id: 4,
-      created_at: "TIMESTAMP now()",
-      isPurchased: true
-    }
-  ]
+      created_at: `${date.toLocaleDateString()}`,
+      isPurchased: false,
+    },
+    {
+      user_id: 5,
+      created_at: `${date.toLocaleDateString()}`,
+      isPurchased: false,
+    },
+  ];
+  
   const carts = await Promise.all(
     cartsToCreate.map((cart) => Cart.createCart(cart))
   )

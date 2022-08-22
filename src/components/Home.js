@@ -23,11 +23,11 @@ const Home = () => {
               </div>
             </div>
           </header>
-          <section className="bg-light pt-5 pb-5" style={{backgroundImage: "url(https://wallpaper.dog/large/5538330.jpg)"}} id="services">
+          <section className="bg-light pt-5 pb-5" style={{backgroundImage: "url(https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/mw2/home/reveal/new-era/new_era-mw2.jpg)"}} id="services">
             <div className="container px-4">
-                <div className="row gx-4 justify-content-center">
+                <div className="row gx-4 justify-content-end">
                     <div className="col-lg-8 text-success mb-2">
-                        <h2 className="fw-bolder">Change the font ANNOUNCING CALL OF DUTY®:</h2>
+                        <h2 className="fw-bolder">ANNOUNCING CALL OF DUTY®:</h2>
                         <h4>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. </h4>
                     </div>
                 </div>

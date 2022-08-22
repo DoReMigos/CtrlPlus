@@ -6,7 +6,7 @@ export default function Navbar() {
   const authorizationToken = localStorage.getItem("token") ? true : false;
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark px-3">
         <div className="container-fluid">
           <Link to="/">
             <img src={Logo} style={{ width: "60px", height: "60px" }} />
@@ -47,7 +47,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <div>
                   <Link to="/Cart" className="nav-link">
-                    <p style={{ marginLeft: "5%" }}>🛒</p>
+                    <p ><span style={{ marginLeft: "5%", marginRight: "5%" }}>🛒</span></p>
                   </Link>
                 </div>
               </li>
