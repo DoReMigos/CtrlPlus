@@ -24,3 +24,11 @@
     justify-content: space-between;
     margin-bottom: 5px;
 }
+
+.pagination{
+    display:flex;
+    justify-content: space-between;
+    margin-left: 47%;
+    margin-right: 47%;
+    min-width: 200px;
+}
