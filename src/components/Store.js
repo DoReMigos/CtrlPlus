@@ -4,6 +4,7 @@ import AdminUpdate from "./AdminUpdate"
 import AddToCart from "./AddToCart"
 import "./Store.css"
 import { addProductToCart } from "../databaseAdapter";
+import LoadingScreen from "./Loading"
 // import  AddToCart  from "./AddToCart"
 // import handleAdd from "./AddToCart"
 export default function Store({userInfo, setUserInfo}) {
@@ -12,13 +13,16 @@ export default function Store({userInfo, setUserInfo}) {
   const [selectedPage, setSelectedPage] = useState(1)
   const [volumeSelect, setVolumeSelect] = useState(20)
   const [productsToShow, setProductsToShow] = useState([])
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getAllProducts();
+      
       setAllProducts(returnProducts)
       console.log(returnProducts)
      ;
     }
+    setTimeout(() => setLoading(false), 2000)
     fetchProducts();
   }, [])
 
@@ -68,6 +72,8 @@ useEffect(()=>{
 },[allProducts])
 
   return (
+    <>
+    {loading === false ? 
     <div>
       <h1 className="text-center">Store</h1>
       <div className="storeContainer">
@@ -187,5 +193,7 @@ useEffect(()=>{
           : null}
       </div>
     </div>
+: <LoadingScreen />}
+    </>
   )
 }
