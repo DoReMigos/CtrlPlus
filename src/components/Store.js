@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from "react";
 import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../databaseAdapter";
-import AdminUpdate from "./AdminUpdate"
+import AdminUpdate from "./AdminUpdate";
+import AdminCreate from "./AdminCreate";
 import AddToCart from "./AddToCart"
 import "./Store.css"
 import { addProductToCart } from "../databaseAdapter";
 // import  AddToCart  from "./AddToCart"
 // import handleAdd from "./AddToCart"
-export default function Store({userInfo, setUserInfo}) {
+
+export default function Store({ userInfo, setUserInfo }) {
   const [allProducts, setAllProducts] = useState([]);
   const [showEdit, setShowEdit] = useState(null)
   const [selectedPage, setSelectedPage] = useState(1)
@@ -17,7 +19,7 @@ export default function Store({userInfo, setUserInfo}) {
       const returnProducts = await getAllProducts();
       setAllProducts(returnProducts)
       console.log(returnProducts)
-     ;
+        ;
     }
     fetchProducts();
   }, [])
@@ -50,26 +52,27 @@ export default function Store({userInfo, setUserInfo}) {
   const isAdmin = userInfo.isAdmin
   console.log(userInfo, "this is userInfo on Store")
   console.log(isAdmin, "this is isAdmin on Store Page")
-function handleEditSelect(productId){
-  setShowEdit(productId)
-}
-useEffect(()=>{
-  if (allProducts.length) {
-    const listOfProducts = allProducts.filter((_, index) =>{
-      if (selectedPage == 1){
-         return (volumeSelect - 1)*(selectedPage - 1) <= index && index < (volumeSelect)
-        } else {
-        return  (volumeSelect - 1)*(selectedPage - 1) < index && index < (volumeSelect)*(selectedPage)
-
-      }
-    })
-    setProductsToShow(listOfProducts)
+  function handleEditSelect(productId) {
+    setShowEdit(productId)
   }
-},[allProducts])
+  useEffect(() => {
+    if (allProducts.length) {
+      const listOfProducts = allProducts.filter((_, index) => {
+        if (selectedPage == 1) {
+          return (volumeSelect - 1) * (selectedPage - 1) <= index && index < (volumeSelect)
+        } else {
+          return (volumeSelect - 1) * (selectedPage - 1) < index && index < (volumeSelect) * (selectedPage)
+
+        }
+      })
+      setProductsToShow(listOfProducts)
+    }
+  }, [allProducts])
 
   return (
     <div>
       <h1 className="text-center">Store</h1>
+      <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
       <div className="storeContainer">
         {productsToShow.length
           ? productsToShow.map((products, index) => {
@@ -83,9 +86,8 @@ useEffect(()=>{
                       <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
                       <div className="priceCartBar">
                         <div className="card-text">{products.price}</div>
-                      <AddToCart products={products} userInfo={userInfo}/>
+                        <AddToCart products={products} userInfo={userInfo} />
                       </div>
-
 
                       <div id="carouselExampleIndicators" className="carousel slide" data-mdb-ride="carousel">
                         <div className="carousel-indicators">
@@ -161,16 +163,15 @@ useEffect(()=>{
                         {isAdmin ? (
 
                           showEdit != products.id ?
-
-                                <button onClick={() => handleEditSelect(products.id)}className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                                  Edit or Delete
-                                </button>
-:
-                                  <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
-                                    <button onClick={() => { handleDelete(productId) }}  className="btn btn-dark" style ={{marginBottom: "10px"}}>Delete product</button>
-                                    <AdminUpdate products={products} />
-                                    <button onClick={() => { setShowEdit(null) }}  className="btn btn-dark">Hide Menu</button>
-                                  </div>
+                            <button onClick={() => handleEditSelect(products.id)} className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                              Edit or Delete
+                            </button>
+                            :
+                            <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                              <button onClick={() => { handleDelete(productId) }} className="btn btn-dark" style={{ marginBottom: "10px" }}>Delete product</button>
+                              <AdminUpdate products={products} />
+                              <button onClick={() => { setShowEdit(null) }} className="btn btn-dark">Hide Menu</button>
+                            </div>
                         ) : null}
                       </div>
                     </div>
@@ -186,6 +187,12 @@ useEffect(()=>{
           })
           : null}
       </div>
+      {/* create buttons for page numbers/previous/next
+            onClick for specific numbers goes into a handleClick function that will set selected page as the template literal for the selected page
+            previous and next buttons will +-1 for selected page, but need edge cases if you're on the first page or last page that it disables the prev or next button -- this is probably extra but looks nice. can technically do this just with the numbers and no prev/next if it's too time consuming/difficult.
+         */}
+
+
     </div>
   )
 }
