@@ -27,7 +27,7 @@ apiRouter.post("/register", async (req, res, next) => {
         });
       }
       const user = await User.createUser({ email, password });
-      const cart = await Cart.createCart({id:user.id, user_id:user.id, createdAt: Date})
+      const cart = await Cart.createCart({ user_id:user.id})
       console.log(cart,'cart to create')
       const token = jwt.sign({ id: user.id, email }, JWT_SECRET);
       res.send({ message: "Thank you for signing up!", token, user });
