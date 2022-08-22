@@ -11,7 +11,7 @@ export default function Navbar() {
   }
   return (
     <div>
-      <nav className="navbar navbar-expand-lg navbar-light bg-dark">
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark px-3">
         <div className="container-fluid">
           <Link to = "/">
             <img src = {Logo} style = {{width: "60px", height: "60px"}}/></Link><h2 className = "bg-dark" style = {{color: "#60dde2"}}>CTRL+</h2>
@@ -63,7 +63,7 @@ export default function Navbar() {
               <li className="nav-item">
                 <div>
                   <Link to="/Cart" className="nav-link">
-                 🛒
+                    <p ><span style={{ marginLeft: "5%", marginRight: "5%" }}>🛒</span></p>
                   </Link>
                 </div>
               </li>

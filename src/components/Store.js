@@ -76,6 +76,7 @@ useEffect(()=>{
     {loading === false ? 
     <div>
       <h1 className="text-center">Store</h1>
+      {isAdmin ? (<AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />) : null}
       <div className="storeContainer">
         {productsToShow.length
           ? productsToShow.map((products, index) => {
