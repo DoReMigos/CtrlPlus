@@ -156,15 +156,15 @@ const Cart = ({ userInfo, setUserInfo }) => {
                 styles='border-radius: 15px;'>
                 <div className='card-body p-0'>
                   <div className='row g-0'>
-                    <div className='col-lg-8'>
-                      <div className='p-5'>
-                        <div className='d-flex justify-content-between align-items-center mb-5'>
+                    <div className='col-lg-12'>
                           <h1 className='fw-bold mb-0 text-black'>
-                            Shopping Cart <h2 id='MyTitle'>Active Cart</h2>
+                            Shopping Cart <h2 id='MyTitle'></h2>
                             <h4 id='subTitles'>
-                              Here's your Cart <h3>{userCart.userName}!</h3>
+                              Here's your Cart: {userInfo.email}!
                             </h4>
                           </h1>
+                      <div className='p-5'>
+                        <div className='d-flex justify-content-between align-items-center mb-5'>
 
                           <div id='myroutines'>
                             {userCart.map((element, index) => {
@@ -202,13 +202,13 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                     {product.title}
                                                   </h6>
                                                 </div>
-                                                <div className='col-md-3 col-lg-3 col-xl-2 d-flex'>
+                                                <div className='col-md-3 col-lg-3 col-xl-3 d-flex'>
                                                   <div styles='width: 50px;'>
                                                     <h5 className='fw-normal mb-0'>
                                                       Description:{" "}
                                                       {product.description}
                                                     </h5>
-                                                    <h5 className='fw-normal mb-0'>
+                                                    <h5 className='fw-bold mb-0 border'>
                                                       Quantity:{" "}
                                                       <CartUpdate product={product}/>
                                                     </h5>
@@ -245,7 +245,8 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                 </a>
                               </h6>
                             </div>
-                            <div className='col-lg-4 bg-grey'>
+                        </div>
+                            <div className='col-lg-4 bg-grey px-3'>
                               <div className='card bg-primary text-white rounded-3'>
                                 <div className='card-body'>
                                   <div className='d-flex justify-content-between align-items-center mb-4'>
@@ -373,7 +374,6 @@ const Cart = ({ userInfo, setUserInfo }) => {
                               </div>
                             </div>
                           </div>
-                        </div>
                       </div>
                     </div>
                   </div>
