@@ -1,4 +1,15 @@
-/* #card {
-  margin-left: -130%;
+#profileDiv {
+  margin: 2%;
   width: 350px;
-} */
+}
+
+
+#ProfileDiv2 {
+  margin: 2%;
+  width: 550px;
+  height: 500px;
+}
+
+#profileContainer{
+  display:flex;
+}

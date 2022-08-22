@@ -14,8 +14,8 @@ apiRouter.get('/', async (req, res, next) => {
 })
 
 apiRouter.post('/', requireAdminUser, async (req, res, next) => {
-    const { title, brand, description, price, inventory, category, image } = req.body;
-    const _product = await Products.createProducts({ title, brand, description, price, inventory, category, image })
+    const { title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4 } = req.body;
+    const _product = await Products.createProducts({ title, brand, description, price, inventory, category, image_1, image_2, image_3, image_4 })
     try {
         if (_product) {
             res.send(_product)
@@ -24,10 +24,10 @@ apiRouter.post('/', requireAdminUser, async (req, res, next) => {
         next(error);
     }
 })
-
+///might need to pass productId insure of line
 apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
-    const { title, brand, description, price, inventory, category, image } = req.body;
-    const id = req.params.productsId;
+    const {price, inventory, category, description } = req.body;
+    const id = req.params.productId;
     const product = await Products.getProductById(id)
     try {
         if (!req.user.isAdmin) {
@@ -37,7 +37,7 @@ apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
                 message: `Only admins allowed to update ${product.name}`,
             });
         }
-        const updatedProduct = await Products.updateProduct({ title, brand, description, price, inventory, category, image });
+        const updatedProduct = await Products.updateProduct({ id:id, price, inventory, category, description });
         res.send(updatedProduct);
     } catch ({ name, message }) {
         next({ name, message });
@@ -45,7 +45,7 @@ apiRouter.patch('/:productId', requireAdminUser, async (req, res, next) => {
 })
 
 apiRouter.delete('/:productId', requireAdminUser, async (req, res, next) => {
-    const id = req.params.productsId;
+    const id = req.params.productId;
     const product = await Products.getProductById(id)
     try {
         if (!req.user.isAdmin) {

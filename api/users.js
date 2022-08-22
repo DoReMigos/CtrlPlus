@@ -5,14 +5,8 @@ const User = require("../db/models/users")
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-
-const {
-  createUser,
-  getUser,
-  getUserById,
-  getUserByEmail,
-  getCartsByUser
-} = require("../db/models");
+console.log(JWT_SECRET, "USER FILE JWT SECRET")
+const { Order, Cart } = require("../db/models");
 
 
 // POST /api/user/register
@@ -33,7 +27,9 @@ apiRouter.post("/register", async (req, res, next) => {
         });
       }
       const user = await User.createUser({ email, password });
-      const token = jwt.sign({ id: user.id, email }, `${process.env.JWT_SECRET_KEY}`);
+      const cart = await Cart.createCart({ user_id:user.id})
+      console.log(cart,'cart to create')
+      const token = jwt.sign({ id: user.id, email }, JWT_SECRET);
       res.send({ message: "Thank you for signing up!", token, user });
     } catch ({ name, message }) {
       next({ name, message });
@@ -60,7 +56,7 @@ apiRouter.post("/login", async (req, res, next) => {
     } else {
       const token = jwt.sign(
         { id: user.id, email: user.email },
-        `${process.env.JWT_SECRET_KEY}`
+        JWT_SECRET
       );
       res.send({ message: "you're logged in!", token, user });
     }
@@ -73,7 +69,7 @@ apiRouter.post("/login", async (req, res, next) => {
 // GET /api/users/me
 apiRouter.get("/me", requireUser,  async (req, res, next) => {
     try{
-      console.log(req.user)
+      console.log(req.user, "User in USERjs")
       res.send(req.user);
     }catch(error){
       next(error)
@@ -93,7 +89,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const carts = await User.getCartsByUser({email:email});
+        const carts = await Cart.getCartsByUser({email:email});
         res.send(carts)
       }
     } catch(error){
@@ -115,7 +111,7 @@ apiRouter.get("/:email/cart", requireUser, async (req, res, next) => {
         });
       }
       if(req.user && user.id == req.user.id ){
-        const order = await User.getOrderById({email});
+        const order = await Cart.getCartsByUser({email});
         res.send(order)
       }
     } catch(error){

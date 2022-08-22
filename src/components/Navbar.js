@@ -1,49 +1,53 @@
 import React from "react";
 import { Link } from "react-router-dom";
-let Logo = require("./CtrlPlusLogo.png")
+let Logo = require("./CtrlPlusLogo.png");
 
 export default function Navbar() {
+  const authorizationToken = localStorage.getItem("token") ? true : false;
   return (
     <div>
-      <nav class="navbar navbar-expand-lg navbar-light bg-dark">
-        <div class="container-fluid">
-            <img src = {Logo} style = {{width: "60px", height: "60px"}}/><h2 className = "text-info bg-dark">CTRL+</h2>
-          {/* <h4 class="text-info bg-dark">CTRL +</h4> */}
+      <nav className="navbar navbar-expand-lg navbar-light bg-dark px-3">
+        <div className="container-fluid">
+          <Link to="/">
+            <img src={Logo} style={{ width: "60px", height: "60px" }} />
+          </Link>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-mdb-toggle="collapse"
             data-mdb-target="#navbarRightAlignExample"
             aria-controls="navbarRightAlignExample"
             aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-         <i class="fas fa-bars"></i>
+            aria-label="Toggle navigation">
+            <i className="fas fa-bars"></i>
           </button>
-
-          <div class="collapse navbar-collapse" id="navbarRightAlignExample">
-            <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-              <li class="nav-item">
+          <div
+            className="collapse navbar-collapse"
+            id="navbarRightAlignExample">
+            <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
+              <div>
+                <Link to="/Profile" className="nav-link">
+                  {authorizationToken === true ? (
+                    <p style={{ color: "#60dde2" }}
+                      className="bg-dark"
+                      value="/Profile">
+                      My Profile
+                    </p>) : null}
+                </Link>
+              </div>
+              <li className="nav-item">
                 <div>
-                  <Link
-                    to="/Store"
-                    class="nav-link active"
-                  >
-                    <p class="text-info bg-dark"> Store</p>
+                  <Link to="/Store" className="nav-link active">
+                    <p className="bg-dark" style={{ color: "#60dde2" }}>
+                      Store
+                    </p>
                   </Link>
                 </div>
               </li>
-              <li class="nav-item">
+              <li className="nav-item">
                 <div>
-                  <Link to="/Store" class="nav-link">
-                  <p class="text-info bg-dark"> Support</p>
-                  </Link>
-                </div>
-              </li>
-              <li class="nav-item">
-                <div>
-                  <Link to="/Store" class="nav-link">
-                 🛒
+                  <Link to="/Cart" className="nav-link">
+                    <p ><span style={{ marginLeft: "5%", marginRight: "5%" }}>🛒</span></p>
                   </Link>
                 </div>
               </li>

@@ -1,11 +1,11 @@
 const express = require('express');
 const apiRouter = express.Router();
-
+const User = require("../db/models/users")
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
 
 const {getUserById} = require("../db/models");
-
+console.log(JWT_SECRET, "JWT SECRET HERE")
 apiRouter.get('/', (req, res, next) => {
   res.send({
     message: 'API is under construction!',
@@ -31,7 +31,7 @@ apiRouter.use(async (req, res, next) => {
       const { id } = jwt.verify(token, JWT_SECRET);
 
       if (id) {
-        req.user = await getUserById(id);
+        req.user = await User.getUserById(id);
         console.log(req.user, "MORTY MORTY MORTY MORTY")
         next();
       }
@@ -61,6 +61,12 @@ apiRouter.use('/users', usersRouter);
 // ROUTER: /api/products
 const productsRouter = require('./products');
 apiRouter.use('/products', productsRouter);
+
+const cartsRouter = require('./carts')
+apiRouter.use('/carts', cartsRouter)
+
+const ordersRouter = require('./orders')
+apiRouter.use('/orders', ordersRouter)
 
 apiRouter.use((error, req, res, next) => {
   res.send({
