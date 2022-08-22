@@ -78,15 +78,16 @@ export async function getUserProfile(token) {
   return result;
 }
 
-export async function getUserCarts(token, email) {
+export async function getUserCarts(token, id) {
   try {
-    const response = await fetch(`${URL}/users/${email}/cart`, {
+    const response = await fetch(`${URL}/carts/${id}`, {
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
     });
     const result = response.json();
+    console.log(result, 'getusercarts log')
     return result;
   } catch (error) {
     console.log(error);
@@ -125,94 +126,126 @@ export async function getAllProducts() {
   return result;
 }
 
-// export async function createProduct(
-//   title,
-//   brand,
-//   description,
-//   price,
-//   quantity,
-//   token
-// ) {
-//   try {
-//     const response = await fetch(`${URL}/products`, {
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       method: "POST",
-//       body: JSON.stringify({
-//         title: title,
-//         brand: brand,
-//         description: description,
-//         price: price,
-//         quantity: quantity,
-//       }),
-//     });
-//     const result = response.json();
-//     return result;
-//   } catch (error) {
-//     console.log(error);
-//   }
-// }
+export async function createProduct(
+  {title,
+  brand,
+  description,
+  price,
+  inventory,
+  image_1,
+  image_2,
+  image_3,
+  image_4,
+  token}
+) {
+  try {
+    const response = await fetch(`${URL}/products`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
 
-// export async function updateProduct(
-//   productId,
-//   token,
-//   title,
-//   brand,
-//   description,
-//   price,
-//   inventory,
-//   category,
-//   image_1,
-//   image_2,
-//   image_3,
-//   image_4
-// ) {
-//   try {
-//     const response = await fetch(`${URL}/products/${productId}`, {
-//       method: "PATCH",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       },
-//       body: JSON.stringify({
-//         title: title,
-//         brand: brand,
-//         description: description,
-//         price: price,
-//         inventory: inventory,
-//         category: category,
-//         image_1: image_1,
-//         image_2: image_2,
-//         image_3: image_3,
-//         image_4: image_4
-//       })
-//     })
-//     const result = response.json();
-//     return result
-//   } catch (error) {
-//     console.log("error");
-//   }
-// }
+      body: JSON.stringify({
+        title: title,
+        brand: brand,
+        description: description,
+        price: price,
+        inventory: inventory,
+        image_1: image_1,
+        image_2: image_2,
+        image_3: image_3,
+        image_4: image_4
+      }),
+    });
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
-// export async function deleteProduct(productId, token){
-//   try{
-//     const response = await fetch (`${URL}/products/${productId}`,{
-//       method: "DELETE",
-//       headers: {
-//         "Content-Type": "application/json",
-//         Authorization: `Bearer ${token}`,
-//       }
-//     })
-//     const result = response.json()
-//     return result
-//   }catch(error){
-//     console.log(error)
-//   }
-// }
+export async function updateProduct(
+  productId,
+  price,
+  inventory,
+  category,
+  token
+) {
+  try {
+    const response = await fetch(`${URL}/products/${productId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        price: price,
+        inventory: inventory,
+        category: category,
+      }),
+    });
+    console.log(response, "THIS IS RESPONSE FOMR UDPATE PRODUCT");
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.log("error");
+  }
+}
+
+export async function deleteProduct(token, productId){
+  try{
+    const response = await fetch (`${URL}/products/${productId}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    const result = response.json();
+    return result;
+  }catch(error){
+    console.log(error);
+  }
+}
 //END OF PRODUCT
 
+export async function deleteCartProd(id, token){
+  try{
+    const response = await fetch (`${URL}/carts/${id}`,{
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      }
+    })
+    const result = await response.json()
+    return result
+  }catch(error){
+    console.log(error)
+  }
+}
+
+export async function updateCartProdQuantity(id, quantity, token){
+  console.log(id, quantity, token, "THIS IS ID QUANTITY TOKEN FROM FRONTEND API")
+  try{
+    const response = await fetch (`${URL}/carts/${id}`,{
+      method: "PATCH",
+      headers:{
+        'Content-Type' : 'application/json',
+        'Authorization': `Bearer ${token}`
+      },
+      body: JSON.stringify({
+        quantity: quantity
+      })
+    })
+    const result = response.json()
+    console.log(result, "THIS IS RESULT FROM FRONT END API CART PRODDDD")
+    return result
+  }catch(error){
+    console.log(error)
+  }
+}
 
 export async function getAPIHealth() {
   try {
@@ -221,5 +254,29 @@ export async function getAPIHealth() {
   } catch (err) {
     console.error(err);
     return { healthy: false };
+  }
+}
+
+export async function addProductToCart(productId, price, order_id,quantity,token){
+  console.log(productId, order_id, price)
+
+  try{
+    const response = await fetch(`${URL}/orders/${order_id}`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        productId: productId,
+        price: price,
+        quantity: quantity,
+      }),
+    });
+    console.log(response)
+    const result = response.json();
+    return result;
+  }catch(error){
+    console.log(error);
   }
 }
