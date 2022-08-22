@@ -1,5 +1,6 @@
 import axios from "axios";
 
+
 export const URL = "http://localhost:4000/api";
 
 // this file holds your frontend network request adapters
@@ -93,23 +94,29 @@ export async function getUserCarts(token, id) {
     console.log(error);
   }
 }
-/*
-  export async function getUserOrders (token,email){
+
+  export async function createCart (token,userId){
     try{
-      const response = await fetch(`${URL}/users/${email}/order`,{
-        headers:{
-          'Content-Type' : 'application/json',
-          'Authorization': `Bearer ${token}`
-        }
-    }
-      )
-      const result = response.json()
+      const response = await fetch(`${URL}/cart/${userId}/orders`, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+        method: "POST",
+        body:JSON.stringify({
+          userId: userId
+        }),
+      });
+      console.log(response.body)
+      console.log(response)
+      const result = await response.json()
+      console.log(result,'createcart log')
       return result
     }catch(error){
       console.log(error);
     }
   } 
-  */
+
 
 //END OF USER API
 
@@ -127,26 +134,35 @@ export async function getAllProducts() {
 }
 
 export async function createProduct(
-  title,
+  {title,
   brand,
   description,
   price,
   inventory,
-  token
+  image_1,
+  image_2,
+  image_3,
+  image_4,
+  token}
 ) {
   try {
     const response = await fetch(`${URL}/products`, {
+      method: "POST",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
       },
-      method: "POST",
+
       body: JSON.stringify({
         title: title,
         brand: brand,
         description: description,
         price: price,
         inventory: inventory,
+        image_1: image_1,
+        image_2: image_2,
+        image_3: image_3,
+        image_4: image_4
       }),
     });
     const result = response.json();

@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { updateProduct } from "../databaseAdapter";
 
 
+
 export default function AdminUpdate({products}){
     const [price, setPrice] = useState(products.price)
     const [inventory, setInventory] = useState(products.inventory)
