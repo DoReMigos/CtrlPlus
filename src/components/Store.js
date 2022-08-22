@@ -24,7 +24,7 @@ export default function Store({ userInfo, setUserInfo }) {
       console.log(returnProducts)
         ;
     }
-    setTimeout(() => setLoading(false), 2000)
+    setTimeout(() => setLoading(false), 1000)
     fetchProducts();
   }, [])
 

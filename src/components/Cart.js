@@ -25,124 +25,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
     const deleteCartProducts = await deleteCartProd(id, token)
     window.location.reload(true);
   }
-  console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
-
-  //         <div id="myroutines">
-  //             {userCart.map((element, index) => {
-  //                 return (
-  //                     <div key={`userCart${index}`} id="routinesContainers">
-  //                         <h2 id="MyTitle">Active Cart</h2>
-  //                         <h4 id="subTitles">Creator: {element.userName}</h4>
-  //                         <h4 id="subTitles">Routine: {element.email}</h4>
-  //                         <h4 id="subTitles">Goal: {element.id}</h4>
-  //                         {/* <UpdateRoutine routineId={element.id} />
-  //               <DeleteRoutine routineId={element.id} /> */}
-  //                         {element.products.map((product, index) => {
-  //                             let productId = product.id;
-  //                             return (
-  //                                 <div key={`myroutines${index}`}>
-  //                                     <h2 id='MyTitle'>Active Activity</h2>
-  //                                     <h4 id='subTitles'>Activity Name:{product.title}</h4>
-  //                                     <h5 id='subTitles'>Brand: {product.brand}</h5>
-  //                                     <h5 id='subTitles'>Description: {product.description}</h5>
-
-  //                                     <h5 id='subTitles'>Count: {product.quantity}</h5>
-  //                                     <h5 id='subTitles'>Price:{product.Price}</h5>
-  //                                     <h5 id='subTitles'>
-  //                                         Routine product ID: {product.order_id}
-  //                                     </h5>
-  //                                 </div>
-  //                             );
-  //                         })}
-  //                     </div>
-  //                 );
-  //             })}
-  //         </div>
-  //     );
-  // }
-  //  const handleChange = () => {
-
-  //  };
-
-  //  const handleSubmit = async (event) => {
-  //    event.preventDefault();
-
-  //   ;
-  //  };
-
-  // useEffect(() => {
-  //     let token = localStorage.getItem("token");
-  //     console.log(token);
-  //     async function getUserInfo() {
-  //         try {
-  //             const response = await getUserProfile(token);
-  //             console.log(token);
-  //             console.log(response, "Message Please Read");
-  //             setUserInfo(response);
-  //             const data = await getUserCarts(token, userInfo.id)
-  //             console.log(data, 'getCartById data')
-  //             setUserCart(data)
-
-  //         } catch (error) {
-  //             console.log(error);
-  //         }
-  //     }
-  //     getUserInfo();
-  // // }, []);
-  // console.log(userInfo, 'userinfo')
-  // useEffect(() => {
-  //     let token = localStorage.getItem("token");
-  //     console.log(token);
-  //     async function getUserCartInfo() {
-  //         try {
-  //             const data = await getUserCarts(token, userInfo.id);
-  //             setUserCart(data);
-  //             console.log(data, "getCartById data");
-  //         } catch (error) {
-  //             console.log(error);
-  //         }
-  //     }
-  //     getUserCartInfo();
-  // }, []);
-
-  // let Navigate = useNavigate()
-  // const handleClick = () => {
-
-  // }
-
-  /* <div>
-    <h1 className="text-center">Shop</h1>
-    <div className="storeContainer">
-        {userCart.length
-            ?
-            <div id="myroutines">
-                {userCart.map((element, index) => {
-                    return (
-                        <div key={`userCart${index}`} id="routinesContainers">
-                            <h2 id="MyTitle">Active Cart</h2>
-                            <h4 id="subTitles">Creator: {element.userName}</h4>
-                            <h4 id="subTitles">Routine: {element.email}</h4>
-                            <h4 id="subTitles">Goal: {element.id}</h4>
-                            {/* <UpdateRoutine routineId={element.id} />
-              <DeleteRoutine routineId={element.id} /> */
-  // <div className="mx-auto my-5">
-  //     {element.products.map((product, index) => {
-  //         let productId = product.id;
-  //         return (
-  //             <div key={`myroutines${index}`}>
-  //                 <h2 id='MyTitle'>Active Activity</h2>
-  //                 <h4 id='subTitles'>Activity Name:{product.title}</h4>
-  //                 <h5 id='subTitles'>Brand: {product.brand}</h5>
-  //                 <h5 id='subTitles'>Description: {product.description}</h5>
-
-  //                 <h5 id='subTitles'>Count: {product.quantity}</h5>
-  //                 <h5 id='subTitles'>Price:{product.Price}</h5>
-  //                 <h5 id='subTitles'>
-  //                     Routine product ID: {product.order_id}
-  //                 </h5>
-  //             </div>
-  //         );
-  //     })} */}
+  console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25",userCart,'USERCART')
 
   return (
     <>
@@ -172,7 +55,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                 <>
                                   <div
                                     className="card"
-                                    key={`userCart${index}`}
+                                    key={element.id}
                                     id='routinesContainers'>
                                     {/* <UpdateRoutine routineId={element.id} />
                                      <DeleteRoutine routineId={element.id} /> */}
@@ -183,7 +66,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                         <>
                                           <div
                                             className='card-body cartProducts'
-                                            key={`myroutines${index}`}>
+                                            key={`${product.id}${index}`}>
                                             <h2 id='MyTitle'>
                                               {product.title}
                                             </h2>
