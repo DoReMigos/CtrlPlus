@@ -22,7 +22,39 @@ async function addProducttoCart({
   }
 }
 
-module.exports={
-    addProducttoCart,
+async function deleteCartProd(id){
+  console.log(id, "THIS IS ID")
+  try{
+    const {rows}= await client.query(`
+    DELETE FROM cart_products
+    where id = $1
+    RETURNING *`
+    ,[id])
+    const deleted = rows[0]
+    console.log(deleted, "THIS IS ROWS!!!!")
+    return deleted
+  }catch(error){
+    console.log(error)
+  }
+  }
 
+  async function updateCartProdQuantity(id, quantity){
+    try{
+      const {rows} = await client.query(`
+      UPDATE cart_products
+      SET quantity = $1
+      WHERE id = $2
+      RETURNING *
+      `,[id, quantity])
+      return rows
+    }catch(error){
+      console.log(error)
+    }
+  }
+  
+
+module.exports={
+  addProducttoCart,
+  deleteCartProd,
+  updateCartProdQuantity
 }

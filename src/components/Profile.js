@@ -1,18 +1,23 @@
-import React, { useState, useEffect } from "react";
+import React, {useEffect } from "react";
 import { getUserProfile } from "../databaseAdapter";
 import { Link } from "react-router-dom";
 import "./Profile.css";
 
-export default function Profile() {
-  const [userInfo, setUserInfo] = useState({});
+export default function Profile({userInfo, setUserInfo}) {
+ 
   useEffect(() => {
     let token = localStorage.getItem("token");
     console.log(token);
     async function getUserInfo() {
-      const response = await getUserProfile(token);
-      console.log(token);
-      console.log(response);
+      try {
+        const response = await getUserProfile(token)
+        console.log(token);
+      console.log(response, "Message Please Read");
       setUserInfo(response);
+      } catch (error) {
+        console.log(error)
+      } ;
+      
     }
     getUserInfo();
   }, []);
@@ -20,20 +25,16 @@ export default function Profile() {
     <div id = "profileContainer">
       <div className="card bg-dark" id="profileDiv">
         <div className="card-body">
-        <h2 className="card-body" style = {{color: "#3a86ff"}}> Welcome to CTRL+</h2>
-          <h2 className="card-body" style = {{color: "#3a86ff"}}>My Account:</h2>
-          <h2 className="card-body" style = {{color: "#3a86ff"}}>Hi, {userInfo.email}</h2>
+        <h2 className="card-body" style = {{color: "#60dde2"}}> Welcome to CTRL+</h2>
+          <h2 className="card-body" style = {{color: "#60dde2"}}>My Account:</h2>
+          <h2 className="card-body" style = {{color: "#60dde2"}}>Hi, {userInfo.email}</h2>
           <hr className = "text-white"></hr>
           <Link to="/Store">
-            <button className="btn btn-info"> Products</button>
+            <button className="btn btn-info"> Purchase Cart Items</button>
           </Link>
           <hr className = "text-white"></hr>
           <Link to="/Store">
-            <button className="btn btn-info"> History </button>
-          </Link>
-          <hr className = "text-white"></hr>
-          <Link to="/Store">
-            <button className="btn btn-info"> Admin Profile </button>
+            <button className="btn btn-info"> Back to Store </button>
           </Link>
           <hr className = "text-white"></hr>
           <Link to="/">
@@ -47,13 +48,12 @@ export default function Profile() {
             Sign Out
           </button>
         </Link>
-          <hr className = "text-white"></hr>
         </div>
       </div>
       {/* History DIV */}
       <div className="card bg-dark" id = "ProfileDiv2">
         <div className="card-body">
-        <h2 className="card-body text-white"> Order History for {userInfo.email} </h2>
+        <h2 className="card-body" style = {{color: "#60dde2"}}> Order History for {userInfo.email} </h2>
           <hr className = "text-white"></hr>
           <Link to="/Store">
            Product

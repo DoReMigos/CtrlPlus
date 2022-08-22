@@ -8,10 +8,12 @@ async function createCart({ id, user_id, createdAt }) {
     } = await client.query(
       `
           INSERT INTO carts( "user_id", "created_at") 
-          VALUES($1, $2) 
-          RETURNING *;
+          VALUES($1, DEFAULT) 
+          
+          RETURNING *
+          ;
         `,
-      [user_id, createdAt]
+      [user_id]
     );
     return cart;
   } catch (error) {
