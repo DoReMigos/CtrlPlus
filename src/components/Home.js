@@ -23,6 +23,37 @@ const Home = () => {
               </div>
             </div>
           </header>
+          <section className="py-5 border-bottom bg-dark" id="features">
+            <div className="container px-5 my-5">
+              <div className="row gx-5">
+                <div className="col-lg-4 mb-5 mb-lg-0">
+                  <h2 className="h4 fw-bolder text-info">Store</h2>
+                  <p className="text-white">
+                    Start browsing our countless collection of gaming awesomeness!
+                  </p>
+                  <a className="text-decoration-none" href="/store">
+                    Check Store
+                  </a>
+                </div>
+                <div className="col-lg-4 mb-5 mb-lg-0">
+                  <h2 className="h4 fw-bolder text-info">Login</h2>
+                  <p className="text-white">
+                    Have an account? Login as a user for the ultimate customer experience!
+                  </p>
+                  <a className="text-decoration-none" href="/login">
+                    Login to account
+                  </a>
+                </div>
+                <div className="col-lg-4">
+                  <h2 className="h4 fw-bolder text-info">Register</h2>
+                  <p className="text-white">Don't have an account with us yet? Create one here for the ultimate user experience!</p>
+                  <a className="text-decoration-none" href="/register">
+                    Register new account
+                  </a>
+                </div>
+              </div>
+            </div>
+          </section>
           <section className="bg-light pt-5 pb-5" style={{backgroundImage: "url(https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/mw2/home/reveal/new-era/new_era-mw2.jpg)"}} id="services">
             <div className="container px-4">
                 <div className="row gx-4 justify-content-end">
@@ -33,43 +64,12 @@ const Home = () => {
                 </div>
             </div>
         </section>
-          <section className="py-5 border-bottom" id="features">
-            <div className="container px-5 my-5">
-              <div className="row gx-5">
-                <div className="col-lg-4 mb-5 mb-lg-0">
-                  <h2 className="h4 fw-bolder">Store</h2>
-                  <p>
-                    Start browsing our countless collection of gaming awesomeness!
-                  </p>
-                  <a className="text-decoration-none" href="/store">
-                    Check Store
-                  </a>
-                </div>
-                <div className="col-lg-4 mb-5 mb-lg-0">
-                  <h2 className="h4 fw-bolder">Login</h2>
-                  <p>
-                    Have an account? Login as a user for the ultimate customer experience!
-                  </p>
-                  <a className="text-decoration-none" href="/login">
-                    Login to account
-                  </a>
-                </div>
-                <div className="col-lg-4">
-                  <h2 className="h4 fw-bolder">Register</h2>
-                  <p>Don't have an account with us yet? Create one here for the ultimate user experience!</p>
-                  <a className="text-decoration-none" href="/register">
-                    Register new account
-                  </a>
-                </div>
-              </div>
-            </div>
-          </section>
 
-          <section className="py-5 border-bottom">
+          <section className="py-5 border-bottom bg-dark">
             <div className="container px-5 my-5 px-5">
               <div className="text-center mb-5">
-                <h2 className="fw-bolder">Gamer Reviews</h2>
-                <p className="lead mb-0">Our gamers from all over the world love using our website!</p>
+                <h2 className="fw-bolder text-info">Gamer Reviews</h2>
+                <p className="lead mb-0 text-white">Our gamers from all over the world love using our website!</p>
               </div>
               <div className="row gx-5 justify-content-center">
                 <div className="col-lg-6">
