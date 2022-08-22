@@ -135,7 +135,7 @@ async function createInitialCarts() {
     {
       id: 1,
       user_id: 2,
-      created_at: 'DEFAULT',
+      created_at: "DEFAULT",
       isPurchased: false,
     },
     {
@@ -152,6 +152,11 @@ async function createInitialCarts() {
     },
     {
       user_id: 4,
+      created_at: `${date.toLocaleDateString()}`,
+      isPurchased: false,
+    },
+    {
+      user_id: 5,
       created_at: `${date.toLocaleDateString()}`,
       isPurchased: false,
     },
