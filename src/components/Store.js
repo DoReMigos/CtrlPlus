@@ -5,6 +5,7 @@ import AdminCreate from "./AdminCreate";
 import AddToCart from "./AddToCart"
 import "./Store.css"
 import { addProductToCart } from "../databaseAdapter";
+import LoadingScreen from "./Loading"
 // import  AddToCart  from "./AddToCart"
 // import handleAdd from "./AddToCart"
 
@@ -14,13 +15,16 @@ export default function Store({ userInfo, setUserInfo }) {
   const [selectedPage, setSelectedPage] = useState(1)
   const [volumeSelect, setVolumeSelect] = useState(20)
   const [productsToShow, setProductsToShow] = useState([])
+  const [loading, setLoading] = useState(true)
   useEffect(() => {
     async function fetchProducts() {
       const returnProducts = await getAllProducts();
+      
       setAllProducts(returnProducts)
       console.log(returnProducts)
         ;
     }
+    setTimeout(() => setLoading(false), 2000)
     fetchProducts();
   }, [])
 
@@ -70,9 +74,11 @@ export default function Store({ userInfo, setUserInfo }) {
   }, [allProducts])
 
   return (
+    <>
+    {loading === false ? 
     <div>
       <h1 className="text-center">Store</h1>
-      <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
+      {isAdmin ? (<AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />) : null}
       <div className="storeContainer">
         {productsToShow.length
           ? productsToShow.map((products, index) => {
@@ -194,5 +200,7 @@ export default function Store({ userInfo, setUserInfo }) {
 
 
     </div>
+: <LoadingScreen />}
+    </>
   )
 }
