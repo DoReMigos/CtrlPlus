@@ -152,7 +152,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
           <div className='row d-flex justify-content-center align-items-center h-100'>
             <div className='col-12'>
               <div
-                className='card card-registration card-registration-2'
+                // className='card card-registration card-registration-2'
                 styles='border-radius: 15px;'>
                 <div className='card-body p-0'>
                   <div className='row g-0'>
@@ -171,6 +171,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                               return (
                                 <>
                                   <div
+                                    className="card"
                                     key={`userCart${index}`}
                                     id='routinesContainers'>
                                     {/* <UpdateRoutine routineId={element.id} />
@@ -180,56 +181,69 @@ const Cart = ({ userInfo, setUserInfo }) => {
 
                                       return (
                                         <>
-                                            <div
-                                              className='cartProducts'
-                                              key={`myroutines${index}`}>
-                                              <h2 id='MyTitle'>
-                                                {product.title}
-                                              </h2>
-                                              <hr className='my-4'></hr>
-                                              <div className='row mb-4 d-flex justify-content-between align-items-center'>
-                                                <div className='col-md-2 col-lg-2 col-xl-2'>
-                                                  <img
-                                                    src={product.image_1}
-                                                    className='img-fluid rounded-3'
-                                                    alt='Cotton T-shirt'></img>
-                                                </div>
-                                                <div className='col-md-3 col-lg-3 col-xl-3'>
-                                                  <h6 className='text-muted'>
-                                                    Brand: {product.brand}
-                                                  </h6>
-                                                  <h6 className='text-black mb-0'>
-                                                    {product.title}
-                                                  </h6>
-                                                </div>
-                                                <div className='col-md-3 col-lg-3 col-xl-3 d-flex'>
-                                                  <div styles='width: 50px;'>
-                                                    <h5 className='fw-normal mb-0'>
-                                                      Description:{" "}
+                                          <div
+                                            className='card-body cartProducts'
+                                            key={`myroutines${index}`}>
+                                            <h2 id='MyTitle'>
+                                              {product.title}
+                                            </h2>
+                                            <hr className='my-4'></hr>
+                                            <div className='row mb-4 d-flex justify-content-between align-items-center'>
+                                              <div className='col-md-2 col-lg-2 col-xl-2'>
+                                                <img
+                                                  src={product.image_1}
+                                                  className='img-fluid rounded-3'
+                                                  alt='Cotton T-shirt'></img>
+                                              </div>
+                                              <div className='col-md-3 col-lg-3 col-xl-3'>
+                                                <h6 className='text-muted'>
+                                                  Brand: {product.brand}
+                                                </h6>
+                                                <h6 className='text-black mb-0'>
+                                                  {product.title}
+                                                </h6>
+                                              </div>
+                                              <div className='col-md-3 col-lg-3 col-xl-3 d-flex'>
+                                                <div styles='width: 50px;'>
+                                                  <h5 className='fw-normal mb-0 '>
+                                                    Description:{" "}
+                                                    <p className=' fw-light fs-md overflow-y-scroll' style={{ height:'10rem', overflow:'auto'}}>
                                                       {product.description}
-                                                    </h5>
-                                                    <h5 className='fw-bold mb-0 border'>
-                                                      Quantity:{" "}
-                                                      <CartUpdate product={product}/>
-                                                    </h5>
-                                                  </div>
-                                                </div>
-                                                <div className='col-md-3 col-lg-2 col-xl-2 offset-lg-1'>
-                                                  <h6 className='mb-0'>
-                                                    Price:{product.price}
-                                                  </h6>
-                                                </div>
-                                                <div className='col-md-1 col-lg-1 col-xl-1 text-end'>
-                                                  <a
-                                                    href='#!'
-                                                    className='text-muted'>
-                                                    <i className='fas fa-times'></i>
-                                                  </a>
-                      <h6 style = {{color: "red", fontSize:"25px", cursor: "pointer" }}onClick={()=>{handleDelete(id)}}>X</h6>
-
+                                                    </p>
+                                                  </h5>
+                                                  <h5 className='fw-bold mb-0 border'>
+                                                    Quantity:{" "}
+                                                    <CartUpdate
+                                                      product={product}
+                                                    />
+                                                  </h5>
                                                 </div>
                                               </div>
+                                              <div className='col-md-3 col-lg-2 col-xl-2 offset-lg-1'>
+                                                <h6 className='mb-0'>
+                                                  Price:{product.price}
+                                                </h6>
+                                              </div>
+                                              <div className='col-md-1 col-lg-1 col-xl-1 text-end'>
+                                                <a
+                                                  href='#!'
+                                                  className='text-muted'>
+                                                  <i className='fas fa-times'></i>
+                                                </a>
+                                                <h6
+                                                  style={{
+                                                    color: "red",
+                                                    fontSize: "25px",
+                                                    cursor: "pointer",
+                                                  }}
+                                                  onClick={() => {
+                                                    handleDelete(id);
+                                                  }}>
+                                                  X
+                                                </h6>
+                                              </div>
                                             </div>
+                                          </div>
                                         </>
                                       );
                                     })}
