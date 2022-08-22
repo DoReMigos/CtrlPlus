@@ -1,15 +1,15 @@
 import React, { useState, useEffect } from 'react'
-import { addProductToCart,getUserCarts } from '../databaseAdapter'
+import { addProductToCart,createCart,getUserCarts } from '../databaseAdapter'
 
 
 export default function AddToCart({products, userInfo}){
     // const [userCart, setUserCart] = useState([])
+    const [quantity, setQuantity] = useState(1)
     const price = products.price
     const productId = products.id
-    const quantity = products.quantity
+    // const quantity = products.quantity
     // console.log(order, 'orderddd')
-    async function handleAdd(){
-        
+    async function handleAdd(){      
 
         
        
@@ -17,6 +17,11 @@ export default function AddToCart({products, userInfo}){
          const pdata = await getUserCarts(token, userInfo.id);
          // pdata.products.push(product)
          console.log(pdata, "dapafs");
+         
+            // const makeCart = await createCart(token, userInfo.id)
+            // console.log(makeCart,'makenewcart')
+
+    
         // const price = event.target[0].value;
         console.log( productId, "ADD TO CART")
         let order_id = pdata[0].id
@@ -28,7 +33,7 @@ export default function AddToCart({products, userInfo}){
         return response
     }
     return(
-           <button onClick={() => handleAdd(productId)}>Add to Cart</button> 
+           <button onClick={() => handleAdd(productId)} onChange = {(event)=>setQuantity(event.target.value)}  className="btn btn-dark" style ={{height: "35px", width:"110px"}}>Add to Cart</button> 
 
     )
 }

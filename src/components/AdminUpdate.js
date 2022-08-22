@@ -2,10 +2,11 @@ import React, {useState} from "react";
 import { updateProduct } from "../databaseAdapter";
 
 
+
 export default function AdminUpdate({products}){
     const [price, setPrice] = useState(products.price)
     const [inventory, setInventory] = useState(products.inventory)
-    const [category, setCategory] = useState(products.category)
+    const [description, setdescription] = useState(products.description)
     const productId = products.id
 
  async function handleSubmit(event){
@@ -15,37 +16,43 @@ export default function AdminUpdate({products}){
     const response = await updateProduct(productId,
         price,
         inventory,
-        category,
+        description,
         token)
-        console.log(response, "THIS IS RESPONSE FOMR ADMIN UPDATE")
+    window.location.reload(true);
  }
- console.log(price, inventory, category)
+ console.log(price, inventory, description)
     return (
         <form onSubmit ={handleSubmit}>
             <div>
+                <hr></hr>
+                <label>Modify Price:</label>
                 <input
                 type = "text"
                 placeholder = "Price"
                 value = {price}
-                onChange = {(event) => setPrice(event.target.value)}></input>
+                style ={{width: "80px", cursor:"pointer", border:"none"}}
+                onChange = {(event) => setPrice(event.target.value)}/>
+                <hr></hr>
+                <label> Modify Quantity:</label>
                <input
                 type = "number"
                 placeholder = "Inventory"
                 value = {inventory}
-                onChange = {(event)=>setInventory(event.target.value)}></input>
+                style ={{width: "80px", cursor:"pointer", border:"none"}}
+                onChange = {(event)=>setInventory(event.target.value)}/>
+                <hr></hr>
+                <label> Description:</label>
                 <input
                 type = "text"
-                placeholder = "Category"
-                value = {category}
-                onChange = {(event)=> setCategory(event.target.value)}></input>
+                placeholder = "description"
+                value = {description}
+                style = {{border:"none"}}
+                onChange = {(event)=> setdescription(event.target.value)}></input>
+                <hr></hr>
             </div>
-            <button type="submit">Submit changes</button>
-
+            <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
+            <button type="submit" className="btn btn-dark"  style ={{width: "80px", cursor:"pointer", marginBottom: "10px", marginTop:"10px"}} > Submit</button>
+            </div>
         </form>
-    //     <button
-    //     id="deletePostButton"
-    //     className="btn btn-dark">
-    //     Edit
-    //   </button>
     )
 }
