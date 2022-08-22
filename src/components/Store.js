@@ -78,7 +78,7 @@ export default function Store({ userInfo, setUserInfo }) {
     {loading === false ? 
     <div>
       <h1 className="text-center">Store</h1>
-      <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
+      {isAdmin ? (<AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />) : null}
       <div className="storeContainer">
         {productsToShow.length
           ? productsToShow.map((products, index) => {
