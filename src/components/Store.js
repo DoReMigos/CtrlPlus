@@ -1,12 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate";
 import AdminCreate from "./AdminCreate";
 import AddToCart from "./AddToCart"
-import ImageCarousel from "./ImageCarousel"
 import ImageSlider from "./ImageSlider";
 import "./Store.css"
-import { addProductToCart } from "../databaseAdapter";
 import LoadingScreen from "./Loading"
 import Pagination from "./Pagination";
 
@@ -29,7 +27,6 @@ export default function Store({ userInfo, setUserInfo }) {
       const returnProducts = await getAllProducts();
 
       setAllProducts(returnProducts)
-      console.log(returnProducts)
         ;
     }
     setTimeout(() => setLoading(false), 2000)
@@ -38,11 +35,9 @@ export default function Store({ userInfo, setUserInfo }) {
 
   useEffect(() => {
     let token = localStorage.getItem("token");
-    console.log(token);
     async function getUserInfo() {
       try {
         const response = await getUserProfile(token)
-        console.log(token);
         console.log(response, "Message Please Read");
         setUserInfo(response);
       } catch (error) {
@@ -60,8 +55,6 @@ export default function Store({ userInfo, setUserInfo }) {
   }
 
   const isAdmin = userInfo.isAdmin
-  console.log(userInfo, "this is userInfo on Store")
-  console.log(isAdmin, "this is isAdmin on Store Page")
 
   function handleEditSelect(productId) {
     setShowEdit(productId)
@@ -82,12 +75,12 @@ export default function Store({ userInfo, setUserInfo }) {
 
           {isAdmin ? (
             showCreate ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <button onClick={() => { setShowCreate(false) }} className="btn btn-dark">Hide Form</button>
+              <button onClick={() => { setShowCreate(false) }} className="btn btn-secondary">Hide Form</button>
               <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
             </div>
               :
               <div className="text-center">
-                <button onClick={() => handleCreate()} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button onClick={() => handleCreate()} className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
                   Create New Product
                 </button>
               </div>
@@ -98,12 +91,6 @@ export default function Store({ userInfo, setUserInfo }) {
             {currentRecords.length
               ? currentRecords.map((products, index) => {
                 const productId = products.id
-                const slides = [
-                  products.image_1,
-                  products.image_2,
-                  products.image_3,
-                  products.image_4
-                ]
                 return (
                   <div key={`${products.id}`} className="mx-auto my-5">
 
@@ -116,10 +103,9 @@ export default function Store({ userInfo, setUserInfo }) {
                             <AddToCart products={products} userInfo={userInfo} />
                           </div>
 
-                          <ImageCarousel products={products} />
-                          {/* <ImageSlider products={products} /> */}
+                          <ImageSlider products={products} />
 
-                          <div style={{ marginTop: "30px" }}>
+                          <div style={{ marginTop: "10px" }}>
                             {showDescription != products.id ?
                               <div className="text-center">
                                 <button onClick={() => handleDescriptionSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
