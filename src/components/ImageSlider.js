@@ -12,11 +12,31 @@ export default function ImageSlider({ products }) {
         { image: products.image_4 }
     ]
 
-    return(
-        <div className="slider">
+    const length = sliderData.length
 
-            {sliderData.map((slide,index) => {
-                return <img src={slide.image} alt='item image'/>
+    if (!Array.isArray(sliderData) || length <= 0) {
+        return null
+    }
+
+    const nextSlide = () => {
+        setCurrent(current === length - 1 ? 0 : current + 1)
+    }
+
+    const prevSlide = () => {
+        setCurrent(current === 0 ? length - 1 : current - 1)
+    }
+
+    return (
+        <div className="slider">
+            <BsChevronDoubleLeft className="left-arrow" onClick={prevSlide} />
+            <BsChevronDoubleRight className="right-arrow" onClick={nextSlide} />
+            {sliderData.map((slide, index) => {
+                return (
+                    <div className={index === current ? 'slide active' : 'slide'} key={index}>
+                        {index === current && (<img className="carouselImages" src={slide.image} alt='item image' />)}
+                        
+                    </div>
+                )
             })}
         </div>
     )
