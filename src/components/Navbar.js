@@ -26,22 +26,27 @@ export default function Navbar() {
             id="navbarRightAlignExample">
             <ul className="navbar-nav ms-auto mb-2 mb-lg-0">
               <div>
-                <Link to="/Profile" className="nav-link">
-                  {authorizationToken === true ? (
-                    <p style={{ color: "#60dde2" }}
-                      className="bg-dark"
-                      value="/Profile">
-                      My Profile
-                    </p>) : null}
-                </Link>
-              </div>
-              <li className="nav-item">
-                <div>
-                  <Link to="/Store" className="nav-link active">
+              <Link to="/Store" className="nav-link active">
                     <p className="bg-dark" style={{ color: "#60dde2" }}>
                       Store
                     </p>
                   </Link>
+              </div>
+              <li className="nav-item">
+                <div>
+                <Link to="/" className="nav-link">
+                  {authorizationToken === true ? (
+                    <p style={{ color: "#60dde2" }}
+                    onClick={() => {
+                      localStorage.removeItem("token");
+                      alert("You have sucessfully signed out")
+                      window.location.reload(true);
+                    }}
+                      className="bg-dark"
+                      value="/">
+                      Logout 
+                    </p>) : null}
+                </Link>
                 </div>
               </li>
               <li className="nav-item">
