@@ -14,6 +14,7 @@ export default function Store({ userInfo, setUserInfo }) {
   const [allProducts, setAllProducts] = useState([]);
   const [showEdit, setShowEdit] = useState(null)
   const [showDescription, setShowDescription] = useState(null)
+  const [showCreate, setShowCreate] = useState(false)
   const [loading, setLoading] = useState(true)
   const [currentPage, setCurrentPage] = useState(1);
   const [recordsPerPage] = useState(16);
@@ -61,6 +62,7 @@ export default function Store({ userInfo, setUserInfo }) {
   const isAdmin = userInfo.isAdmin
   console.log(userInfo, "this is userInfo on Store")
   console.log(isAdmin, "this is isAdmin on Store Page")
+
   function handleEditSelect(productId) {
     setShowEdit(productId)
   }
@@ -68,17 +70,40 @@ export default function Store({ userInfo, setUserInfo }) {
     setShowDescription(productId)
   }
 
+  function handleCreate() {
+    setShowCreate(true)
+  }
+
   return (
     <>
       {loading === false ?
         <div className="bg-dark">
           <h1 className="text-center" style={{ color: "white" }}>Store</h1>
-          {isAdmin ? (<AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />) : null}
+
+          {isAdmin ? (
+            showCreate ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+              <button onClick={() => { setShowCreate(false) }} className="btn btn-dark">Hide Form</button>
+              <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
+            </div>
+              :
+              <div className="text-center">
+                <button onClick={() => handleCreate()} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                  Create New Product
+                </button>
+              </div>
+          ) : null}
+
+
           <div className="storeContainer bg-dark">
             {currentRecords.length
               ? currentRecords.map((products, index) => {
                 const productId = products.id
-
+                const slides = [
+                  products.image_1,
+                  products.image_2,
+                  products.image_3,
+                  products.image_4
+                ]
                 return (
                   <div key={`${products.id}`} className="mx-auto my-5">
 
@@ -97,9 +122,9 @@ export default function Store({ userInfo, setUserInfo }) {
                           <div style={{ marginTop: "30px" }}>
                             {showDescription != products.id ?
                               <div className="text-center">
-                              <button onClick={() => handleDescriptionSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Show Description
-                              </button>
+                                <button onClick={() => handleDescriptionSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                  Show Description
+                                </button>
                               </div>
                               :
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -113,9 +138,9 @@ export default function Store({ userInfo, setUserInfo }) {
 
                               showEdit != products.id ?
                                 <div className="text-center">
-                                <button onClick={() => handleEditSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                                  Edit or Delete
-                                </button>
+                                  <button onClick={() => handleEditSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                    Edit or Delete
+                                  </button>
                                 </div>
                                 :
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
@@ -135,11 +160,11 @@ export default function Store({ userInfo, setUserInfo }) {
               : null}
           </div>
 
-            <Pagination
-              nPages={nPages}
-              currentPage={currentPage}
-              setCurrentPage={setCurrentPage}
-            />
+          <Pagination
+            nPages={nPages}
+            currentPage={currentPage}
+            setCurrentPage={setCurrentPage}
+          />
 
         </div>
         : <LoadingScreen />}
