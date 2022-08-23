@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../databaseAdapter";
+import { getAllProducts, getUserProfile, deleteProduct } from "../databaseAdapter";
 import AdminUpdate from "./AdminUpdate";
 import AdminCreate from "./AdminCreate";
 import AddToCart from "./AddToCart"
 import ImageSlider from "./ImageSlider";
 import "./Store.css"
-import { addProductToCart } from "../databaseAdapter";
 import LoadingScreen from "./Loading"
 import Pagination from "./Pagination";
 
@@ -28,7 +27,6 @@ export default function Store({ userInfo, setUserInfo }) {
       const returnProducts = await getAllProducts();
 
       setAllProducts(returnProducts)
-      console.log(returnProducts)
         ;
     }
     setTimeout(() => setLoading(false), 2000)
@@ -37,11 +35,9 @@ export default function Store({ userInfo, setUserInfo }) {
 
   useEffect(() => {
     let token = localStorage.getItem("token");
-    console.log(token);
     async function getUserInfo() {
       try {
         const response = await getUserProfile(token)
-        console.log(token);
         console.log(response, "Message Please Read");
         setUserInfo(response);
       } catch (error) {
@@ -59,8 +55,6 @@ export default function Store({ userInfo, setUserInfo }) {
   }
 
   const isAdmin = userInfo.isAdmin
-  console.log(userInfo, "this is userInfo on Store")
-  console.log(isAdmin, "this is isAdmin on Store Page")
 
   function handleEditSelect(productId) {
     setShowEdit(productId)
@@ -97,12 +91,6 @@ export default function Store({ userInfo, setUserInfo }) {
             {currentRecords.length
               ? currentRecords.map((products, index) => {
                 const productId = products.id
-                const slides = [
-                  products.image_1,
-                  products.image_2,
-                  products.image_3,
-                  products.image_4
-                ]
                 return (
                   <div key={`${products.id}`} className="mx-auto my-5">
 

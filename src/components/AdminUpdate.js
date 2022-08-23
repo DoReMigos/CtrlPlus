@@ -12,7 +12,7 @@ export default function AdminUpdate({products}){
  async function handleSubmit(event){
     event.preventDefault();
     const token = localStorage.getItem("token");
-    // alert("Admin Updated Product")
+    alert("Product updated!")
     const response = await updateProduct(productId,
         price,
         inventory,
@@ -20,7 +20,7 @@ export default function AdminUpdate({products}){
         token)
     window.location.reload(true);
  }
- console.log(price, inventory, description)
+
     return (
         <form onSubmit ={handleSubmit}>
             <div>
