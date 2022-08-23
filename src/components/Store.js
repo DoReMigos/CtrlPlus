@@ -105,7 +105,7 @@ export default function Store({ userInfo, setUserInfo }) {
 
                           <ImageSlider products={products} />
 
-                          <div style={{ marginTop: "30px" }}>
+                          <div style={{ marginTop: "10px" }}>
                             {showDescription != products.id ?
                               <div className="text-center">
                                 <button onClick={() => handleDescriptionSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
