@@ -11,9 +11,9 @@ export default function Pagination({ nPages, currentPage, setCurrentPage }) {
   };
 
   return (
-    <div style={{ width: "100%", display: "flex" , paddingTop: "2rem"}}>
+    <div style={{ width: "100%", display: "flex"}}>
       <nav style={{ margin: "0 auto" }}>
-        <ul className="pagination justfiy-content-center">
+        <ul className="pagination justify-content-center">
           <li className="page-item">
             <a className="page-link" onClick={prevPage} href="#">
               Previous
