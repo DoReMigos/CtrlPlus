@@ -91,8 +91,8 @@ export default function Store({ userInfo, setUserInfo }) {
                             <AddToCart products={products} userInfo={userInfo} />
                           </div>
 
-                          {/* <ImageCarousel products={products} /> */}
-                          <ImageSlider products={products} />
+                          <ImageCarousel products={products} />
+                          {/* <ImageSlider products={products} /> */}
 
                           <div style={{ marginTop: "30px" }}>
                             {showDescription != products.id ?
