@@ -30,7 +30,7 @@ export default function AdminUpdate({products}){
                 type = "text"
                 placeholder = "Price"
                 value = {price}
-                style ={{width: "80px", cursor:"pointer", border:"none"}}
+                style ={{width: "80px", cursor:"pointer", border:"none", marginLeft:"5px"}}
                 onChange = {(event) => setPrice(event.target.value)}/>
                 <hr></hr>
                 <label> Modify Quantity:</label>
@@ -38,7 +38,7 @@ export default function AdminUpdate({products}){
                 type = "number"
                 placeholder = "Inventory"
                 value = {inventory}
-                style ={{width: "80px", cursor:"pointer", border:"none"}}
+                style ={{width: "80px", cursor:"pointer", border:"none", marginLeft:"5px"}}
                 onChange = {(event)=>setInventory(event.target.value)}/>
                 <hr></hr>
                 <label> Description:</label>
@@ -46,7 +46,7 @@ export default function AdminUpdate({products}){
                 type = "text"
                 placeholder = "description"
                 value = {description}
-                style = {{border:"none"}}
+                style = {{height: "auto", border:"none", marginLeft:"5px"}}
                 onChange = {(event)=> setdescription(event.target.value)}></input>
                 <hr></hr>
             </div>

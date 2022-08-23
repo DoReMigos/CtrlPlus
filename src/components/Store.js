@@ -4,20 +4,24 @@ import AdminUpdate from "./AdminUpdate";
 import AdminCreate from "./AdminCreate";
 import AddToCart from "./AddToCart"
 import ImageCarousel from "./ImageCarousel"
+import ImageSlider from "./ImageSlider";
 import "./Store.css"
 import { addProductToCart } from "../databaseAdapter";
 import LoadingScreen from "./Loading"
-// import  AddToCart  from "./AddToCart"
-// import handleAdd from "./AddToCart"
+import Pagination from "./Pagination";
 
 export default function Store({ userInfo, setUserInfo }) {
   const [allProducts, setAllProducts] = useState([]);
   const [showEdit, setShowEdit] = useState(null)
   const [showDescription, setShowDescription] = useState(null)
-  const [selectedPage, setSelectedPage] = useState(1)
-  const [volumeSelect, setVolumeSelect] = useState(40)
-  const [productsToShow, setProductsToShow] = useState([])
   const [loading, setLoading] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [recordsPerPage] = useState(16);
+  const indexOfLastRecord = currentPage * recordsPerPage;
+  const indexOfFirstRecord = indexOfLastRecord - recordsPerPage;
+  const currentRecords = allProducts.slice(indexOfFirstRecord, indexOfLastRecord);
+  const nPages = Math.ceil(allProducts.length / recordsPerPage);
+
 
   useEffect(() => {
     async function fetchProducts() {
@@ -54,25 +58,6 @@ export default function Store({ userInfo, setUserInfo }) {
     window.location.reload(true);
   }
 
-  async function handleClick1(event) {
-    event.preventDefault()
-    setSelectedPage(1);
-  }
-
-  async function handleClick2(event) {
-    event.preventDefault()
-    setSelectedPage(2);
-  }
-
-  async function handleClick3(event) {
-    event.preventDefault()
-  }
-
-  async function handleClick4(event) {
-    event.preventDefault()
-  }
-  
-
   const isAdmin = userInfo.isAdmin
   console.log(userInfo, "this is userInfo on Store")
   console.log(isAdmin, "this is isAdmin on Store Page")
@@ -83,22 +68,6 @@ export default function Store({ userInfo, setUserInfo }) {
     setShowDescription(productId)
   }
 
-  useEffect(() => {
-    if (allProducts.length) {
-      const listOfProducts = allProducts.filter((_, index) => {
-        if (selectedPage == 1) {
-          return (volumeSelect - 1) * (selectedPage - 1) <= index && index < (volumeSelect)
-        } else {
-          return (volumeSelect - 1) * (selectedPage - 1) < index && index < (volumeSelect) * (selectedPage)
-
-        }
-      })
-      setProductsToShow(listOfProducts)
-    }
-  }, [allProducts])
-
-
-
   return (
     <>
       {loading === false ?
@@ -106,15 +75,10 @@ export default function Store({ userInfo, setUserInfo }) {
           <h1 className="text-center" style={{ color: "white" }}>Store</h1>
           {isAdmin ? (<AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />) : null}
           <div className="storeContainer bg-dark">
-            {productsToShow.length
-              ? productsToShow.map((products, index) => {
+            {currentRecords.length
+              ? currentRecords.map((products, index) => {
                 const productId = products.id
-                const slides = [
-                  products.image_1,
-                  products.image_2,
-                  products.image_3,
-                  products.image_4
-                ]
+
                 return (
                   <div key={`${products.id}`} className="mx-auto my-5">
 
@@ -127,13 +91,16 @@ export default function Store({ userInfo, setUserInfo }) {
                             <AddToCart products={products} userInfo={userInfo} />
                           </div>
 
-                          <ImageCarousel products={products} />
+                          {/* <ImageCarousel products={products} /> */}
+                          <ImageSlider products={products} />
 
                           <div style={{ marginTop: "30px" }}>
                             {showDescription != products.id ?
-                              <button onClick={() => handleDescriptionSelect(products.id)} className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
-                                Description
+                              <div className="text-center">
+                              <button onClick={() => handleDescriptionSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                Show Description
                               </button>
+                              </div>
                               :
                               <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                                 <div>{products.description}</div>
@@ -141,29 +108,25 @@ export default function Store({ userInfo, setUserInfo }) {
                               </div>}
                           </div>
 
-
-
                           <div>
                             {isAdmin ? (
 
                               showEdit != products.id ?
-                                <button onClick={() => handleEditSelect(products.id)} className="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                                <div className="text-center">
+                                <button onClick={() => handleEditSelect(products.id)} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
                                   Edit or Delete
                                 </button>
+                                </div>
                                 :
                                 <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-                                  <button onClick={() => { handleDelete(productId) }} className="btn btn-dark" style={{ marginBottom: "10px" }}>Delete product</button>
-                                  <AdminUpdate products={products} />
                                   <button onClick={() => { setShowEdit(null) }} className="btn btn-dark">Hide Menu</button>
+                                  <AdminUpdate products={products} />
+                                  <button onClick={() => { handleDelete(productId) }} className="btn btn-dark" style={{ marginBottom: "10px" }}>Delete product</button>
                                 </div>
                             ) : null}
                           </div>
                         </div>
                       </div>
-
-
-
-
                     </div>
 
                   </div>
@@ -172,22 +135,11 @@ export default function Store({ userInfo, setUserInfo }) {
               : null}
           </div>
 
-          <div className="pagination">
-            {/* {selectedPage === 1 ? ( */}
-              <div>
-                <button onClick={ handleClick1 }>1</button>
-                <button onClick={ handleClick2 }>2</button>
-                <button onClick={ handleClick3 }>3</button>
-                <button onClick={ handleClick4 }>4</button>
-              </div>
-            {/* ) : null
-            } */}
-          </div>
-          {/* create buttons for page numbers/previous/next
-            onClick for specific numbers goes into a handleClick function that will set selected page as the template literal for the selected page
-            previous and next buttons will +-1 for selected page, but need edge cases if you're on the first page or last page that it disables the prev or next button -- this is probably extra but looks nice. can technically do this just with the numbers and no prev/next if it's too time consuming/difficult.
-         */}
-
+            <Pagination
+              nPages={nPages}
+              currentPage={currentPage}
+              setCurrentPage={setCurrentPage}
+            />
 
         </div>
         : <LoadingScreen />}
