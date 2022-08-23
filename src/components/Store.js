@@ -3,7 +3,6 @@ import { getAllProducts, getUserProfile, deleteProduct, getUserCarts } from "../
 import AdminUpdate from "./AdminUpdate";
 import AdminCreate from "./AdminCreate";
 import AddToCart from "./AddToCart"
-import ImageCarousel from "./ImageCarousel"
 import ImageSlider from "./ImageSlider";
 import "./Store.css"
 import { addProductToCart } from "../databaseAdapter";
@@ -82,12 +81,12 @@ export default function Store({ userInfo, setUserInfo }) {
 
           {isAdmin ? (
             showCreate ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <button onClick={() => { setShowCreate(false) }} className="btn btn-dark">Hide Form</button>
+              <button onClick={() => { setShowCreate(false) }} className="btn btn-secondary">Hide Form</button>
               <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
             </div>
               :
               <div className="text-center">
-                <button onClick={() => handleCreate()} className="btn btn-dark" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
+                <button onClick={() => handleCreate()} className="btn btn-secondary" type="button" data-bs-toggle="collapse" data-bs-target="#flush-collapseTwo" aria-expanded="false" aria-controls="flush-collapseOne">
                   Create New Product
                 </button>
               </div>
@@ -116,8 +115,7 @@ export default function Store({ userInfo, setUserInfo }) {
                             <AddToCart products={products} userInfo={userInfo} />
                           </div>
 
-                          <ImageCarousel products={products} />
-                          {/* <ImageSlider products={products} /> */}
+                          <ImageSlider products={products} />
 
                           <div style={{ marginTop: "30px" }}>
                             {showDescription != products.id ?
