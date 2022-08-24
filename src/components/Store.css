@@ -6,7 +6,7 @@
 }
 .productsCard{
     width: 400px;
-    min-height: 500px;
+    min-height: 460px;
     height: fit-content;
     margin-left:30px;
     margin-bottom: 10px;
@@ -23,4 +23,24 @@
     width: 370px;
     justify-content: space-between;
     margin-bottom: 5px;
+}
+
+.page-item:hover{
+    background: black;
+}
+
+.pagination{
+    --bs-pagination-color: black;
+    --bs-pagination-bg: #343a40;
+    --bs-pagination-border-color: black;
+    --bs-pagination-hover-color: black;
+    --bs-pagination-active-color: gray;
+    --bs-pagination-active-bg: #1c1f23;
+    --bs-pagination-active-border-color: black;
+    --bs-pagination-focus-color: black;
+}
+
+.btn-dark {
+    --bs-btn-bg: #1c1f23;
+    --bs-btn-hover-bg: black;
 }

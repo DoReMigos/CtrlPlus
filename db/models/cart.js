@@ -64,9 +64,7 @@ async function getAllCarts() {
       JOIN users ON users.id=carts."user_id";
       `
     );
-
     const cart = await attachProductsToCarts(carts);
-    console.log(cart, "getallcarts attachProductsToCarts");
     return carts;
   } catch (error) {
     console.error(error);
@@ -119,7 +117,6 @@ async function getCartByUserId({ id }) {
       WHERE carts."user_id"=$1 AND "isPurchased"=false;
       `, [id]);
     const routines = await attachProductsToCarts(rows);
-    console.log(routines, "this is what we are checking")
     return routines;
   } catch (error) {
     console.error(error);
@@ -142,7 +139,6 @@ async function attachProductsToCarts(carts) {
       cartIds,
       "cartids"
     );
-    // get the activities, JOIN with routine_activities (so we can get a routineId), and only those that have those routine ids on the routine_activities join
     const { rows: products } = await client.query(
       `
       SELECT products.*, cart_products.quantity, cart_products."purchased_price", cart_products.id, cart_products."order_id"
@@ -152,7 +148,7 @@ async function attachProductsToCarts(carts) {
     `,
       cartIds
     );
-    // console.log( products, 'products')
+  
 
     // loop over the routines
     for (const carts of cartsToReturn) {

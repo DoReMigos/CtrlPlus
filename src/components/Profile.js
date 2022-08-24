@@ -4,15 +4,13 @@ import { Link } from "react-router-dom";
 import "./Profile.css";
 
 export default function Profile({userInfo, setUserInfo}) {
+  const authorizationToken = localStorage.getItem("token") ? true : false;
  
   useEffect(() => {
     let token = localStorage.getItem("token");
-    console.log(token);
     async function getUserInfo() {
       try {
         const response = await getUserProfile(token)
-        console.log(token);
-      console.log(response, "Message Please Read");
       setUserInfo(response);
       } catch (error) {
         console.log(error)
@@ -22,50 +20,34 @@ export default function Profile({userInfo, setUserInfo}) {
     getUserInfo();
   }, []);
   return (
-    <div id = "profileContainer">
-      <div className="card bg-dark" id="profileDiv">
-        <div className="card-body">
-        <h2 className="card-body" style = {{color: "#60dde2"}}> Welcome to CTRL+</h2>
-          <h2 className="card-body" style = {{color: "#60dde2"}}>My Account:</h2>
-          <h2 className="card-body" style = {{color: "#60dde2"}}>Hi, {userInfo.email}</h2>
-          <hr className = "text-white"></hr>
-          <Link to="/Store">
-            <button className="btn btn-info"> Purchase Cart Items</button>
-          </Link>
-          <hr className = "text-white"></hr>
-          <Link to="/Store">
-            <button className="btn btn-info"> Back to Store </button>
-          </Link>
-          <hr className = "text-white"></hr>
-          <Link to="/">
-          <button
+    <>
+         {authorizationToken === true ? (  
+     <div className="pageContainer vh-100" style={{ backgroundImage: "url(https://pbs.twimg.com/media/FOZKlglUcAIoB2u?format=jpg&name=large)",}}>
+           <h2>Welcome to CTRL+ 
+            <h1 className="mt-3"> {userInfo.email} </h1>
+            <a className="btn btn-primary btn-lg px-4 me-sm-3"
+                        href="/store">Browse Store</a>
+            <Link to="/">
+            <button
             id="allButton"
             type="button"
-            className="btn btn-info"
+            className="btn btn-danger"
             onClick={() => {
               localStorage.removeItem("token");
             }}>
             Sign Out
           </button>
-        </Link>
-        </div>
-      </div>
-      {/* History DIV */}
-      <div className="card bg-dark" id = "ProfileDiv2">
-        <div className="card-body">
-        <h2 className="card-body" style = {{color: "#60dde2"}}> Order History for {userInfo.email} </h2>
-          <hr className = "text-white"></hr>
-          <Link to="/Store">
-           Product
           </Link>
-          <Link to="/Store">
-            Product
-          </Link>
-         <Link to="/Store">
-            Product
-          </Link>
-        </div>
-      </div>
-    </div>
+           </h2>
+   </div>
+             ) : 
+             <div className="pageContainer vh-100" style={{ backgroundImage: "url(https://pbs.twimg.com/media/FOZKlglUcAIoB2u?format=jpg&name=large)",}}>
+             <h2>Please Login Or Register For User Profile 
+              <hr></hr>
+              <a className="btn btn-primary btn-lg px-4 me-sm-3"
+                          href="/store">Browse Store</a>
+             </h2>
+     </div>}
+  </>
   );
 }

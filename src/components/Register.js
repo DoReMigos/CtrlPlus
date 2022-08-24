@@ -16,7 +16,6 @@ export default function Register() {
     event.preventDefault();
     alert(`Thank you for Registering with Ctrl+ ${newEmail}!`);
     const result = await RegisterUser(newEmail, password);
-    console.log(result, "this is result");
     localStorage.setItem("token", result.token);
     localStorage.setItem("Email", newEmail);
     navigate("/Login");
@@ -40,6 +39,7 @@ export default function Register() {
                         className="form-control form-control-lg"
                         placeholder="Email"
                         type="text"
+                        required={true}
                         onChange={(event) => setnewEmail(event.target.value)}
                       />
                       <label className="form-label" htmlFor="form3Example1cg">
@@ -52,6 +52,7 @@ export default function Register() {
                         className="form-control form-control-lg"
                         placeholder="Password"
                         type="password"
+                        required={true}
                         onChange={(event) => setPassword(event.target.value)}
                       />
                       <label className="form-label" htmlFor="form3Example4cg">
@@ -64,6 +65,7 @@ export default function Register() {
                         className="form-control form-control-lg"
                         placeholder="Password"
                         type="password"
+                        required={true}
                         onChange={(event) =>
                           setConfirmPassword(event.target.value)
                         }
