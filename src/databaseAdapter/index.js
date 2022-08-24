@@ -3,24 +3,6 @@ import axios from "axios";
 
 export const URL = "http://localhost:4000/api";
 
-// this file holds your frontend network request adapters
-// think about each function as a service that provides data
-// to your React UI through AJAX calls
-
-// for example, if we need to display a list of users
-// we'd probably want to define a getUsers service like this:
-
-/* 
-  export async function getUsers() {
-    try {
-      const { data: users } = await axios.get('/api/users')
-      return users;
-    } catch(err) {
-      console.error(err)
-    }
-  }
-  */
-
 //EVERYTHING BELOW HERE IS USER API
 export async function RegisterUser(email, password) {
   try {
@@ -55,7 +37,6 @@ export async function userLogin(email, password) {
       }),
     });
     const result = await response.json();
-    console.log(result);
     const token = result.token;
     return token;
   } catch (error) {
@@ -70,12 +51,7 @@ export async function getUserProfile(token) {
       Authorization: `Bearer ${token}`,
     },
   });
-  console.log(
-    token,
-    "THIS TOKEN IS CURRENTLY DISPLAYING, does not make it into response"
-  );
   const result = await response.json();
-  console.log(result, "Response FROM JSON response");
   return result;
 }
 
@@ -88,7 +64,6 @@ export async function getUserCarts(token, id) {
       },
     });
     const result = response.json();
-    console.log(result, 'getusercarts log')
     return result;
   } catch (error) {
     console.log(error);
@@ -107,10 +82,7 @@ export async function getUserCarts(token, id) {
           userId: userId
         }),
       });
-      console.log(response.body)
-      console.log(response)
       const result = await response.json()
-      console.log(result,'createcart log')
       return result
     }catch(error){
       console.log(error);
@@ -129,7 +101,6 @@ export async function getAllProducts() {
     },
   });
   const result = await response.json();
-  console.log(result);
   return result;
 }
 
@@ -192,7 +163,6 @@ export async function updateProduct(
         category: category,
       }),
     });
-    console.log(response, "THIS IS RESPONSE FOMR UDPATE PRODUCT");
     const result = response.json();
     return result;
   } catch (error) {
@@ -263,7 +233,6 @@ export async function updateCartProdQuantity(id, quantity, token){
       })
     })
     const result = response.json()
-    console.log(result, "THIS IS RESULT FROM FRONT END API CART PRODDDD")
     return result
   }catch(error){
     console.log(error)
@@ -296,7 +265,6 @@ export async function addProductToCart(productId, price, order_id,quantity,token
         quantity: quantity,
       }),
     });
-    console.log(response)
     const result = response.json();
     return result;
   }catch(error){
