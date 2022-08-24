@@ -160,6 +160,11 @@ async function createInitialCarts() {
       created_at: `${date.toLocaleDateString()}`,
       isPurchased: false,
     },
+    {
+      user_id: 6,
+      created_at: `${date.toLocaleDateString()}`,
+      isPurchased: false,
+    }
   ];
   
   const carts = await Promise.all(
