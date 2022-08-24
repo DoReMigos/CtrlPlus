@@ -215,6 +215,22 @@ export async function deleteProduct(token, productId){
     console.log(error);
   }
 }
+
+export async function getProductByCategory() {
+  try {
+    const response = await fetch (`${URL}/products/categories`,{
+      headers: {
+        "Content-Type": "application/json",
+      },
+    });
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
+
 //END OF PRODUCT
 
 export async function deleteCartProd(id, token){

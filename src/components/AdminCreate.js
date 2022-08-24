@@ -13,7 +13,6 @@ export default function AdminCreate(){
     const [image_2, setImage_2] = useState("")
     const [image_3, setImage_3] = useState("")
     const [image_4, setImage_4] = useState("")
-    const[error,setError] = useState(null)
 
  async function handleSubmit(event){
     event.preventDefault();
@@ -39,7 +38,7 @@ export default function AdminCreate(){
     return (
         <form className="text-center" onSubmit ={handleSubmit}>
             <div>
-                <h6> Create New Product</h6>
+                <h6 style={{ color: "white" }}> Create New Product</h6>
             <input
                 type = "text"
                 placeholder = "Item Name*"
