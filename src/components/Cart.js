@@ -325,7 +325,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
 
                               <div className='d-flex justify-content-between'>
                                 <p className='mb-2'>Subtotal</p>
-                                <p className='mb-2'>${alltotal + 1}</p>
+                                <p className='mb-2'>${alltotal}</p>
                               </div>
                               <div className='d-flex justify-content-between'>
                                 <p className='mb-2'>Shipping</p>
