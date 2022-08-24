@@ -46,18 +46,24 @@ export default function Navbar() {
               </li>
               <li className="nav-item">
                 <div>
+                {authorizationToken === true ? (
                 <Link to="/" className="nav-link">
-                  {authorizationToken === true ? (
                     <p style={{ color: "#60dde2" }}
                     onClick={() => {
+                      alert("You have sucessfully signed out")
                       localStorage.removeItem("token");
-                      window.location.reload(true);
                     }}
                       className="bg-dark"
                       value="/">
                       Logout 
-                    </p>) : null}
-                </Link>
+                    </p>
+                </Link>) : <Link to="/Login" className="nav-link">
+                    <p style={{ color: "#60dde2", marginRight: "15px" }}
+                      className="bg-dark"
+                      value="/Login">
+                      Login
+                    </p>
+                </Link>}
                 </div>
               </li>
               <li className="nav-item">

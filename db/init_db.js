@@ -113,7 +113,6 @@ async function populateInitialData() {
 async function createInitialProducts() {
   console.log("Starting to create products...")
   try {
-    // console.log(results)
     const products = await Promise.all(results.map(Products.createProducts));
 
     console.log("Products created:");
@@ -237,17 +236,13 @@ async function creationInitalCartProducts() {
     },
   ]
 
-  // console.log(cart1, cart2, bicep1, leg3,'ddddd')
   const cartProducts = await Promise.all(
     cartProductsToCreate.map(addProducttoCart)
     )
-    console.log("cart Products created: ", cartProducts)
-    console.log("Finished creating cart_products!")
   }
   async function getcbyus(id){
   let cartsss =  await Cart.getAllPurchasedCarts({id: 4})
-  // let all =  attachProductsToCarts(cartsss)
-  console.log(cartsss,'all')}
+ }
   buildTables()
   .then(dropTables)
   .then(createTables)
