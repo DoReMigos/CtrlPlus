@@ -69,18 +69,15 @@ const Cart = ({ userInfo, setUserInfo }) => {
     <>
       <section className='h-100 h-custom ' style={{ background: "black" }}>
         <div className='container py-5 h-100'>
-          <div className='row d-flex justify-content-center align-items-center h-100'>
-            <div className='col-12'>
+          <div className='row d-flex justify-content-center align-items-center h-100' >
+            <div className='col-12' >
               <div className='card-body p-0' >
                 <div className='row g-0'>
                   <div className='col-lg-12' >
-                    <h1 className='fw-bold mb-0 text-white'>
-                      Shopping Cart <h2 id='MyTitle'></h2>
-                      <div>
-                        <h4 id='subTitles'>
-                          Here's your Cart: {userInfo.email}
-                        </h4></div>
+                    <h1 className='fw-bold mb-0 text-white text-center'>
+                      Shopping Cart 
                     </h1>
+                    <hr style={{color:"white"}}></hr>
                     <div className='p-3'>
                       <div className='d-flex justify-content-between align-items-center mb-4'>
 
@@ -126,7 +123,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                 src={product.image_1}
                                                 className='img-fluid rounded-3'
                                                 alt='Cotton T-shirt'
-                                                style={{ objectFit: "cover", maxWidth: "700px" }}></img>
+                                                style={{ objectFit: "cover", maxWidth: "700px", maxHeight:"300px"}}></img>
                                             </div>
                                             <div className="cartInformation">
                                               <div>
@@ -180,10 +177,10 @@ const Cart = ({ userInfo, setUserInfo }) => {
                             let money = `$${complete.toFixed(2)}`;
 
                             return (
-
-                              
-                              <div className='p-3'>
-                                <div className='row d-flex justify-content-center align-items-center h-100'>
+                              <div
+                                  className="card"
+                                  key={element.id}
+                                  style={{ background: "#212529"}}>
                                   <div
                                     key={`${element.id}`}
                                     className='card-body cartProducts'>
@@ -198,7 +195,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                         src={element.image}
                                         className='img-fluid rounded-3'
                                         alt='Cotton T-shirt'
-                                        style={{ objectFit: "cover", maxWidth: "700px" }}></img>
+                                        style={{ objectFit: "cover", maxWidth: "700px", marginBottom:"5px" }}></img>
                                     </div>
                                     <div className="cartInformation">
                                       <div>
@@ -222,8 +219,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                       </div>
                                     </div>
                                   </div>
-                                </div>
-                              </div>
+                                  </div>
                             )
                           })
 

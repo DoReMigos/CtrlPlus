@@ -44,6 +44,7 @@ export default function LoggedIn() {
                         type="text"
                         placeholder="Enter Email"
                         value={email}
+                        required={true}
                         onChange={handleOnChange}
                       />
                     </div>
@@ -56,6 +57,7 @@ export default function LoggedIn() {
                         className="form-control form-control-lg"
                         type="password"
                         placeholder="Enter Password"
+                        required={true}
                         onChange={handleOnChange}
                       ></input>
                       <label className="form-label" htmlFor="form3Example1cg">
