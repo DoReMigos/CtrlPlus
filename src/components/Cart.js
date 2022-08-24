@@ -89,7 +89,12 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                 <div
                                   className='card'
                                   key={element.id}
-                                  style={{ background: "#212529" }}>
+                                  style={{
+                                    width: "800px",
+                                    height: "700px",
+                                    overflow: "scroll",
+                                    background: "#212529",
+                                  }} >
                                   {element.products.map((product, index) => {
                                     const id = product.id;
                                     total = product.price;
@@ -267,7 +272,8 @@ const Cart = ({ userInfo, setUserInfo }) => {
                          
 
                       
-                        <div className='col-lg-3 bg-grey px-2'>
+                        <div className='col-lg-4 bg-grey px-2'
+                                style={{margin:"4%"}}>
                           <div className='card bg-primary text-white rounded-3'>
                             <div className='card-body'>
                               <div className='d-flex justify-content-between align-items-center mb-4'>
