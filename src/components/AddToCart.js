@@ -33,7 +33,7 @@ export default function AddToCart({products, userInfo}){
         return response
     }
     return(
-           <button onClick={() => handleAdd(productId)} onChange = {(event)=>setQuantity(event.target.value)}  className="btn btn-dark" style ={{height: "35px", width:"110px"}}>Add to Cart</button> 
+           <button onClick={() => handleAdd(productId)} onChange = {(event)=>setQuantity(event.target.value)}  className="btn btn-dark" style ={{height: "35px", width:"80px"}}>Add to Cart</button> 
 
     )
 }
