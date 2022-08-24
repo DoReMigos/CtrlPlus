@@ -32,6 +32,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
   let amount
   let money = ''
   let alltotal = 0
+  let final = 0
 
   //  useEffect(() => {
   //    promise.then((data) => {
@@ -429,7 +430,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
 
                                   <div className='d-flex justify-content-between mb-4'>
                                     <p className='mb-2'>Total(Incl. taxes)</p>
-                                    <p className='mb-2'>$20.00</p>
+                                    <p className='mb-2'>${(final = ((alltotal+10)*1.05).toFixed(2))}</p>
                                   </div>
 
                                   <button
@@ -437,7 +438,10 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                     className='btn btn-info btn-block btn-lg'
                                     onSubmit={(e)=> handleCheckout(e,alltotal) }>
                                     <div className='d-flex justify-content-between'>
-                                    <span>${alltotal+20+10}</span> <br></br>
+                                      <span>
+                                        </span> 
+                                      <br>
+                                      </br>
                                       <span>
                                         Checkout
                                         
