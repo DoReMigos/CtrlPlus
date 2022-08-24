@@ -5,8 +5,7 @@ const User = require("../db/models/users")
 
 const jwt = require("jsonwebtoken");
 const { JWT_SECRET } = process.env;
-console.log(JWT_SECRET, "USER FILE JWT SECRET")
-const { Order, Cart } = require("../db/models");
+const { Cart } = require("../db/models");
 
 
 // POST /api/user/register
@@ -28,7 +27,6 @@ apiRouter.post("/register", async (req, res, next) => {
       }
       const user = await User.createUser({ email, password });
       const cart = await Cart.createCart({ user_id:user.id})
-      console.log(cart,'cart to create')
       const token = jwt.sign({ id: user.id, email }, JWT_SECRET);
       res.send({ message: "Thank you for signing up!", token, user });
     } catch ({ name, message }) {
@@ -69,7 +67,6 @@ apiRouter.post("/login", async (req, res, next) => {
 // GET /api/users/me
 apiRouter.get("/me", requireUser,  async (req, res, next) => {
     try{
-      console.log(req.user, "User in USERjs")
       res.send(req.user);
     }catch(error){
       next(error)

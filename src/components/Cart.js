@@ -5,7 +5,12 @@ import CartUpdate from "./CartUpdate"
 
 const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
+  const authorizationToken = localStorage.getItem("token") ? true : false;
   let token = localStorage.getItem("token");
+///RUBY ADDED THIS RECENTLY
+  let guestCart= JSON.parse(localStorage.getItem("products"))
+///RUBY ADDED THIS RECENTLY
+
   console.log(userInfo, token);
   const getMyInfo = async () => {
     const response = await getUserProfile(token);
@@ -19,6 +24,14 @@ const Cart = ({ userInfo, setUserInfo }) => {
   useEffect(() => {
     getMyInfo();
   }, []);
+///RUBY ADDED THIS RECENTLY
+  async function handleGuestDelete(productId){
+    let storageProducts = JSON.parse(localStorage.getItem('products'));
+    let products = storageProducts.filter(product => product.productId !== productId );
+    localStorage.setItem('products', JSON.stringify(products));
+    window.location.reload(true);
+  }
+///RUBY ADDED THIS RECENTLY
 
   async function handleDelete(id){
     const token = localStorage.getItem("token")
@@ -165,7 +178,8 @@ const Cart = ({ userInfo, setUserInfo }) => {
                           </h1>
                       <div className='p-5'>
                         <div className='d-flex justify-content-between align-items-center mb-5'>
-
+                        {/* ///RUBY ADDED THIS RECENTLY */}
+                        {authorizationToken === true ? (
                           <div id='myroutines'>
                             {userCart.map((element, index) => {
                               return (
@@ -178,9 +192,9 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                      <DeleteRoutine routineId={element.id} /> */}
                                     {element.products.map((product, index) => {
                                       const id = product.id;
-
                                       return (
                                         <>
+                                      {authorizationToken === true ? (
                                           <div
                                             className='card-body cartProducts'
                                             key={`myroutines${index}`}>
@@ -244,6 +258,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                               </div>
                                             </div>
                                           </div>
+                                          ) : null}
                                         </>
                                       );
                                     })}
@@ -260,6 +275,31 @@ const Cart = ({ userInfo, setUserInfo }) => {
                               </h6>
                             </div>
                         </div>
+                        // ruby added this recently
+                        ) :  guestCart.map((element, index)=>{
+                          let productId = element.productId
+                          return(
+                            <div key={`${element.id}`}>    
+                            <h2>{element.title}</h2>
+                            <img style = {{width: "100px"}}src = {element.image}/>
+                            <h5>{element.price}</h5>   
+                            <h5>{element.quantity}</h5>                            
+                            <h4>{element.description}</h4>
+                            <h6
+                              style={{
+                              color: "red",  
+                              fontSize: "25px",
+                              cursor: "pointer",
+                              }}
+                              onClick={() => {
+                              handleGuestDelete(productId);
+                              }}>
+                              X
+                            </h6>                            
+                            </div>
+                          )
+                        })}
+
                             <div className='col-lg-4 bg-grey px-3'>
                               <div className='card bg-primary text-white rounded-3'>
                                 <div className='card-body'>
