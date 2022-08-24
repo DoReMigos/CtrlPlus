@@ -25,7 +25,6 @@ async function getAllProducts() {
         FROM products
         ORDER BY id DESC;
       `);
-    console.log(rows, "this is rows from products")
     return rows;
   } catch (error) {
     throw error;

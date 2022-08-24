@@ -9,18 +9,17 @@ export default function CartUpdate({product}){
  async function handleSubmit(event){
     event.preventDefault();
     const token = localStorage.getItem("token");
-    // alert("Admin Updated Product")
+    alert("Quantity Updated")
     const response = await updateCartProdQuantity(quantity, id, token)
-        console.log(response, "THIS IS RESPONSE FOMR CART CARRTTTT UPDATE")
  }
-//  console.log(id, quantity)
     return (
         <form onSubmit ={handleSubmit}>
             <div>
+            <label style={{color:"darkgray"}}> Quantity:</label>
                <input
                 type = "number"
                 placeholder = "quantity"
-                style ={{width: "50px", border:"none", cursor:"pointer"}}
+                style ={{width: "50px", border:"none", cursor:"pointer", marginLeft:"5px"}}
                 value = {quantity}
                 onChange = {(event)=>setQuantity(event.target.value)}></input>
             </div>

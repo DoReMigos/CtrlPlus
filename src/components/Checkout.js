@@ -5,17 +5,27 @@ let Logo = require("./CtrlPlusLogo.png");
 
 export default function Checkout() {
   const [show, setShow] = useState(true);
+  const [num, setNum] = useState(0)
+
+  function randomConfirmationNum(min, max){
+    return Math.floor(Math.random()*(max-min +1)) + min;
+  }
+
+  const handleClick = () => {
+    setNum(randomConfirmationNum(1,3000000))
+  }
 
   return (
     <div>
     <div className="container" id="box">
       <div className="py-5 text-center">
-     
+      {show && (
         <img
           className="d=block mx-auto mb-4"
           src={Logo}
           style={{ width: "72px", height: "72px" }}
         ></img>
+      )}
     
         {show && (
         <p className="lead">
@@ -30,7 +40,7 @@ export default function Checkout() {
           </p>
         )}
       </div>
-      <div className="row">
+      <div className="row justify-content-center">
         <div className="col-md-8 order-md-1">
           {show && (
             <form className="needs-validation novalidate">
@@ -134,110 +144,12 @@ export default function Checkout() {
                 </div>
               </div>
               <hr className="mb-4"></hr>
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  className="custom-control-input"
-                  id="same-address"
-                />
-                <label className="custom-control-label" htmlFor="same-address">
-                  Shipping address is the same as my billing address
-                </label>
-              </div>
-              <hr className="mb-4"></hr>
-              <h4 className="mb-3">Payment</h4>
-              <div className="d-block my-3">
-                <div className="custom-control custom-radio">
-                  <input
-                    id="credit"
-                    name="paymentMethod"
-                    type="radio"
-                    className="custom-control-input"
-                    required
-                  />
-                  <label className="custom-control-label" htmlFor="credit">
-                    Credit card
-                  </label>
-                </div>
-                <div className="custom-control custom-radio">
-                  <input
-                    id="debit"
-                    name="paymentMethod"
-                    type="radio"
-                    className="custom-control-input"
-                    required
-                  />
-                  <label className="custom-control-label" htmlFor="debit">
-                    Debit card
-                  </label>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="cc-name">Name on card</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="cc-name"
-                    placeholder=""
-                    required
-                  />
-                  <small className="text-muted">
-                    Full name as displayed on card
-                  </small>
-                  <div className="invalid-feedback">
-                    Name on card is required
-                  </div>
-                </div>
-                <div className="col-md-6 mb-3">
-                  <label htmlFor="cc-number">Credit card number</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="cc-number"
-                    placeholder="Please Do Not Use Valid Information"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Credit card number is required
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-3 mb-3">
-                  <label htmlFor="cc-expiration">Expiration</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="cc-expiration"
-                    placeholder="Not A Real E-Commerce Website"
-                    required
-                  />
-                  <div className="invalid-feedback">
-                    Expiration date required
-                  </div>
-                </div>
-                <div className="col-md-3 mb-3">
-                  <label htmlFor="cc-cvv">CVV</label>
-                  <input
-                    type="text"
-                    className="form-control"
-                    id="cc-cvv"
-                    placeholder=""
-                    required
-                  />
-
-                  <div className="invalid-feedback">Security code required</div>
-                </div>
-              </div>
-              <hr className="mb-4"></hr>
               <button
-                onClick={() => setShow(!show)}
+                onClick={() => {setShow(!show); handleClick();} }
                 id="toggle"
                 className="btn btn-primary btn-lg btn-block"
                 type="submit"
-                style={{ marginBottom: "5%" }}
-              >
+                style={{ marginBottom: "5%" }}>
                 Purchase
               </button>
             </form>
@@ -256,10 +168,11 @@ export default function Checkout() {
                     <div className="col-12 col-md-9 col-lg-7 col-xl-6">
                       <div className="card">
                         <div className="card-body p-5">
+                        <h2 className="text-uppercase text-center mb-5">Confirmation # {num} </h2>
+                        <h2 className="text-uppercase text-center mb-5">Please Print Confirmation Page For You Records </h2>
                           <h2 className="text-uppercase text-center mb-5">
                             Thank You For Your Purchase!
                           </h2>
-                          <h2 className="text-uppercase text-center mb-5">Hope to see you back soon!</h2>
                           <form>
                             <div></div>
                           </form>
