@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const URL = "https://ctrlplus.herokuapp.com/api";
+export const URL = "http://localhost:4000/api";
 
 //EVERYTHING BELOW HERE IS USER API
 export async function RegisterUser(email, password) {
