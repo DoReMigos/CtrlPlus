@@ -6,12 +6,16 @@ import Checkout from './Checkout'
 import { Link, useLinkClickHandler} from "react-router-dom";
 // let navigate = useNavigate()
 const Cart = ({ userInfo, setUserInfo }) => {
-  let token = localStorage.getItem("token");
-  
   const [userCart, setUserCart] = useState([]);
+  const authorizationToken = localStorage.getItem("token") ? true : false;
   const [cartPrice, setCartPrice] = useState(0)
+  const token = localStorage.getItem('token')
   // const promise = getUserProfile(token)
   // const promiseCart = getUserCarts(token, userInfo.id);
+///RUBY ADDED THIS RECENTLY
+  let guestCart= JSON.parse(localStorage.getItem("products"))
+///RUBY ADDED THIS RECENTLY
+
   console.log(userInfo, token);
   const getMyInfo = async () => {
     const response = await getUserProfile(token);
@@ -39,36 +43,65 @@ const Cart = ({ userInfo, setUserInfo }) => {
   useEffect(() => {
     
     getMyInfo();
-    // cartPriceTotal();
-    
-    
   }, []);
-// let total
-//     let amount
-  
- 
-//   async function cartPriceTotal(){
-//     try {
-//        const arr11 = userCart.copyWithin();
-//  let alltotal=0
-//        console.log(userCart, arr11, "userCart");
-//        let arr2 = await JSON.parse(JSON.stringify(userCart));
-//        setTimeout(() => 1000);
-//        if (arr2.length) {
-         
-//        arr11[0].products.forEach((element) => {
-//          let total = element.price;
-//          let cur_re = /\D*(\d+|\d.*?\d)(?:\D+(\d{2}))?\D*$/;
-//          let parts = cur_re.exec(total);
-//          let number = parseFloat(
-//            parts[1].replace(/\D/, "") + "." + (parts[2] ? parts[2] : "00")
-//          );
-//          console.log(number.toFixed(2));
-//          let amount = element.quantity;
-//          let complete = number.toFixed(2) * amount;
-//          alltotal += complete;
-//          let money = `$${complete.toFixed(2)}`;
-        
+///RUBY ADDED THIS RECENTLY
+  async function handleGuestDelete(productId){
+    let storageProducts = JSON.parse(localStorage.getItem('products'));
+    let products = storageProducts.filter(product => product.productId !== productId );
+    localStorage.setItem('products', JSON.stringify(products));
+    window.location.reload(true);
+  }
+///RUBY ADDED THIS RECENTLY
+
+  async function handleDelete(id){
+    const token = localStorage.getItem("token")
+    const deleteCartProducts = await deleteCartProd(id, token)
+    window.location.reload(true);
+  }
+  console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
+
+  //         <div id="myroutines">
+  //             {userCart.map((element, index) => {
+  //                 return (
+  //                     <div key={`userCart${index}`} id="routinesContainers">
+  //                         <h2 id="MyTitle">Active Cart</h2>
+  //                         <h4 id="subTitles">Creator: {element.userName}</h4>
+  //                         <h4 id="subTitles">Routine: {element.email}</h4>
+  //                         <h4 id="subTitles">Goal: {element.id}</h4>
+  //                         {/* <UpdateRoutine routineId={element.id} />
+  //               <DeleteRoutine routineId={element.id} /> */}
+  //                         {element.products.map((product, index) => {
+  //                             let productId = product.id;
+  //                             return (
+  //                                 <div key={`myroutines${index}`}>
+  //                                     <h2 id='MyTitle'>Active Activity</h2>
+  //                                     <h4 id='subTitles'>Activity Name:{product.title}</h4>
+  //                                     <h5 id='subTitles'>Brand: {product.brand}</h5>
+  //                                     <h5 id='subTitles'>Description: {product.description}</h5>
+
+  //                                     <h5 id='subTitles'>Count: {product.quantity}</h5>
+  //                                     <h5 id='subTitles'>Price:{product.Price}</h5>
+  //                                     <h5 id='subTitles'>
+  //                                         Routine product ID: {product.order_id}
+  //                                     </h5>
+  //                                 </div>
+  //                             );
+  //                         })}
+  //                     </div>
+  //                 );
+  //             })}
+  //         </div>
+  //     );
+  // }
+  //  const handleChange = () => {
+
+  //  };
+
+  //  const handleSubmit = async (event) => {
+  //    event.preventDefault();
+
+  //   ;
+  //  };
 
 //          console.log(total, complete, amount, money,alltotal, "dddd");
 
@@ -136,10 +169,10 @@ const Cart = ({ userInfo, setUserInfo }) => {
                           </h1>
                       <div className='p-3'>
                         <div className='d-flex justify-content-between align-items-center mb-4'>
-
+                        {/* ///RUBY ADDED THIS RECENTLY */}
+                        {authorizationToken === true ? (
                           <div id='myroutines'>
                             {userCart.map((element, index) => {
-                            
                               return (
                                   <div
                                     className="card"
@@ -176,9 +209,8 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                       );
 
                                       return (
-                                        
-                                          <>
-                                       
+                                        <>
+                                      {authorizationToken === true ? (
                                           <div
                                             key={`${product.id}${index}`}
                                             className='card-body cartProducts bg-grey'>
@@ -244,6 +276,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                             </div>
                                           </div>
                                         </div> 
+                                          ) : null}
                                     </>)
                                     })}
                                   </div>)
@@ -260,6 +293,31 @@ const Cart = ({ userInfo, setUserInfo }) => {
                               </h6>
                             </div>
                         </div>
+                        // ruby added this recently
+                        ) :  guestCart.map((element, index)=>{
+                          let productId = element.productId
+                          return(
+                            <div key={`${element.id}`}>    
+                            <h2>{element.title}</h2>
+                            <img style = {{width: "100px"}}src = {element.image}/>
+                            <h5>{element.price}</h5>   
+                            <h5>{element.quantity}</h5>                            
+                            <h4>{element.description}</h4>
+                            <h6
+                              style={{
+                              color: "red",  
+                              fontSize: "25px",
+                              cursor: "pointer",
+                              }}
+                              onClick={() => {
+                              handleGuestDelete(productId);
+                              }}>
+                              X
+                            </h6>                            
+                            </div>
+                          )
+                        })}
+
                             <div className='col-lg-3 bg-grey px-3'>
                               <div className='card bg-primary text-white rounded-3'>
                                 <div className='card-body'>
@@ -325,9 +383,9 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                         id='typeExp'
                                         className='htmlForm-control htmlForm-control-lg'
                                         placeholder='MM/YYYY'
-                                        size='7'
-                                        minLength='7'
-                                        maxLength='7'
+                                        size='6'
+                                        minLength='6'
+                                        maxLength='6'
                                       />
                                       <label
                                         className='htmlForm-label'
