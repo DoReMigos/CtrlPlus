@@ -11,6 +11,7 @@ export default function Navbar() {
           <Link to="/">
             <img src={Logo} style={{ width: "60px", height: "60px" }} />
           </Link>
+          <h2 className="bg-dark" style={{ color: "#60dde2", fontFamily:"monospace", fontSize:"40px" }}>CTRL+</h2>
           <button
             className="navbar-toggler"
             type="button"
@@ -34,19 +35,36 @@ export default function Navbar() {
               </div>
               <li className="nav-item">
                 <div>
-                <Link to="/" className="nav-link">
+                <Link to="/Profile" className="nav-link">
                   {authorizationToken === true ? (
                     <p style={{ color: "#60dde2" }}
+                      className="bg-dark"
+                      value="/">
+                      Profile
+                    </p>) : null}
+                </Link>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div>
+                {authorizationToken === true ? (
+                <Link to="/" className="nav-link">
+                    <p style={{ color: "#60dde2" }}
                     onClick={() => {
-                      localStorage.removeItem("token");
                       alert("You have sucessfully signed out")
-                      window.location.reload(true);
+                      localStorage.removeItem("token");
                     }}
                       className="bg-dark"
                       value="/">
                       Logout 
-                    </p>) : null}
-                </Link>
+                    </p>
+                </Link>) : <Link to="/Login" className="nav-link">
+                    <p style={{ color: "#60dde2", marginRight: "15px" }}
+                      className="bg-dark"
+                      value="/Login">
+                      Login
+                    </p>
+                </Link>}
                 </div>
               </li>
               <li className="nav-item">

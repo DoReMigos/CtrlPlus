@@ -14,7 +14,6 @@ async function addProducttoCart({
     ON CONFLICT ("order_id", "product_id") DO NOTHING
     RETURNING "order_id", "product_id", quantity, "purchased_price", id;
     `, [orderId, productId, quantity, price])
-    // console.log(routine_activity[4],'eeeee')
     return cart_products
   } catch (error){
     console.error("error with addProducttoCart")
@@ -23,7 +22,6 @@ async function addProducttoCart({
 }
 
 async function deleteCartProd(id){
-  console.log(id, "THIS IS ID")
   try{
     const {rows}= await client.query(`
     DELETE FROM cart_products
@@ -31,7 +29,6 @@ async function deleteCartProd(id){
     RETURNING *`
     ,[id])
     const deleted = rows[0]
-    console.log(deleted, "THIS IS ROWS!!!!")
     return deleted
   }catch(error){
     console.log(error)

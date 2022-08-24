@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 export const URL = "http://localhost:4000/api";
 
 //EVERYTHING BELOW HERE IS USER API
@@ -17,7 +16,6 @@ export async function RegisterUser(email, password) {
       }),
     });
     const result = await response.json();
-    console.log(result);
     return result;
   } catch (error) {
     throw error;
@@ -70,25 +68,24 @@ export async function getUserCarts(token, id) {
   }
 }
 
-  export async function createCart (token,userId){
-    try{
-      const response = await fetch(`${URL}/cart/${userId}/orders`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        method: "POST",
-        body:JSON.stringify({
-          userId: userId
-        }),
-      });
-      const result = await response.json()
-      return result
-    }catch(error){
-      console.log(error);
-    }
-  } 
-
+export async function createCart(token, userId) {
+  try {
+    const response = await fetch(`${URL}/cart/${userId}/orders`, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      method: "POST",
+      body: JSON.stringify({
+        userId: userId,
+      }),
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
+  }
+}
 
 //END OF USER API
 
@@ -104,8 +101,8 @@ export async function getAllProducts() {
   return result;
 }
 
-export async function createProduct(
-  {title,
+export async function createProduct({
+  title,
   brand,
   description,
   price,
@@ -114,8 +111,8 @@ export async function createProduct(
   image_2,
   image_3,
   image_4,
-  token}
-) {
+  token,
+}) {
   try {
     const response = await fetch(`${URL}/products`, {
       method: "POST",
@@ -133,7 +130,7 @@ export async function createProduct(
         image_1: image_1,
         image_2: image_2,
         image_3: image_3,
-        image_4: image_4
+        image_4: image_4,
       }),
     });
     const result = response.json();
@@ -170,9 +167,9 @@ export async function updateProduct(
   }
 }
 
-export async function deleteProduct(token, productId){
-  try{
-    const response = await fetch (`${URL}/products/${productId}`,{
+export async function deleteProduct(token, productId) {
+  try {
+    const response = await fetch(`${URL}/products/${productId}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
@@ -181,14 +178,14 @@ export async function deleteProduct(token, productId){
     });
     const result = response.json();
     return result;
-  }catch(error){
+  } catch (error) {
     console.log(error);
   }
 }
 
 export async function getProductByCategory() {
   try {
-    const response = await fetch (`${URL}/products/categories`,{
+    const response = await fetch(`${URL}/products/categories`, {
       headers: {
         "Content-Type": "application/json",
       },
@@ -200,42 +197,40 @@ export async function getProductByCategory() {
   }
 }
 
-
 //END OF PRODUCT
 
-export async function deleteCartProd(id, token){
-  try{
-    const response = await fetch (`${URL}/carts/${id}`,{
+export async function deleteCartProd(id, token) {
+  try {
+    const response = await fetch(`${URL}/carts/${id}`, {
       method: "DELETE",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Bearer ${token}`,
-      }
-    })
-    const result = await response.json()
-    return result
-  }catch(error){
-    console.log(error)
+      },
+    });
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }
 
-export async function updateCartProdQuantity(id, quantity, token){
-  console.log(id, quantity, token, "THIS IS ID QUANTITY TOKEN FROM FRONTEND API")
-  try{
-    const response = await fetch (`${URL}/carts/${id}`,{
+export async function updateCartProdQuantity(id, quantity, token) {
+  try {
+    const response = await fetch(`${URL}/carts/${id}`, {
       method: "PATCH",
-      headers:{
-        'Content-Type' : 'application/json',
-        'Authorization': `Bearer ${token}`
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        quantity: quantity
-      })
-    })
-    const result = response.json()
-    return result
-  }catch(error){
-    console.log(error)
+        quantity: quantity,
+      }),
+    });
+    const result = response.json();
+    return result;
+  } catch (error) {
+    console.log(error);
   }
 }
 
@@ -249,15 +244,19 @@ export async function getAPIHealth() {
   }
 }
 
-export async function addProductToCart(productId, price, order_id,quantity,token){
-  console.log(productId, order_id, price)
-
-  try{
+export async function addProductToCart(
+  productId,
+  price,
+  order_id,
+  quantity,
+  token
+) {
+  try {
     const response = await fetch(`${URL}/orders/${order_id}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        'Authorization': `Bearer ${token}`,
+        Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
         productId: productId,
@@ -267,7 +266,7 @@ export async function addProductToCart(productId, price, order_id,quantity,token
     });
     const result = response.json();
     return result;
-  }catch(error){
+  } catch (error) {
     console.log(error);
   }
 }

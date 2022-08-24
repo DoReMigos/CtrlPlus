@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import "./Profile.css";
 
 export default function Profile({userInfo, setUserInfo}) {
+  const authorizationToken = localStorage.getItem("token") ? true : false;
  
   useEffect(() => {
     let token = localStorage.getItem("token");
@@ -20,8 +21,8 @@ export default function Profile({userInfo, setUserInfo}) {
   }, []);
   return (
     <>
+         {authorizationToken === true ? (  
      <div className="pageContainer vh-100" style={{ backgroundImage: "url(https://pbs.twimg.com/media/FOZKlglUcAIoB2u?format=jpg&name=large)",}}>
-           
            <h2>Welcome to CTRL+ 
             <h1 className="mt-3"> {userInfo.email} </h1>
             <a className="btn btn-primary btn-lg px-4 me-sm-3"
@@ -39,6 +40,14 @@ export default function Profile({userInfo, setUserInfo}) {
           </Link>
            </h2>
    </div>
+             ) : 
+             <div className="pageContainer vh-100" style={{ backgroundImage: "url(https://pbs.twimg.com/media/FOZKlglUcAIoB2u?format=jpg&name=large)",}}>
+             <h2>Please Login Or Register For User Profile 
+              <hr></hr>
+              <a className="btn btn-primary btn-lg px-4 me-sm-3"
+                          href="/store">Browse Store</a>
+             </h2>
+     </div>}
   </>
   );
 }

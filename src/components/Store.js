@@ -70,7 +70,7 @@ export default function Store({ userInfo, setUserInfo }) {
   return (
     <>
       {loading === false ?
-        <div className="bg-dark">
+        <div style={{background:"black"}}>
           <h1 className="text-center" style={{ color: "white" }}>Store</h1>
 
           {isAdmin ? (
@@ -87,19 +87,19 @@ export default function Store({ userInfo, setUserInfo }) {
           ) : null}
 
 
-          <div className="storeContainer bg-dark">
+          <div className="storeContainer" style={{background:"black"}}>
             {currentRecords.length
               ? currentRecords.map((products, index) => {
                 const productId = products.id
                 return (
                   <div key={`${products.id}`} className="mx-auto my-5">
 
-                    <div className="card productsCard" style={{ background: "gray" }}>
+                    <div className="card productsCard" style={{ background: "#212529" }}>
                       <div className="card-body d-flex flex-row">
                         <div>
-                          <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px" }}>{products.title}</h5>
+                          <h5 className="card-title font-weight-bold mb-2 text-center" style={{ height: "50px", color:"white"}}>{products.title}</h5>
                           <div className="priceCartBar">
-                            <div className="card-text">{products.price}</div>
+                            <div className="card-text" style={{color:"white"}}>{products.price}</div>
                             <AddToCart products={products} userInfo={userInfo} />
                           </div>
 
@@ -113,7 +113,7 @@ export default function Store({ userInfo, setUserInfo }) {
                                 </button>
                               </div>
                               :
-                              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                              <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', color:"darkgray" }}>
                                 <div>{products.description}</div>
                                 <button onClick={() => { setShowDescription(null) }} className="btn btn-dark">Hide Description</button>
                               </div>}
@@ -157,3 +157,4 @@ export default function Store({ userInfo, setUserInfo }) {
     </>
   )
 }
+

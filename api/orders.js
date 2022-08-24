@@ -8,20 +8,14 @@ const { JWT_SECRET } = process.env;
 
 
 apiRouter.post('/:order_id', requireUser, async (req,res,next)=>{
-  console.log("adding product order")
   const { productId, quantity,price } = req.body;
-  console.log(productId,quantity,price,'Product id quantity price ')
   const daatat = Cart.getCartByUserId(req.user.id)
-  console.log(daatat,'getcartbyid')
   const cartId = daatat.id
   const data = {};
  const orderId = req.params.order_id;
   let  = productId
   try {
-    // const product = await Products.getProductById(productId)
-    // console.log(product)
     const neworder = await Order.addProducttoCart({orderId, productId, quantity, price})
-    console.log(neworder,'neworder')
     res.send(neworder)
     
   } catch (error) {
@@ -29,8 +23,7 @@ apiRouter.post('/:order_id', requireUser, async (req,res,next)=>{
   }
 })
 //DELETE/api/cart/order_id
-apiRouter.delete("/:order_id", requireUser, async (req, res, next) => {
-  console.log("HELLO DELETE")
+apiRouter.delete("/:order_id", requireUser, async (req, res, next) => { 
     const id = req.params.id
   try {
     const order = await Order.deleteCartProd(id);
