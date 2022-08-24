@@ -34,6 +34,18 @@ export default function Navbar() {
               </div>
               <li className="nav-item">
                 <div>
+                <Link to="/Profile" className="nav-link">
+                  {authorizationToken === true ? (
+                    <p style={{ color: "#60dde2" }}
+                      className="bg-dark"
+                      value="/">
+                      Profile
+                    </p>) : null}
+                </Link>
+                </div>
+              </li>
+              <li className="nav-item">
+                <div>
                 <Link to="/" className="nav-link">
                   {authorizationToken === true ? (
                     <p style={{ color: "#60dde2" }}

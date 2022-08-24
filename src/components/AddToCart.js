@@ -39,7 +39,7 @@ export default function AddToCart({ products, userInfo }) {
       quantity,
       token
     );
-
+alert("Product Added To Cart")
     return response;
   }
   return (
