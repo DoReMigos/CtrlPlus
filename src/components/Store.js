@@ -29,7 +29,7 @@ export default function Store({ userInfo, setUserInfo }) {
       setAllProducts(returnProducts)
         ;
     }
-    setTimeout(() => setLoading(false), 2000)
+    setTimeout(() => setLoading(false), 1000)
     fetchProducts();
   }, [])
 
