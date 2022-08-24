@@ -9,15 +9,9 @@ const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
   const authorizationToken = localStorage.getItem("token") ? true : false;
   const [cartPrice, setCartPrice] = useState(0)
-    let navigate = useNavigate();
-
+  let navigate = useNavigate();
   const token = localStorage.getItem('token')
-  // const promise = getUserProfile(token)
-  // const promiseCart = getUserCarts(token, userInfo.id);
-///RUBY ADDED THIS RECENTLY
   let guestCart= JSON.parse(localStorage.getItem("products"))
-///RUBY ADDED THIS RECENTLY
-
   console.log(userInfo, token);
   const getMyInfo = async () => {
     const response = await getUserProfile(token);
@@ -34,27 +28,17 @@ const Cart = ({ userInfo, setUserInfo }) => {
   let alltotal = 0
   let final = 0
 
-  //  useEffect(() => {
-  //    promise.then((data) => {
-  //     console.log(data, 'data')
-  //      setUserInfo(data.user);
-  //      setUserCart(data.products);
-  //    });
-  //  }, []);
-  //   console.log(price,'price')
-  // const necart = Promise.resolve(cartPriceTotal())
   useEffect(() => {
     
     getMyInfo();
   }, []);
-///RUBY ADDED THIS RECENTLY
+
   async function handleGuestDelete(productId){
     let storageProducts = JSON.parse(localStorage.getItem('products'));
     let products = storageProducts.filter(product => product.productId !== productId );
     localStorage.setItem('products', JSON.stringify(products));
     window.location.reload(true);
   }
-///RUBY ADDED THIS RECENTLY
 
   async function handleDelete(id){
     const token = localStorage.getItem("token")
@@ -63,78 +47,9 @@ const Cart = ({ userInfo, setUserInfo }) => {
   }
   console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
 
-  //         <div id="myroutines">
-  //             {userCart.map((element, index) => {
-  //                 return (
-  //                     <div key={`userCart${index}`} id="routinesContainers">
-  //                         <h2 id="MyTitle">Active Cart</h2>
-  //                         <h4 id="subTitles">Creator: {element.userName}</h4>
-  //                         <h4 id="subTitles">Routine: {element.email}</h4>
-  //                         <h4 id="subTitles">Goal: {element.id}</h4>
-  //                         {/* <UpdateRoutine routineId={element.id} />
-  //               <DeleteRoutine routineId={element.id} /> */}
-  //                         {element.products.map((product, index) => {
-  //                             let productId = product.id;
-  //                             return (
-  //                                 <div key={`myroutines${index}`}>
-  //                                     <h2 id='MyTitle'>Active Activity</h2>
-  //                                     <h4 id='subTitles'>Activity Name:{product.title}</h4>
-  //                                     <h5 id='subTitles'>Brand: {product.brand}</h5>
-  //                                     <h5 id='subTitles'>Description: {product.description}</h5>
-
-  //                                     <h5 id='subTitles'>Count: {product.quantity}</h5>
-  //                                     <h5 id='subTitles'>Price:{product.Price}</h5>
-  //                                     <h5 id='subTitles'>
-  //                                         Routine product ID: {product.order_id}
-  //                                     </h5>
-  //                                 </div>
-  //                             );
-  //                         })}
-  //                     </div>
-  //                 );
-  //             })}
-  //         </div>
-  //     );
-  // }
-  //  const handleChange = () => {
-
-  //  };
-
-  //  const handleSubmit = async (event) => {
-  //    event.preventDefault();
-
-  //   ;
-  //  };
-
-//          console.log(total, complete, amount, money,alltotal, "dddd");
-
-//          console.log("total:");
-//          let arr3 = element.products;
-//          let cost = arr2[0].products[0].price;
-//          setCartPrice(alltotal)
-//          console.log(cost, arr2, "cost");
-//         return alltotal
-//        })};
-      
-//     } catch (error) {
-//       console.log(error)
-//     }
-  
-//   }
-  // useEffect(() => {
-    
-  //   cartPriceTotal()
-  //    let bigmoney = cartPriceTotal();
-  //    setCartPrice(bigmoney);
-  //    let arr4 = [];
-  //    console.log(bigmoney, cartPrice);
-  //  }, [userCart]);
-
-  // cartPriceTotal()
   async function handleCheckout(event, alltotal) {
-    // const token = localStorage.getItem("token");
    
-    navigate('/Checkout')
+    navigate("/Checkout")
   }
   console.log(
     handleCheckout,
@@ -325,8 +240,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                 <div className='card-body'>
                                   <div className='d-flex justify-content-between align-items-center mb-4'>
                                     <h5 className='mb-0'>Card details</h5>
-                                    {/* <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/avatar-6.webp"
-                                                                                                className="img-fluid rounded-3" styles="width: 45px;" alt="Avatar"></img> */}
+                                  
                                   </div>
                                   <p>We accept</p>
                                   <img
@@ -434,9 +348,9 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                   </div>
 
                                   <button
-                                    type='submit'
+                                    type='btn'
                                     className='btn btn-info btn-block btn-lg'
-                                    onSubmit={(e)=> handleCheckout(e,alltotal) }>
+                                    onClick={handleCheckout}>
                                     <div className='d-flex justify-content-between'>
                                       <span>
                                         </span> 
