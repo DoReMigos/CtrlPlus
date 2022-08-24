@@ -23,15 +23,12 @@ export default function AddToCart({ products, userInfo }) {
       image: image,
     });
     localStorage.setItem("products", JSON.stringify(products));
+    alert("Product Added To Cart");
   }
   async function handleAdd() {
     const token = localStorage.getItem("token");
     const pdata = await getUserCarts(token, userInfo.id);
-
-    console.log(pdata, "dapafs");
-
     let order_id = pdata[0].id;
-    console.log(order_id);
     const response = await addProductToCart(
       productId,
       price,
@@ -39,7 +36,7 @@ export default function AddToCart({ products, userInfo }) {
       quantity,
       token
     );
-
+    alert("Product Added To Cart");
     return response;
   }
   return (
