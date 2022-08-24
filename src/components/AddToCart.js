@@ -62,8 +62,8 @@ export default function AddToCart({ products, userInfo }) {
           onClick={() => {
             addProduct();
           }}
-          className="btn btn-dark"
-          style={{ height: "35px", width: "110px" }}
+          className="btn"
+          style={{ height: "35px", width: "110px", backgroundColor:"black"}}
         >
           Add to Cart
         </button>

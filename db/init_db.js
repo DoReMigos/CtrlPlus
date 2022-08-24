@@ -159,11 +159,6 @@ async function createInitialCarts() {
       user_id: 5,
       created_at: `${date.toLocaleDateString()}`,
       isPurchased: false,
-    },
-    {
-      user_id: 6,
-      created_at: `${date.toLocaleDateString()}`,
-      isPurchased: false,
     }
   ];
   

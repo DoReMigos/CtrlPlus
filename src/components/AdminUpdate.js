@@ -24,31 +24,31 @@ export default function AdminUpdate({products}){
     return (
         <form onSubmit ={handleSubmit}>
             <div>
-                <hr></hr>
-                <label>Modify Price:</label>
+                <hr style={{color:"white"}}></hr>
+                <label style={{color:"darkgray"}}>Modify Price:</label>
                 <input
                 type = "text"
                 placeholder = "Price"
                 value = {price}
                 style ={{width: "80px", cursor:"pointer", border:"none", marginLeft:"5px"}}
                 onChange = {(event) => setPrice(event.target.value)}/>
-                <hr></hr>
-                <label> Modify Quantity:</label>
+                <hr style={{color:"white"}}></hr>
+                <label style={{color:"darkgray"}}> Modify Quantity:</label>
                <input
                 type = "number"
                 placeholder = "Inventory"
                 value = {inventory}
                 style ={{width: "80px", cursor:"pointer", border:"none", marginLeft:"5px"}}
                 onChange = {(event)=>setInventory(event.target.value)}/>
-                <hr></hr>
-                <label> Description:</label>
+                <hr style={{color:"white"}}></hr>
+                <label style={{color:"darkgray"}}> Description:</label>
                 <input
                 type = "text"
                 placeholder = "description"
                 value = {description}
                 style = {{height: "auto", border:"none", marginLeft:"5px"}}
                 onChange = {(event)=> setdescription(event.target.value)}></input>
-                <hr></hr>
+                <hr style={{color:"white"}}></hr>
             </div>
             <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>
             <button type="submit" className="btn btn-dark"  style ={{width: "80px", cursor:"pointer", marginBottom: "10px", marginTop:"10px"}} > Submit</button>
