@@ -6,7 +6,7 @@ import { updateProduct } from "../databaseAdapter";
 export default function AdminUpdate({products}){
     const [price, setPrice] = useState(products.price)
     const [inventory, setInventory] = useState(products.inventory)
-    const [description, setdescription] = useState(products.description)
+    const [description, setDescription] = useState(products.description)
     const productId = products.id
 
  async function handleSubmit(event){
@@ -47,7 +47,7 @@ export default function AdminUpdate({products}){
                 placeholder = "description"
                 value = {description}
                 style = {{height: "auto", border:"none", marginLeft:"5px"}}
-                onChange = {(event)=> setdescription(event.target.value)}></input>
+                onChange = {(event)=> setDescription(event.target.value)}></input>
                 <hr style={{color:"white"}}></hr>
             </div>
             <div style ={{display:'flex', flexDirection: 'column', alignItems: 'center'}}>

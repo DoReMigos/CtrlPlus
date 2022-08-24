@@ -12,7 +12,6 @@ export default function AdminCreate(){
     const [image_1, setImage_1] = useState("")
     const [image_2, setImage_2] = useState("")
     const [image_3, setImage_3] = useState("")
-    const [image_4, setImage_4] = useState("")
 
  async function handleSubmit(event){
     event.preventDefault();
@@ -28,7 +27,6 @@ export default function AdminCreate(){
         image_1,
         image_2,
         image_3,
-        image_4,
         token
     });
     window.location.reload(true);
@@ -38,7 +36,7 @@ export default function AdminCreate(){
     return (
         <form className="text-center" onSubmit ={handleSubmit}>
             <div>
-                <h6 style={{ color: "white" }}> Create New Product</h6>
+                <h5 style={{ color: "white" }}> Create New Product</h5>
             <input
                 type = "text"
                 placeholder = "Item Name*"
@@ -54,6 +52,7 @@ export default function AdminCreate(){
                 placeholder = "Price*"
                 required={true}
                 onChange = {(event) => setPrice(event.target.value)}></input>
+               <hr></hr>
                <input
                 type = "number"
                 placeholder = "Inventory*"
@@ -69,6 +68,7 @@ export default function AdminCreate(){
                 placeholder = "Description*"
                 required={true}
                 onChange = {(event)=> setDescription(event.target.value)}></input>
+               <hr></hr>
                 <input
                 type = "text"
                 placeholder = "Item image url"
@@ -81,12 +81,9 @@ export default function AdminCreate(){
                 type = "text"
                 placeholder = "Item image url"
                 onChange = {(event)=> setImage_3(event.target.value)}></input>
-                <input
-                type = "text"
-                placeholder = "Item image url"
-                onChange = {(event)=> setImage_4(event.target.value)}></input>
+               <hr></hr>
             </div>
-            <button type="submit">Create item</button>
+            <button type="submit" className="btn btn-secondary">Create item</button>
 
         </form>
     )
