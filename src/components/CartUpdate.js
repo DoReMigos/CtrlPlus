@@ -15,10 +15,11 @@ export default function CartUpdate({product}){
     return (
         <form onSubmit ={handleSubmit}>
             <div>
+            <label style={{color:"darkgray"}}> Quantity:</label>
                <input
                 type = "number"
                 placeholder = "quantity"
-                style ={{width: "50px", border:"none", cursor:"pointer"}}
+                style ={{width: "50px", border:"none", cursor:"pointer", marginLeft:"5px"}}
                 value = {quantity}
                 onChange = {(event)=>setQuantity(event.target.value)}></input>
             </div>
