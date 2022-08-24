@@ -144,7 +144,7 @@ export async function updateProduct(
   productId,
   price,
   inventory,
-  category,
+  description,
   token
 ) {
   try {
@@ -157,7 +157,7 @@ export async function updateProduct(
       body: JSON.stringify({
         price: price,
         inventory: inventory,
-        category: category,
+       description:description
       }),
     });
     const result = response.json();
