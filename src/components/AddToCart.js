@@ -63,7 +63,7 @@ export default function AddToCart({ products, userInfo }) {
             addProduct();
           }}
           className="btn btn-dark"
-          style={{ height: "35px", width: "110px" }}
+          style={{ height: "35px", width: "80px" }}
         >
           Add to Cart
         </button>
