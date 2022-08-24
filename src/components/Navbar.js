@@ -11,6 +11,7 @@ export default function Navbar() {
           <Link to="/">
             <img src={Logo} style={{ width: "60px", height: "60px" }} />
           </Link>
+          <h2 className="bg-dark" style={{ color: "#60dde2", fontFamily:"monospace", fontSize:"40px" }}>CTRL+</h2>
           <button
             className="navbar-toggler"
             type="button"
