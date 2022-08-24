@@ -13,3 +13,21 @@
 #profileContainer{
   display:flex;
 }
+
+.pageContainer h2{
+  position: absolute;
+  margin-top: 200px;
+  margin-left: 50px;
+  color: white;
+  width: 1000px;
+  height: 100px;
+
+  font-size: 75px;
+}
+
+.pageContainer h1{
+  color: aqua;
+  margin-top: -15px;
+  font-size: 65px;
+  font-weight: bold
+}

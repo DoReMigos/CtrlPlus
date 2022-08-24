@@ -54,7 +54,7 @@ const Home = () => {
               </div>
             </div>
           </section>
-          <section className="bg-light pt-5 pb-5" style={{backgroundImage: "url(https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/mw2/home/reveal/new-era/new_era-mw2.jpg)"}} id="services">
+          <section className="bg-white pt-5 pb-5" style={{backgroundImage: "url(https://www.callofduty.com/content/dam/atvi/callofduty/cod-touchui/mw2/home/reveal/new-era/new_era-mw2.jpg)"}} id="services">
             <div className="container px-4">
                 <div className="row gx-4 justify-content-end">
                     <div className="col-lg-7 text-success mb-3">
@@ -82,10 +82,10 @@ Mark your calendars for September 15: The future of Call of Duty® will be revea
                         </div>
                         <div className="ms-4">
                           <p className="mb-1">
-                            The clicky sound on the Logitech G715 keyboard is really CRISP!
+                            The clicky sound on the Logitech G915 keyboard is really CRISP!
                           </p>
                           <div className="small text-muted">
-                            - Jessica, South Korea
+                            - Jessica, Illinois
                           </div>
                         </div>
                       </div>
@@ -102,12 +102,13 @@ Mark your calendars for September 15: The future of Call of Duty® will be revea
                           With the SteelSeries multi-platform gaming headset, I can finally hear whether an enemy is above or below me in Warzone!
                           </p>
                           <div className="small text-muted">
-                            - Ruby, USA
+                            - Ruby, Texas
                           </div>
                         </div>
                       </div>
                     </div>
                   </div>
+                
                   
                 </div>
               </div>
