@@ -51,7 +51,6 @@ export default function Navbar() {
                     <p style={{ color: "#60dde2" }}
                     onClick={() => {
                       localStorage.removeItem("token");
-                      alert("You have sucessfully signed out")
                       window.location.reload(true);
                     }}
                       className="bg-dark"
