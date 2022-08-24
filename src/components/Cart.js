@@ -9,6 +9,8 @@ const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
   const authorizationToken = localStorage.getItem("token") ? true : false;
   const [cartPrice, setCartPrice] = useState(0)
+    let navigate = useNavigate();
+
   const token = localStorage.getItem('token')
   // const promise = getUserProfile(token)
   // const promiseCart = getUserCarts(token, userInfo.id);
@@ -129,10 +131,9 @@ const Cart = ({ userInfo, setUserInfo }) => {
 
   // cartPriceTotal()
   async function handleCheckout(event, alltotal) {
-    //  useLinkClickHandler({ To: "/Checkout" }, alltotal);
     // const token = localStorage.getItem("token");
-    // const navigate = useNavigate('/Checkout')
-    // navigate('/Checkout')
+   
+    navigate('/Checkout')
   }
   console.log(
     handleCheckout,
@@ -432,14 +433,14 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                   </div>
 
                                   <button
-                                    type='button'
+                                    type='submit'
                                     className='btn btn-info btn-block btn-lg'
-                                    onClick={(e)=> handleCheckout(e,alltotal) }>
+                                    onSubmit={(e)=> handleCheckout(e,alltotal) }>
                                     <div className='d-flex justify-content-between'>
                                     <span>${alltotal+20+10}</span> <br></br>
                                       <span>
                                         Checkout
-                                        <Link to="/Checkout"></Link>
+                                        
                                         <i typeof="btn" className='fas fa-long-arrow-alt-right ms-2'></i>
                                       </span>
                                     </div>
