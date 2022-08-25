@@ -5,25 +5,24 @@ import CartUpdate from "./CartUpdate"
 import Checkout from './Checkout'
 import { Link, useLinkClickHandler } from "react-router-dom";
 import "./Cart.css"
-// let navigate = useNavigate()
+
 const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
   const [guestsCart, SetGuestsCart] = useState([])
-  const authorizationToken = localStorage.getItem("token") ? true : false;
   const [cartPrice, setCartPrice] = useState(0)
   let navigate = useNavigate();
   const token = localStorage.getItem('token')
+  const authorizationToken = localStorage.getItem("token") ? true : false;
   let guestCart = JSON.parse(localStorage.getItem("products"))
-  // SetGuestsCart(guestCart)
-  console.log(userInfo, token);
+
   const getMyInfo = async () => {
     const response = await getUserProfile(token);
-    console.log(token);
-    console.log(response, "Message Please Read");
+
+
     setUserInfo(response);
     const datad = await getUserCarts(token, userInfo.id);
     setUserCart(datad);
-    console.log(datad);
+
   };
   let total
   let amount
@@ -48,24 +47,19 @@ const Cart = ({ userInfo, setUserInfo }) => {
     const deleteCartProducts = await deleteCartProd(id, token)
     window.location.reload(true);
   }
-  console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25")
+
 
   async function handleCheckout(event, alltotal) {
 
     navigate("/Checkout")
   }
-  console.log(
-    handleCheckout,
-    "THIS IS DELETE CART PRODUCSTS LINE 25",
-    userCart,
-    "USERCART"
-  );
+
   async function handleDelete(id) {
     const token = localStorage.getItem("token")
     const deleteCartProducts = await deleteCartProd(id, token)
     window.location.reload(true);
   }
-  console.log(handleDelete, "THIS IS DELETE CART PRODUCSTS LINE 25", userCart, 'USERCART')
+
 
   return (
     <>
@@ -90,8 +84,8 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                   className='card'
                                   key={element.id}
                                   style={{
-                                    width: "800px",
-                                    height: "700px",
+                                    width: "50vw",
+                                    height: "60vw",
                                     overflow: "scroll",
                                     background: "#212529",
                                   }} >
@@ -177,11 +171,11 @@ const Cart = ({ userInfo, setUserInfo }) => {
                          
                            guestCart.map((element, index) => {
                             let productId = element.productId;
-                            console.log(element)
+     
                             const id = productId;
                             total = element.price;
-                            console.log(total, "total");
-                            let arr4;
+                
+
                             let cur_re = /\D*(\d+|\d.*?\d)(?:\D+(\d{2}))?\D*$/;
                             let parts = cur_re.exec(total);
                             let number = parseFloat(
@@ -193,7 +187,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                             let complete = number.toFixed(2) * amount;
                             alltotal += complete;
                             let money = `$${complete.toFixed(2)}`;
-                            console.log(money, alltotal, complete, amount, 'guest cart money totals')
+  
 
                             return (<>
                              { guestCart ? (
@@ -262,7 +256,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                               </div>)
                               
                               :(
-                              console.log(money,'ternary!!!'),
+       
                               <h3>'Please Add A Product to Checkout!'</h3> )}</>) }))}
                               
                            
