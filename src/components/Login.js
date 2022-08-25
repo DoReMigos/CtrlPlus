@@ -22,7 +22,7 @@ export default function LoggedIn() {
     const token = await userLogin(email, password);
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
-    navigate("/Store");
+    navigate("/Profile");
   };
   return (
     <section id="registerSection">
