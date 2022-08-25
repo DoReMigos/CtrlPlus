@@ -133,16 +133,12 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                               <img
                                                 src={product.image_1}
                                                 className='img-fluid rounded-3 justify-center'
-                                                alt='Cotton T-shirt'
-<<<<<<< HEAD
-                                                style={{ objectFit: "cover", width:"100%", height:"300px"}}></img>
-=======
+                                                alt='products image'
                                                 style={{
                                                   objectFit: "contain",
                                                   width: "100%",
                                                   height: "300px",
                                                 }}></img>
->>>>>>> origin/deploy
                                             </div>
                                             <div className='cartInformation'>
                                               <div>
