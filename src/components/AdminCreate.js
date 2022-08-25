@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { createProduct } from "../databaseAdapter";
+import "./Store.css"
 
 
 export default function AdminCreate(){

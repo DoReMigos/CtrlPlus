@@ -38,7 +38,6 @@ export default function Store({ userInfo, setUserInfo }) {
     async function getUserInfo() {
       try {
         const response = await getUserProfile(token)
-        console.log(response, "Message Please Read");
         setUserInfo(response);
       } catch (error) {
         console.log(error)

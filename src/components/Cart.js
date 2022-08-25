@@ -133,7 +133,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                               <img
                                                 src={product.image_1}
                                                 className='img-fluid rounded-3 justify-center'
-                                                alt='Cotton T-shirt'
+                                                alt='products image'
                                                 style={{
                                                   objectFit: "contain",
                                                   width: "100%",
