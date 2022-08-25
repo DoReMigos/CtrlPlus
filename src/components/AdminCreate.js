@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { createProduct } from "../databaseAdapter";
+import "./Store.css"
 
 
 export default function AdminCreate(){
@@ -86,7 +87,7 @@ export default function AdminCreate(){
                 placeholder = "Item image url"
                 onChange = {(event)=> setImage_4(event.target.value)}></input>
             </div>
-            <button type="submit">Create item</button>
+            <button className="btn btn-dark" type="submit">Create item</button>
 
         </form>
     )
