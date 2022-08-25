@@ -83,7 +83,7 @@ export default function Register() {
                       </button>
                     </div>
                     <p className="text-center text-muted mt-5 mb-0">
-                     <p> Have already an account?</p>
+                     <p> Already have an account?</p>
                       <Link to="/Login">
                         <u>Login here</u>
                       </Link>

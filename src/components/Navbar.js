@@ -1,15 +1,16 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 let Logo = require("./CtrlPlusLogo.png");
 
 export default function Navbar() {
   const authorizationToken = localStorage.getItem("token") ? true : false;
+  const navigate = useNavigate()
   return (
     <div>
       <nav className="navbar navbar-expand-lg navbar-light bg-dark px-3">
         <div className="container-fluid">
           <Link to="/">
-            <img src={Logo} style={{ width: "60px", height: "60px" }} />
+            <img src={Logo} style={{ width: "60px", height: "60px" }} alt ="Logo for Ctrl+" />
           </Link>
           <h2 className="bg-dark" style={{ color: "#60dde2", fontFamily:"monospace", fontSize:"40px" }}>CTRL+</h2>
           <button
@@ -53,6 +54,8 @@ export default function Navbar() {
                     onClick={() => {
                       alert("You have sucessfully signed out")
                       localStorage.removeItem("token");
+                      navigate("./")
+                      window.location.reload(true);
                     }}
                       className="bg-dark"
                       value="/">
