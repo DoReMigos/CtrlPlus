@@ -8,11 +8,13 @@ import "./Cart.css"
 // let navigate = useNavigate()
 const Cart = ({ userInfo, setUserInfo }) => {
   const [userCart, setUserCart] = useState([]);
+  const [guestsCart, SetGuestsCart] = useState([])
   const authorizationToken = localStorage.getItem("token") ? true : false;
   const [cartPrice, setCartPrice] = useState(0)
   let navigate = useNavigate();
   const token = localStorage.getItem('token')
   let guestCart = JSON.parse(localStorage.getItem("products"))
+  // SetGuestsCart(guestCart)
   console.log(userInfo, token);
   const getMyInfo = async () => {
     const response = await getUserProfile(token);
@@ -69,41 +71,45 @@ const Cart = ({ userInfo, setUserInfo }) => {
     <>
       <section className='h-100 h-custom ' style={{ background: "black" }}>
         <div className='container py-5 h-100'>
-          <div className='row d-flex justify-content-center align-items-center h-100' >
-            <div className='col-12' >
-              <div className='card-body p-0' >
+          <div className='row d-flex justify-content-center align-items-center h-100'>
+            <div className='col-12'>
+              <div className='card-body p-0'>
                 <div className='row g-0'>
-                  <div className='col-lg-12' >
+                  <div className='col-lg-12'>
                     <h1 className='fw-bold mb-0 text-white text-center'>
-                      Shopping Cart 
+                      Shopping Cart
                     </h1>
-                    <hr style={{color:"white"}}></hr>
+                    <hr style={{ color: "white" }}></hr>
                     <div className='p-3'>
                       <div className='d-flex justify-content-between align-items-center mb-4'>
-
                         {authorizationToken === true ? (
                           <div>
                             {userCart.map((element, index) => {
                               return (
                                 <div
-                                  className="card"
+                                  className='card'
                                   key={element.id}
-                                  style={{ background: "#212529" }}>
+                                  style={{
+                                    width: "800px",
+                                    height: "700px",
+                                    overflow: "scroll",
+                                    background: "#212529",
+                                  }} >
                                   {element.products.map((product, index) => {
                                     const id = product.id;
-                                    total = product.price
-                                    let arr4
+                                    total = product.price;
+                                    let arr4;
                                     let cur_re =
                                       /\D*(\d+|\d.*?\d)(?:\D+(\d{2}))?\D*$/;
                                     let parts = cur_re.exec(total);
                                     let number = parseFloat(
                                       parts[1].replace(/\D/, "") +
-                                      "." +
-                                      (parts[2] ? parts[2] : "00")
+                                        "." +
+                                        (parts[2] ? parts[2] : "00")
                                     );
                                     let amount = product.quantity;
                                     let complete = number.toFixed(2) * amount;
-                                    alltotal += complete
+                                    alltotal += complete;
                                     let money = `$${complete.toFixed(2)}`;
 
                                     return (
@@ -112,23 +118,31 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                           <div
                                             key={`${product.id}${index}`}
                                             className='card-body cartProducts'>
-                                            <h4 id='MyTitle'
-                                              style={{ border: 'thin 1px white', borderTopStyle: 'groove', borderTopColor: "white", color: "white" }}
-                                            >
+                                            <h4
+                                              id='MyTitle'
+                                              style={{
+                                                border: "thin 1px white",
+                                                borderTopStyle: "groove",
+                                                borderTopColor: "white",
+                                                color: "white",
+                                              }}>
                                               {product.title}
                                             </h4>
                                             <hr style={{ color: "white" }}></hr>
                                             <div>
                                               <img
                                                 src={product.image_1}
-                                                className='img-fluid rounded-3'
+                                                className='img-fluid rounded-3 justify-center'
                                                 alt='Cotton T-shirt'
-                                                style={{ objectFit: "cover", maxWidth: "700px", maxHeight:"300px"}}></img>
+                                                style={{
+                                                  objectFit: "contain",
+                                                  width: "100%",
+                                                  height: "300px",
+                                                }}></img>
                                             </div>
-                                            <div className="cartInformation">
+                                            <div className='cartInformation'>
                                               <div>
-                                                <CartUpdate
-                                                  product={product} />
+                                                <CartUpdate product={product} />
                                                 <h6
                                                   style={{
                                                     color: "red",
@@ -141,96 +155,129 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                                   x remove product from cart
                                                 </h6>
                                               </div>
-                                              <div >
-                                                <h6 style={{ color: "darkgray" }}>
+                                              <div>
+                                                <h6
+                                                  style={{ color: "darkgray" }}>
                                                   Price:{product.price}
                                                 </h6>
                                               </div>
                                             </div>
                                           </div>
                                         ) : null}
-                                      </>)
+                                      </>
+                                    );
                                   })}
-                                </div>)
-
+                                </div>
+                              );
                             })}
                           </div>
-                        ) :
-
-                          guestCart.map((element, index) => {
-                            let productId = element.productId
-
+                         ) :( 
+                    
+                           
+                         
+                           guestCart.map((element, index) => {
+                            let productId = element.productId;
+                            console.log(element)
                             const id = productId;
-                            total = element.price
-                            let arr4
-                            let cur_re =
-                              /\D*(\d+|\d.*?\d)(?:\D+(\d{2}))?\D*$/;
+                            total = element.price;
+                            console.log(total, "total");
+                            let arr4;
+                            let cur_re = /\D*(\d+|\d.*?\d)(?:\D+(\d{2}))?\D*$/;
                             let parts = cur_re.exec(total);
                             let number = parseFloat(
                               parts[1].replace(/\D/, "") +
-                              "." +
-                              (parts[2] ? parts[2] : "00")
+                                "." +
+                                (parts[2] ? parts[2] : "00")
                             );
-                            let amount = element.quantity;
+                            let amount = 1
                             let complete = number.toFixed(2) * amount;
-                            alltotal += complete
+                            alltotal += complete;
                             let money = `$${complete.toFixed(2)}`;
+                            console.log(money, alltotal, complete, amount, 'guest cart money totals')
 
-                            return (
+                            return (<>
+                             { guestCart ? (
                               <div
-                                  className="card"
-                                  key={element.id}
-                                  style={{ background: "#212529"}}>
+                                className='card col-3 align-items-center'
+                                key={element.id}
+                                style={{ background: "#212529" }}>
+                                <div
+                                  key={`${element.id}`}
+                                  className='card-body cartProducts'>
+                                  <h4
+                                    id='MyTitle'
+                                    style={{
+                                      border: "thin 1px white",
+                                      borderTopStyle: "groove",
+                                      borderTopColor: "white",
+                                      color: "white",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                    }}>
+                                    {element.title}
+                                  </h4>
+                                  <hr style={{ color: "white" }}></hr>
                                   <div
-                                    key={`${element.id}`}
-                                    className='card-body cartProducts'>
-                                    <h4 id='MyTitle'
-                                      style={{ border: 'thin 1px white', borderTopStyle: 'groove', borderTopColor: "white", color: "white" }}
-                                    >
-                                      {element.title}
-                                    </h4>
-                                    <hr style={{ color: "white" }}></hr>
+                                    style={{
+                                      border: "thin 1px white",
+                                      borderTopStyle: "groove",
+                                      borderTopColor: "white",
+                                      color: "white",
+                                      display: "flex",
+                                      justifyContent: "center",
+                                    }}>
+                                    <img
+                                      src={element.image}
+                                      className='img-fluid rounded-3'
+                                      alt='Cotton T-shirt'
+                                      style={{
+                                        objectFit: "contain",
+                                        width: "300px",
+                                        height: "200px",
+                                        marginBottom: "5px",
+                                      }}></img>
+                                  </div>
+                                  <div className='cartInformation'>
                                     <div>
-                                      <img
-                                        src={element.image}
-                                        className='img-fluid rounded-3'
-                                        alt='Cotton T-shirt'
-                                        style={{ objectFit: "cover", maxWidth: "700px", marginBottom:"5px" }}></img>
+                                      {element.quantity}
+                                      <h6
+                                        style={{
+                                          color: "red",
+                                          fontSize: "10px",
+                                          cursor: "pointer",
+                                        }}
+                                        onClick={() => {
+                                          handleGuestDelete(productId);
+                                        }}>
+                                        x remove product from cart
+                                      </h6>
                                     </div>
-                                    <div className="cartInformation">
-                                      <div>
-                                        {element.quantity}
-                                        <h6
-                                          style={{
-                                            color: "red",
-                                            fontSize: "10px",
-                                            cursor: "pointer",
-                                          }}
-                                          onClick={() => {
-                                            handleGuestDelete(productId);
-                                          }}>
-                                          x remove product from cart
-                                        </h6>
-                                      </div>
-                                      <div >
-                                        <h6 style={{ color: "darkgray" }}>
-                                          Price:{element.price}
-                                        </h6>
-                                      </div>
+                                    <div>
+                                      <h6 style={{ color: "darkgray" }}>
+                                        Price:{element.price}
+                                      </h6>
                                     </div>
                                   </div>
-                                  </div>
-                            )
-                          })
+                                </div>
+                              </div>)
+                              
+                              :(
+                              console.log(money,'ternary!!!'),
+                              <h3>'Please Add A Product to Checkout!'</h3> )}</>) }))}
+                              
+                           
+                          
+                    
+                            
+                         
 
-                        }
-
-                        <div className='col-lg-3 bg-grey px-3'>
+                      
+                        <div className='col-lg-4 bg-grey px-2'
+                                style={{margin:"4%"}}>
                           <div className='card bg-primary text-white rounded-3'>
                             <div className='card-body'>
                               <div className='d-flex justify-content-between align-items-center mb-4'>
                                 <h5 className='mb-0'>Card details</h5>
-
                               </div>
                               <p>We accept</p>
                               <img
@@ -325,7 +372,7 @@ const Cart = ({ userInfo, setUserInfo }) => {
 
                               <div className='d-flex justify-content-between'>
                                 <p className='mb-2'>Subtotal</p>
-                                <p className='mb-2'>${alltotal + 1}</p>
+                                <p className='mb-2'>${alltotal}</p>
                               </div>
                               <div className='d-flex justify-content-between'>
                                 <p className='mb-2'>Shipping</p>
@@ -334,7 +381,14 @@ const Cart = ({ userInfo, setUserInfo }) => {
 
                               <div className='d-flex justify-content-between mb-4'>
                                 <p className='mb-2'>Total(Incl. taxes)</p>
-                                <p className='mb-2'>${(final = ((alltotal + 10) * 1.05).toFixed(2))}</p>
+                                <p className='mb-2'>
+                                
+                                  ${ 
+                                    (final = ((alltotal + 10) * 1.05).toFixed(
+                                      2
+                                    ))
+                                  }
+                                </p>
                               </div>
 
                               <button
@@ -342,14 +396,13 @@ const Cart = ({ userInfo, setUserInfo }) => {
                                 className='btn btn-info btn-block btn-lg'
                                 onClick={handleCheckout}>
                                 <div className='d-flex justify-content-between'>
-                                  <span>
-                                  </span>
-                                  <br>
-                                  </br>
+                                  <span></span>
+                                  <br></br>
                                   <span>
                                     Checkout
-
-                                    <i typeof="btn" className='fas fa-long-arrow-alt-right ms-2'></i>
+                                    <i
+                                      typeof='btn'
+                                      className='fas fa-long-arrow-alt-right ms-2'></i>
                                   </span>
                                 </div>
                               </button>
