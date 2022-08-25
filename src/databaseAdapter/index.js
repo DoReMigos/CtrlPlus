@@ -1,6 +1,6 @@
 import axios from "axios";
 
-export const URL = "http://localhost:4000/api";
+export const URL = "https://ctrlplus.herokuapp.com/api";
 
 //EVERYTHING BELOW HERE IS USER API
 export async function RegisterUser(email, password) {
@@ -144,7 +144,7 @@ export async function updateProduct(
   productId,
   price,
   inventory,
-  category,
+  description,
   token
 ) {
   try {
@@ -157,7 +157,7 @@ export async function updateProduct(
       body: JSON.stringify({
         price: price,
         inventory: inventory,
-        category: category,
+       description:description
       }),
     });
     const result = response.json();

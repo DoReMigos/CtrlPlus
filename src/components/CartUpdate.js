@@ -11,6 +11,7 @@ export default function CartUpdate({product}){
     const token = localStorage.getItem("token");
     alert("Quantity Updated")
     const response = await updateCartProdQuantity(quantity, id, token)
+    window.location.reload()
  }
     return (
         <form onSubmit ={handleSubmit}>

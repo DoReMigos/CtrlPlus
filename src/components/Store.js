@@ -75,7 +75,7 @@ export default function Store({ userInfo, setUserInfo }) {
 
           {isAdmin ? (
             showCreate ? <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-              <button onClick={() => { setShowCreate(false) }} className="btn btn-secondary">Hide Form</button>
+              <button onClick={() => { setShowCreate(false) }} className="btn btn-secondary" style ={{marginBottom:"1%"}}>Hide Form</button>
               <AdminCreate allProducts={allProducts} setAllProducts={setAllProducts} />
             </div>
               :

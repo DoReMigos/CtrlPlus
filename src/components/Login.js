@@ -22,12 +22,12 @@ export default function LoggedIn() {
     const token = await userLogin(email, password);
     localStorage.setItem("token", token);
     localStorage.setItem("email", email);
-    navigate("/Profile");
+    navigate("/Store");
   };
   return (
     <section id="registerSection">
       <div className="mask d-flex align-items-center h-100 gradient-custom-3">
-        <div className="container h-100">
+        <div className="container h-100" style={{marginTop:"5%"}}>
           <div
             className="row d-flex justify-content-center align-items-center"
             style={{ marginTop: "50px", marginBottom: "50px" }}
